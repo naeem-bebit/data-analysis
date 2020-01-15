@@ -1,7 +1,7 @@
 name: Python package
 
 on: 
-  [push]
+  push:
     branches:
       - master
       - logistic-regression
