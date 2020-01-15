@@ -1,3 +1,4 @@
+"""Logistic regression Iris dataset."""
 # Load libraries
 from sklearn.linear_model import LogisticRegression
 from sklearn import datasets
