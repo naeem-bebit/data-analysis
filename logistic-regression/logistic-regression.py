@@ -4,7 +4,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
 
-# Load data with only two classes
+# Load IRIS data with only two classes
 iris = datasets.load_iris()
 X = iris.data[:100, :]
 y = iris.target[:100]
