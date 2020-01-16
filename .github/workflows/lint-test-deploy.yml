@@ -26,6 +26,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        - logistic-regression
+    steps:
+    - name: Install requirements Run pytest
+      run: |
+        pip install -r requirements.txt pytest | pytest
           
   #       - name: Install dependencies
   #     run: |
