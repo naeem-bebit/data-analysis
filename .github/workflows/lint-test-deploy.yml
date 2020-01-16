@@ -17,9 +17,9 @@ jobs:
     - name: Lint with flake8
       run: |      
         CHANGED_FILES=$(git log --diff-filter=AM --pretty=format: --name-only -n 1)
-        if [[ $(echo ${CHANGED_FILES} | grep -c '*.py') -ge 1 ]]; then
+        if [[ $(echo ${CHANGED_FILES} | grep -c '\.py') -ge 1 ]]; then
           pip install --upgrade pip flake8 flake8-docstrings
-          echo ${CHANGED_FILES} | tr ' ' '\n' | grep '*.py'| xargs flake8
+          echo ${CHANGED_FILES} | tr ' ' '\n' | grep '\.py'| xargs flake8
         fi
   unit test:
     needs: lint-flake8
