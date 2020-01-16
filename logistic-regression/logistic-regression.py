@@ -9,7 +9,7 @@ iris = datasets.load_iris()
 X = iris.data[:100, :]
 y = iris.target[:100]
 
-# Standarize features
+# Standarize the features
 scaler = StandardScaler()
 X_std = scaler.fit_transform(X)
 
