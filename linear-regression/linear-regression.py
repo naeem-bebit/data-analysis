@@ -17,6 +17,7 @@ y = boston.target
 regr = LinearRegression()
 
 # Fit the linear model regression
+
 model = regr.fit(X, y)
 
 # View the intercept
