@@ -21,25 +21,14 @@ jobs:
           pip install --upgrade pip flake8 flake8-docstrings
           echo ${CHANGED_FILES} | tr ' ' '\n' | grep '\.py'| xargs flake8
         fi
-  unit test:
-    needs: lint-flake8
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        - logistic-regression
-    steps:
-    - name: Install requirements Run pytest
-      run: |
-        pip install -r requirements.txt pytest | pytest
-          
-  #       - name: Install dependencies
+  # unit test:
+  #   needs: lint-flake8
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       - logistic-regression
+  #   steps:
+  #   - name: Install requirements Run pytest
   #     run: |
-        
-  #       pip install -r requirements.txt
-
-  #           - name: Test with pytest
-  #     run: |
-  #       pip install pytest
+  #       pip install -r requirements.txt pytest 
   #       pytest
-
-
