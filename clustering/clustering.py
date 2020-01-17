@@ -1,4 +1,4 @@
-#"""Clustering using Boston dataset."""
+"""Clustering using Boston dataset."""
 # Load libraries
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
@@ -22,7 +22,7 @@ model = clt.fit(X_std)
 model.labels_
 
 # Create new observation
-new_observation = [[0.8, 0.8, 0.8, 0.8]]
+new_observation = [0.8, 0.8, 0.8, 0.8]
 
 # Predict observation's cluster
 model.predict(new_observation)
