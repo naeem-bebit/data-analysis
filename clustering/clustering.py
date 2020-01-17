@@ -1,4 +1,4 @@
-#"""Clustering using Boston dataset."""
+"""Clustering using Boston dataset."""
 # Load libraries
 from sklearn import datasets
 from sklearn.preprocessing import StandardScaler
