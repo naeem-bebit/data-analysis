@@ -2,8 +2,6 @@
 # https://chrisalbon.com/machine_learning/trees_and_forests/random_forest_classifier_example/
 # Load the library with the iris dataset
 from sklearn.datasets import load_iris
-
-# Load scikit's random forest classifier library
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 import numpy as np
