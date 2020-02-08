@@ -34,4 +34,3 @@ x_test = np.array([[.4, 0.6]])
 trained_model.predict(x_test)
 
 trained_model.predict_proba(x_test)
- 
