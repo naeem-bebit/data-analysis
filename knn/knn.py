@@ -2,7 +2,6 @@
 import pandas as pd
 from sklearn import neighbors
 import numpy as np
-# %matplotlib inline
 import seaborn
 
 training_data = pd.DataFrame()
@@ -30,7 +29,6 @@ trained_model.score(X, y)
 # and the second independent variable, test_1', as .6
 x_test = np.array([[.4, 0.6]])
 
-# Apply the learner to the new, unclassified observation.
 trained_model.predict(x_test)
 
 trained_model.predict_proba(x_test)
