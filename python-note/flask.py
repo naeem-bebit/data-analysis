@@ -7,8 +7,6 @@ from sklearn.externals import joblib
 # import joblib
 # from sklearn.model_selection import train_test_split
 
-# import sys
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -44,8 +42,6 @@ def predict():
 		vect = cv.transform([comment]).toarray()
 		my_prediction = clf.predict(vect)
 	return render_template('result.html',prediction = my_prediction)
-
-
 
 if __name__ == '__main__':
 	app.run(debug=True)
