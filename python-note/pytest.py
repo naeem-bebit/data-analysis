@@ -14,3 +14,7 @@ assert result
 ])
 def test_num(num1, num2, result):
     assert file_name.function_name() == result
+
+def teardown(module)
+
+magic.Mock()
