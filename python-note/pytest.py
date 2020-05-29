@@ -1,5 +1,6 @@
 import pytest
-from unittest import mock
+import unittest
+from unittest.mock import mock
 
 @pytest.fixture
 def bob():
@@ -17,4 +18,8 @@ def test_num(num1, num2, result):
 
 def teardown(module)
 
-magic.Mock()
+mock_object = mock.Mock()
+real_object = file_name.function_name()
+self.assertIsInstance(mock_object, file_name.function_name)
+
+
