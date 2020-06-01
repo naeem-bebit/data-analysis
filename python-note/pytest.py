@@ -23,5 +23,9 @@ real_object = file_name.function_name()
 self.assertIsInstance(mock_object, file_name.function_name)
 
 #import  unittest
+## pytest command
 
+#lambda_function is the name of the lambda
 
+pytest --cov=lambda_function --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html --cov-report term-missing
+pytest --cov=lambda_function --cov-report term-missing
