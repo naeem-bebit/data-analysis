@@ -67,3 +67,12 @@ INNER JOIN HumanResources.EmployeeDepartmentHistory AS dh
 INNER JOIN HumanResources.EmployeePayHistory AS ph  
     ON ph.BusinessEntityID = dh.BusinessEntityID  
 WHERE dh.EndDate IS NULL;
+
+SELECT CONCAT(year, '-', month) AS "YYYY-MM", COUNT(*) AS view_cnt, COUNT(DISTINCT(user_id)) AS unique_user_cnt
+FROM usergram.gram_time_based_partitioned_client_id_44
+WHERE location_uri LIKE '%blog.usergram.info%'
+    AND (CAST( year AS INTEGER), CAST( month AS INTEGER)) >= (2020, 10)
+GROUP BY year, month
+ORDER BY year, month
+
+WHERE REGEXP_LIKE(location_url,'^app.usergram.info/users/[0-9,_,-]+')
