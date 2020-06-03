@@ -30,3 +30,7 @@ self.assertIsInstance(mock_object, file_name.function_name)
 pytest --cov=lambda_function --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html --cov-report term-missing
 pytest --cov=lambda_function --cov-report term-missing
 
+
+pytest integration test
+How to do integration test?
+pytest integrationtest.py
