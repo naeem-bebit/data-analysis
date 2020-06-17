@@ -1,3 +1,5 @@
+import itertools
+
 from unittest.mock import Mock
 import json
 mock = Mock()
@@ -44,3 +46,16 @@ asd = [i for i in abc]
 
 mix = [(i,d) for i in 'abc' for d in range(4)]
 # print(mix)
+
+
+letters = ['a', 'b', 'c', 'd']
+numbers = [1, 2, 3, 4]
+names = ['Naeem', 'Hussien']
+
+selectors = [True, False, True, False]
+
+result = itertools.compress(letters, selectors)
+for i in result:
+    print(i)
+
+counter = itertools.count()  # it will loop endlessly
