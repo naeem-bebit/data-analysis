@@ -59,3 +59,12 @@ for i in result:
     print(i)
 
 counter = itertools.count()  # it will loop endlessly
+
+#tips and trick
+
+a, b, *c, d = (1, 2, 3, 4, 5)
+
+print(a)
+print(b)
+print(c)
+print(d)
