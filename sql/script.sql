@@ -76,3 +76,22 @@ GROUP BY year, month
 ORDER BY year, month
 
 WHERE REGEXP_LIKE(location_url,'^app.usergram.info/users/[0-9,_,-]+')
+
+-- Function
+SELECT DIV(5);
+SELECT MOD(5);
+SELECT TRIM('   remove the space  ');
+SELECT FLOOR(35.4); -- return 35
+SELECT EXP(5);
+SELECT LOG(5);
+SELECT LOG10(2);
+SELECT POW(2),2; -- 2 power 2
+SELECT GREATEST(2,3) -- return 3(highest)
+SELECT LEAST(2,3) -- return 2(lowest)
+SELECT RADIANS(8);
+SELECT SQRT(196);
+SELECT TRUNCATE(234.45,1); --return 234.4
+SELECT RAND(); --random number
+SELECT TOP 3; --select the top 3 of the record
+SELECT CHAR_LENGTH(column);
+SELECT CHARACTER_LENGTH(column);
