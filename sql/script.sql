@@ -94,4 +94,9 @@ SELECT TRUNCATE(234.45,1); --return 234.4
 SELECT RAND(); --random number
 SELECT TOP 3; --select the top 3 of the record
 SELECT CHAR_LENGTH(column);
+SELECT LENGTH(column); --different with 'char_length' & 'length'
 SELECT CHARACTER_LENGTH(column);
+SELECT RIGHT('This is string', 6); --will return "string"
+SELECT LEFT('This is string', 4); -- will return "This"
+SELECT SUBSTR('This is string', 1,4); -- will return "This"
+SELECT INSERT('Hello word', 7, 5, 'World'); --replace word with world
