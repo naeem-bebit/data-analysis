@@ -77,6 +77,9 @@ ORDER BY year, month
 
 WHERE REGEXP_LIKE(location_url,'^app.usergram.info/users/[0-9,_,-]+')
 
+SELECT AVG(NULLIF(COALESCE(current_year,  
+   previous_year), 0.00)) AS 'Average Budget'  -- return null if both expressions are equal
+
 -- Function
 SELECT DIV(5);
 SELECT MOD(5);
