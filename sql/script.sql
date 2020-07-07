@@ -80,6 +80,11 @@ WHERE REGEXP_LIKE(location_url,'^app.usergram.info/users/[0-9,_,-]+')
 SELECT AVG(NULLIF(COALESCE(current_year,  
    previous_year), 0.00)) AS 'Average Budget'  -- return null if both expressions are equal
 
+SELECT * from table_name where column_name REGEXP/RLIKE '^[abcde]' -- the first letter contains abcde
+SELECT * from table_name where column_name REGEXP/RLIKE '^[^abcde]' -- the first letter NOT contains abcde
+SELECT * from table_name where column_name REGEXP/RLIKE '[abcde]$' -- the last letter contains abcde
+SELECT * FROM mytable WHERE SUBSTRING(coliumn_name, -1) IN ('1', '2') -- last character in (1,2)
+
 -- Function
 SELECT DIV(5);
 SELECT MOD(5);
