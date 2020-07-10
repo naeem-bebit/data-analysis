@@ -95,6 +95,12 @@ SELECT
          ELSE 'Not A Triangle' END
     FROM TRIANGLES; 
 
+select itemID
+from t
+group by itemId
+having sum(case when categoryID = 10 then 1 else 0 end) > 0 and
+       sum(case when categoryID = 16 then 1 else 0 end) > 0;
+
 -- Function
 SELECT DIV(5);
 SELECT MOD(5);
@@ -118,3 +124,12 @@ SELECT RIGHT('This is string', 6); --will return "string"
 SELECT LEFT('This is string', 4); -- will return "This"
 SELECT SUBSTR('This is string', 1,4); -- will return "This"
 SELECT INSERT('Hello word', 7, 5, 'World'); --replace word with world
+
+
+CREATE TABLE Persons (
+    ID int NOT NULL,
+    LastName varchar(255) NOT NULL,
+    FirstName varchar(255),
+    Age int,
+    PRIMARY KEY (ID)
+);
