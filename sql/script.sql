@@ -133,3 +133,6 @@ CREATE TABLE Persons (
     Age int,
     PRIMARY KEY (ID)
 );
+
+select count(sale_price) from table_name
+select count(nvl(sale_price,0)) from table_name -- use this instead if its consist null value
