@@ -136,3 +136,9 @@ CREATE TABLE Persons (
 
 select count(sale_price) from table_name
 select count(nvl(sale_price,0)) from table_name -- use this instead if its consist null value
+IFNULL(), ISNULL(), COALESCE(), and NVL()
+-- datetime mysql
+
+ADDDATE("2017-06-15", INTERVAL 10 DAY); -- add 10 days to the current date
+ADDTIME(datetime, addtime) -- example SELECT ADDTIME("09:34:21.000001", "2:10:5.000003"); add to current time
+SELECT SUBDATE("2017-06-15", INTERVAL 10 DAY); --  subtract date from the current date
