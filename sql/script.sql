@@ -142,3 +142,12 @@ IFNULL(), ISNULL(), COALESCE(), and NVL()
 ADDDATE("2017-06-15", INTERVAL 10 DAY); -- add 10 days to the current date
 ADDTIME(datetime, addtime) -- example SELECT ADDTIME("09:34:21.000001", "2:10:5.000003"); add to current time
 SELECT SUBDATE("2017-06-15", INTERVAL 10 DAY); --  subtract date from the current date
+
+  COUNT(DISTINCT
+    CASE
+      WHEN
+        date >= '2020-03-19' THEN table_name
+      ELSE
+        NULL
+      END
+    ) AS 'column_name'
