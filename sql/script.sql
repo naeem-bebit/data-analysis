@@ -151,3 +151,10 @@ SELECT SUBDATE("2017-06-15", INTERVAL 10 DAY); --  subtract date from the curren
         NULL
       END
     ) AS 'column_name'
+
+    ROUND(
+        PERCENT_RANK() OVER (
+            PARTITION BY e.department_id
+            ORDER BY salary
+        ) 
+    ,2) percentile_rank
