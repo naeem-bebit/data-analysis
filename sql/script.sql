@@ -147,7 +147,7 @@ SELECT SUBDATE("2017-06-15", INTERVAL 10 DAY); --  subtract date from the curren
     CASE
       WHEN
         date >= '2020-03-19' THEN table_name
-      ELSE
+      ELSE -- OR NULL 
         NULL
       END
     ) AS 'column_name'
@@ -158,3 +158,13 @@ SELECT SUBDATE("2017-06-15", INTERVAL 10 DAY); --  subtract date from the curren
             ORDER BY salary
         ) 
     ,2) percentile_rank
+
+SELECT DATE_FORMAT(subdate(datetime, weekday(datetime)), '%Y-%m-%d') AS weekly,
+       COUNT(CASE
+                 WHEN datetime >= '2020-06-22' THEN endpoint = '/api/filter/' 
+                      OR NULL
+             END) AS 'after release',
+       COUNT(CASE
+                 WHEN datetime < '2020-06-21' THEN endpoint = '/api/filter/' 
+                      OR NULL
+             END) AS 'before release'
