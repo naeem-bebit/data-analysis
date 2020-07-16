@@ -168,3 +168,9 @@ SELECT DATE_FORMAT(subdate(datetime, weekday(datetime)), '%Y-%m-%d') AS weekly,
                  WHEN datetime < '2020-06-21' THEN endpoint = '/api/filter/' 
                       OR NULL
              END) AS 'before release'
+
+-- json array
+SELECT * ,JSON_EXTRACT(query, '$[0][1].activity_type') as activity_edge --https://jsonformatter.curiousconcept.com/ 
+from table_name
+where JSON_EXTRACT(query, '$[0][1][0].activity_type') = 1
+
