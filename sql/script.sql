@@ -174,3 +174,7 @@ SELECT * ,JSON_EXTRACT(query, '$[0][1].activity_type') as activity_edge --https:
 from table_name
 where JSON_EXTRACT(query, '$[0][1][0].activity_type') = 1
 
+-- link to jso sql array 
+-- https://dev.mysql.com/doc/refman/8.0/en/json.html
+-- https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html
+
