@@ -46,3 +46,25 @@ def add(x, y):
 
 
 add(3, 4)
+
+
+class Student:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def show(self):
+        print(self.name, self.age)
+
+    class Laptop:
+
+        def __init__(self, brand):
+            self.brand = brand
+
+        def show(self):
+            print(self.brand)
+
+
+c1 = Student('ali', 16)
+c1.show()
