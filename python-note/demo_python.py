@@ -1,5 +1,5 @@
 """Demo for python"""
-
+import inspect
 
 # Decorator
 def f1():
@@ -120,3 +120,71 @@ class a2:
 a2 = a2(12,23)
 a2.b2()
 a2.val_1()
+
+# inspect function
+def b1(i):
+    if i == 1:
+        print('1')
+    else:
+        print('2')
+
+    return
+
+b1_test = b1(1)
+
+# print(inspect.getsource(b1_test))
+
+a, b, *args = 1,2, 3,4
+print('this is', a)
+print('this is', b)
+print('this is', args)
+
+def func1(a, b, *args):
+    print(a)
+    print(b)
+    print(args)
+
+func1(10,20,'1', '2','ab', 123)
+
+def func2(a, *args):
+    return len(args) + 1
+
+print(func2(2,3,4,5))
+print(func2(1)) ##to force and ensure that at least an argument given
+
+
+def func3(*args):
+    count = len(args)
+    total = sum(args)
+    return count and total/count
+
+print(func3(2,2,4,4))
+print(func3())
+
+list1 = [12,22,32,42]
+func1(*list1) #unpack the list using *args
+
+def func(a, *args, b):
+    print(a,args,b)
+
+func(1,'2','3', b=12)
+
+def func(a, *, b):
+    print(a,b)
+
+func(1,b=2)
+
+def func(a,b=10, *args):
+    print(a,b, args)
+
+func(1,'strign','a')
+
+def func(a, b, **kwargs): #** kwargs will return the dictionary
+    print(a,b , kwargs)
+
+func(a = 22,b = 2, c= 1,d=2)
+
+def func(*args, **kwargs):
+    print(args, kwargs)
+
+func(1,2,a =1,b=2)

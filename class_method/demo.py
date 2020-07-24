@@ -69,3 +69,18 @@ class Student:
 c1 = Student('ali', 16)
 c1.show()
 
+print('duck typing')
+class Laptop:
+    def ide(self, type):
+        type.execute()
+
+class Type:
+    def execute(self):
+        print ('Running')
+
+vs = Type()
+
+lap = Laptop()
+lap.ide(vs)
+
+
