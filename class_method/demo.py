@@ -83,4 +83,15 @@ vs = Type()
 lap = Laptop()
 lap.ide(vs)
 
+class Cat:
+    def __init__(self, breed, colour):
+        self.breed_1 = breed
+        self.colour_1 = colour
+
+cat1 = Cat('kampung', 'kuning')
+print(cat1.breed_1)
+
+
+
+
 

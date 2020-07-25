@@ -188,3 +188,8 @@ def func(*args, **kwargs):
     print(args, kwargs)
 
 func(1,2,a =1,b=2)
+
+
+
+print('Abu bakar')
+
