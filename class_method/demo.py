@@ -91,6 +91,64 @@ class Cat:
 cat1 = Cat('kampung', 'kuning')
 print(cat1.breed_1)
 
+import numpy as np
+list1 = [1,2,3,4,'a'] #all array must be in the same types
+
+aray_list = np.array(list1)
+print(aray_list)
+print(type(aray_list))
+print(aray_list[1])
+
+a, _, b = (1, 2, 3) # a = 1, b = 3
+print(a, b)
+
+a, *_, b = (7, 6, 5, 4, 3, 2, 1) #ignore multiple values '_'
+print(a, b)
+
+_ = 5 #as variable
+while _ < 10:
+    print(_, end = ' ') # default value of 'end' id '\n' in python. we're changing it to space
+    _ += 1
+
+
+million = 1_000_000 # separate the digit
+
+print(million)
+
+
+class Test:
+    _a = 1345
+    _b = 2345
+
+    def test_this():
+        return Test._b
+
+print(Test._a)
+print(Test.test_this())
+
+# Single underscores are a Python naming convention indicating a name is meant for internal use.
+# It is generally not enforced by the Python interpreter and meant as a hint to the programmer only.
+
+class Stud:
+
+    def __init__(self):
+        # self.age = age
+        self.b = 'b'
+        self.__a = 'magic'
+
+s = Stud()
+# print(s.__a)
+
+print(f'{1+2=}')
+print(type(f'{1+2=}'))
+
+lista = [1,2,3,4]
+aiter = iter(lista)
+print(next(aiter)) # == print(iter(aiter).__next__())
+print(next(aiter))
+
+
+
 
 
 

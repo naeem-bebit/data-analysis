@@ -9,3 +9,11 @@ class Student:
 
     def total_mark(self, mark2):
         return self.age_first + mark2
+
+
+class Teacher(Student):
+    def __init__(self, name):
+        self.name_techer = name
+
+    def show_teacher(self):
+        print(self.name_techer)
