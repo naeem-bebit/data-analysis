@@ -147,9 +147,30 @@ aiter = iter(lista)
 print(next(aiter)) # == print(iter(aiter).__next__())
 print(next(aiter))
 
+listb = np.array([1,2,3])
+for i in listb:
+    print('listb', i)
 
+def a():
+    print('a')
 
+a()
 
+class Employee:
+   'Common base class for all employees'
+   empCount = 0
 
+   def __init__(self, name, salary):
+      self.name = name
+      self.salary = salary
+      Employee.empCount += 1
 
+   def displayCount(self):
+     print("Total Employee %d" % Employee.empCount)
+
+   def displayEmployee(self):
+      print("Name : ", self.name,  ", Salary: ", self.salary)
+
+# The variable empCount is a class variable whose value is shared among all instances of a this class.
+# This can be accessed as Employee.empCount from inside the class or outside the class.
 
