@@ -174,3 +174,10 @@ class Employee:
 # The variable empCount is a class variable whose value is shared among all instances of a this class.
 # This can be accessed as Employee.empCount from inside the class or outside the class.
 
+e1 = Employee('ravin', 10)
+e2 = Employee('Raja', 20)
+e3 = Employee('Rajo', 30)
+
+e1.displayEmployee()
+e2.displayEmployee()
+print("Total Employee %d" % Employee.empCount)
