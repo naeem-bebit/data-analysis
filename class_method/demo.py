@@ -181,3 +181,9 @@ e3 = Employee('Rajo', 30)
 e1.displayEmployee()
 e2.displayEmployee()
 print("Total Employee %d" % Employee.empCount)
+
+l1 = [1,2,3]
+print(type(l1))
+# print(dir(l1))
+
+print(dir(e3)) # to check the method of the class
