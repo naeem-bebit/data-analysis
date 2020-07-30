@@ -187,3 +187,16 @@ print(type(l1))
 # print(dir(l1))
 
 print(dir(e3)) # to check the method of the class
+bc = 5
+bd = 0
+try:
+    print('Open connection')
+    be = bc/bd
+    print(be)
+except ZeroDivisionError as zero:
+    print('Error of 0', zero)
+except Exception as e:
+    print('This is an error', e)
+finally:
+    print('Close connection')
+
