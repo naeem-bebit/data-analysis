@@ -1,3 +1,5 @@
+from time import sleep
+
 print('hello world')
 
 test_c = 6
@@ -70,48 +72,54 @@ c1 = Student('ali', 16)
 c1.show()
 
 print('duck typing')
+
+
 class Laptop:
     def ide(self, type):
         type.execute()
 
+
 class Type:
     def execute(self):
-        print ('Running')
+        print('Running')
+
 
 vs = Type()
 
 lap = Laptop()
 lap.ide(vs)
 
+
 class Cat:
     def __init__(self, breed, colour):
         self.breed_1 = breed
         self.colour_1 = colour
 
+
 cat1 = Cat('kampung', 'kuning')
 print(cat1.breed_1)
 
 import numpy as np
-list1 = [1,2,3,4,'a'] #all array must be in the same types
+
+list1 = [1, 2, 3, 4, 'a']  # all array must be in the same types
 
 aray_list = np.array(list1)
 print(aray_list)
 print(type(aray_list))
 print(aray_list[1])
 
-a, _, b = (1, 2, 3) # a = 1, b = 3
+a, _, b = (1, 2, 3)  # a = 1, b = 3
 print(a, b)
 
-a, *_, b = (7, 6, 5, 4, 3, 2, 1) #ignore multiple values '_'
+a, *_, b = (7, 6, 5, 4, 3, 2, 1)  # ignore multiple values '_'
 print(a, b)
 
-_ = 5 #as variable
+_ = 5  # as variable
 while _ < 10:
-    print(_, end = ' ') # default value of 'end' id '\n' in python. we're changing it to space
+    print(_, end=' ')  # default value of 'end' id '\n' in python. we're changing it to space
     _ += 1
 
-
-million = 1_000_000 # separate the digit
+million = 1_000_000  # separate the digit
 
 print(million)
 
@@ -123,8 +131,10 @@ class Test:
     def test_this():
         return Test._b
 
+
 print(Test._a)
 print(Test.test_this())
+
 
 # Single underscores are a Python naming convention indicating a name is meant for internal use.
 # It is generally not enforced by the Python interpreter and meant as a hint to the programmer only.
@@ -136,40 +146,45 @@ class Stud:
         self.b = 'b'
         self.__a = 'magic'
 
+
 s = Stud()
 # print(s.__a)
 
 print(f'{1+2=}')
 print(type(f'{1+2=}'))
 
-lista = [1,2,3,4]
+lista = [1, 2, 3, 4]
 aiter = iter(lista)
-print(next(aiter)) # == print(iter(aiter).__next__())
+print(next(aiter))  # == print(iter(aiter).__next__())
 print(next(aiter))
 
-listb = np.array([1,2,3])
+listb = np.array([1, 2, 3])
 for i in listb:
     print('listb', i)
+
 
 def a():
     print('a')
 
+
 a()
 
+
 class Employee:
-   'Common base class for all employees'
-   empCount = 0
+    'Common base class for all employees'
+    empCount = 0
 
-   def __init__(self, name, salary):
-      self.name = name
-      self.salary = salary
-      Employee.empCount += 1
+    def __init__(self, name, salary):
+        self.name = name
+        self.salary = salary
+        Employee.empCount += 1
 
-   def displayCount(self):
-     print("Total Employee %d" % Employee.empCount)
+    def displayCount(self):
+        print("Total Employee %d" % Employee.empCount)
 
-   def displayEmployee(self):
-      print("Name : ", self.name,  ", Salary: ", self.salary)
+    def displayEmployee(self):
+        print("Name : ", self.name, ", Salary: ", self.salary)
+
 
 # The variable empCount is a class variable whose value is shared among all instances of a this class.
 # This can be accessed as Employee.empCount from inside the class or outside the class.
@@ -182,16 +197,16 @@ e1.displayEmployee()
 e2.displayEmployee()
 print("Total Employee %d" % Employee.empCount)
 
-l1 = [1,2,3]
+l1 = [1, 2, 3]
 print(type(l1))
 # print(dir(l1))
 
-print(dir(e3)) # to check the method of the class
+print(dir(e3))  # to check the method of the class
 bc = 5
 bd = 0
 try:
     print('Open connection')
-    be = bc/bd
+    be = bc / bd
     print(be)
 except ZeroDivisionError as zero:
     print('Error of 0', zero)
@@ -200,3 +215,31 @@ except Exception as e:
 finally:
     print('Close connection')
 
+
+# threading
+from threading import *
+class Hi(Thread):
+
+    def run(self):
+        for i in range(5):
+            print('Hi')
+            sleep(0.2)
+
+class Hello(Thread):
+
+    def run(self):
+        for i in range(5):
+            print('Hello')
+            sleep(0.1)
+
+objHi = Hi()
+# objHi.hi()
+objHello = Hello()
+# objHello.hello()
+
+objHi.start()
+objHello.start()
+
+objHi.join()
+objHello.join()
+print('End of the threading')
