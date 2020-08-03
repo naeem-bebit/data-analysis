@@ -243,3 +243,15 @@ objHello.start()
 objHi.join()
 objHello.join()
 print('End of the threading')
+
+# faster than numpy array, numpy array is faster than list,
+# its similar concept but different implempentation
+from array import *
+import numpy as np
+val1 = array('i', [2,3,4,5]) # i is the type
+print(val1)
+print(len(val1))
+print(val1.typecode)
+val2 = np.array
+for i in val1:
+    print(i)
