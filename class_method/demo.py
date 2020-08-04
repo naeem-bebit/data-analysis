@@ -255,3 +255,8 @@ print(val1.typecode)
 val2 = np.array
 for i in val1:
     print(i)
+
+val2 = array('i',[3,4])
+val2.append(5)
+print(val2)
+
