@@ -245,18 +245,41 @@ objHello.join()
 print('End of the threading')
 
 # faster than numpy array, numpy array is faster than list,
-# its similar concept but different implempentation
+# its similar concept but different implementation
+# numpy array for matrix, multi dimensional array
 from array import *
 import numpy as np
 val1 = array('i', [2,3,4,5]) # i is the type
 print(val1)
 print(len(val1))
-print(val1.typecode)
-val2 = np.array
+print('this is typecode', val1.typecode)
 for i in val1:
     print(i)
+val2 = np.array([1,2,3], int)
+print('val2', val2)
+print('dtype', val2.dtype)
+print('type', type(val2))
+val2_view = val2.view()
 
+ar1 = np.array([[1,2,3],[4,5,6]])
+print(ar1)
+m = np.matrix('1 2 3; 4 5 6') # matrix has been deprecated
+print('This is matrix', m)
+m1 = np.array([[1,2],[3,4]])
+m2 = np.array([[1,2],[3,4]])
+m3 = m1*m2
+print(m3)
+
+print('array matrix: ', ar1.shape)
+
+val2_copy = val2.copy()
+val2[1] = 30
+print(val2_view)
+print(val2_copy)
 val2 = array('i',[3,4])
 val2.append(5)
 print(val2)
+ab = [1,2,3,4]
+val3 = array('i', (i*2 for i in ab))
+print(val3)
 
