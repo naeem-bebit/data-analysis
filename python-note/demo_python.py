@@ -193,3 +193,36 @@ func(1,2,a =1,b=2)
 
 print('Abu bakar')
 
+class Part1:
+    x = 0
+    def __init__(self, nam):
+        self.name = nam
+        print('nam', self.name)
+
+    def part_x(self):
+        self.x += 1
+        print(self.name, self.x)
+
+class Part2(Part1):
+    y = 0
+    def part_y(self):
+        self.y += 4
+        # self.x += 5
+        self.part_x()
+        print('part2', self.name, self.x, self.y)
+
+a = Part1('there')
+a.part_x()
+a.part_x()
+a.part_x()
+
+b = Part1('this')
+b.part_x()
+
+c = Part2('inherit')
+c.part_y()
+c.part_y()
+
+
+
+

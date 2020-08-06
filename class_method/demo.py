@@ -283,3 +283,8 @@ ab = [1,2,3,4]
 val3 = array('i', (i*2 for i in ab))
 print(val3)
 
+print(r'test\navin') #use r for raw string
+
+a = {'a':1, 'b':2, 'c':3} #curly bracket because the value is unique
+print(a.get('a'))
+print(a['a'])
