@@ -223,6 +223,14 @@ c = Part2('inherit')
 c.part_y()
 c.part_y()
 
+print(12 & 13) #and
+print(12|13) #or
+print(25&30)
+print(12^13) #xor
+print(~12) #complement
+print(10<<2) #leftshift
+print(10>>2) #rightshift
+
 
 
 
