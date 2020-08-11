@@ -77,3 +77,21 @@ print(rel2)
 
 lam = lambda a: a*2
 print(lam(2))
+
+# Linear Search
+
+l1 = [1,2,3,4,5,99,56]
+
+def linear_search(l1,n):
+    for i in l1:
+        if i == n:
+            print('Found', i)
+            break
+    print('Not found')
+        # else:
+        #     print('Not found')
+
+linear_search(l1,6)
+# Binary Search
+
+
