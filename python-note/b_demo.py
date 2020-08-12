@@ -87,11 +87,23 @@ def linear_search(l1,n):
         if i == n:
             print('Found', i)
             break
-    print('Not found')
+    else:
+        print('Not found')
         # else:
         #     print('Not found')
+# n = int(input("INPUT NUMber"))
+n = 4
+linear_search(l1,n)
 
-linear_search(l1,6)
+## Bubble Sort
+
+print(l1[1])
 # Binary Search
+
+def b_search(l1, n):
+    if n == 1:
+        print(1)
+    return n
+
 
 
