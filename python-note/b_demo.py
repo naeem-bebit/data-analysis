@@ -97,6 +97,19 @@ linear_search(l1,n)
 
 ## Bubble Sort
 
+l2 = [5,6,3,1,4,9]
+
+def sort_buble(l2):
+    for i in range(len(l2)-1, 0, -1):
+        for j in range(i):
+            if l2[j]>l2[j+1]:
+                temp = l2[j]
+                l2[j] = l2[j+1]
+                l2[j+1] = temp
+
+sort_buble(l2)
+print(l2)
+
 print(l1[1])
 # Binary Search
 
