@@ -29,3 +29,30 @@ model.predict(new_observation)
 
 # View cluster centers
 model.cluster_centers_
+
+
+#Encoding categorical features
+
+import pandas as pd
+from sklearn.compose import make_column_transformer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import cross_val_score
+
+df = pd.read_csv('http://bit.ly/kaggletrain')
+df = df.loc[df.Embarked.notna(), ['Survived', 'Pclass', 'Sex', 'Embarked']]
+X = df.drop('Survived', axis='columns')
+y = df.Survived
+
+column_trans = make_column_transformer(
+    (OneHotEncoder(), ['Sex', 'Embarked']),
+    remainder='passthrough')
+logreg = LogisticRegression(solver='lbfgs')
+
+pipe = make_pipeline(column_trans, logreg)
+
+cross_val_score(pipe, X, y, cv=5, scoring='accuracy').mean()
+X_new = X.sample(5, random_state=99)
+pipe.fit(X, y)
+pipe.predict(X_new)
