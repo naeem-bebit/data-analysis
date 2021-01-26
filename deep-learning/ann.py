@@ -13,8 +13,8 @@ tf.__version__
 dataset = pd.read_csv("Churn_Modelling.csv")
 X = dataset.iloc[:, 3:-1].values
 y = dataset.iloc[:, -1].values
-print(X)
-print(y)
+# print(X)
+# print(y)
 
 # Encoding categorical data
 # Label Encoding the "Gender" column
@@ -22,7 +22,7 @@ from sklearn.preprocessing import LabelEncoder
 
 le = LabelEncoder()
 X[:, 2] = le.fit_transform(X[:, 2])
-print(X)
+# print(X)
 # One Hot Encoding the "Geography" column
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
@@ -31,7 +31,7 @@ ct = ColumnTransformer(
     transformers=[("encoder", OneHotEncoder(), [1])], remainder="passthrough"
 )
 X = np.array(ct.fit_transform(X))
-print(X)
+# print(X)
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.model_selection import train_test_split
@@ -110,5 +110,5 @@ print(
 from sklearn.metrics import confusion_matrix, accuracy_score
 
 cm = confusion_matrix(y_test, y_pred)
-print(cm)
+# print(cm)
 accuracy_score(y_test, y_pred)
