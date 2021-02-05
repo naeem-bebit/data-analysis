@@ -1,11 +1,10 @@
 # Apriori
-
 # Run the following command in the terminal to install the apyori package: pip install apyori
 
-# Importing the libraries
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+from apyori import apriori
 
 # Data Preprocessing
 dataset = pd.read_csv("Market_Basket_Optimisation.csv", header=None)
@@ -14,8 +13,6 @@ for i in range(0, 7501):
     transactions.append([str(dataset.values[i, j]) for j in range(0, 20)])
 
 # Training the Apriori model on the dataset
-from apyori import apriori
-
 rules = apriori(
     transactions=transactions,
     min_support=0.003,
@@ -25,13 +22,11 @@ rules = apriori(
     max_length=2,
 )
 
-# Visualising the results
-
-## Displaying the first results coming directly from the output of the apriori function
+# Displaying the first results coming directly from the output of the apriori function
 results = list(rules)
 results
 
-## Putting the results well organised into a Pandas DataFrame
+# Putting the results well organised into a Pandas DataFrame
 def inspect(results):
     lhs = [tuple(result[2][0][0])[0] for result in results]
     rhs = [tuple(result[2][0][1])[0] for result in results]
@@ -46,8 +41,8 @@ resultsinDataFrame = pd.DataFrame(
     columns=["Left Hand Side", "Right Hand Side", "Support", "Confidence", "Lift"],
 )
 
-## Displaying the results non sorted
+# Displaying the results non sorted
 resultsinDataFrame
 
-## Displaying the results sorted by descending lifts
+# Displaying the results sorted by descending lifts
 resultsinDataFrame.nlargest(n=10, columns="Lift")
