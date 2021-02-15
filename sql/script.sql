@@ -173,6 +173,63 @@ SELECT DATE_FORMAT(subdate(datetime, weekday(datetime)), '%Y-%m-%d') AS weekly,
 SELECT * ,JSON_EXTRACT(query, '$[0][1].activity_type') as activity_edge --https://jsonformatter.curiousconcept.com/ 
 from table_name
 where JSON_EXTRACT(query, '$[0][1][0].activity_type') = 1
+                           
+SELECT DATE_FORMAT(date, '%Y-%m') AS monthly,
+    SUM(CASE WHEN app_user_usage.date < '2020-08-1' THEN app_user_usage.filter END) AS 'filter usage before release',
+    SUM(CASE WHEN app_user_usage.date BETWEEN '2020-08-1' AND '2020-09-29' THEN app_user_usage.filter END) AS 'filter usage after release UK-238/UK-535',
+    SUM(CASE WHEN app_user_usage.date >= '2020-09-30' THEN app_user_usage.filter END) AS 'filter usage after UK-266',
+    SUM(CASE WHEN app_user_usage.date < '2020-08-1' THEN app_user_usage.observe END) AS 'observe usage before release',
+    SUM(CASE WHEN app_user_usage.date BETWEEN '2020-08-1' AND '2020-09-29' THEN app_user_usage.observe END) AS 'observe usage after release UK-238/UK-535',
+    SUM(CASE WHEN app_user_usage.date >= '2020-09-30' THEN app_user_usage.observe END) AS 'observe usage after UK-266'
+FROM app_user_usage
+    INNER JOIN app_user ON app_user_usage.app_user_id = app_user.id
+WHERE app_user.login_name NOT LIKE '%bebit%'
+    AND app_user.is_staff = 0
+    AND app_user.client_id IN (
+        SELECT client_id
+        FROM be_def
+        WHERE created_at < '2020-08-1'
+    UNION
+        SELECT client_id
+        FROM contact_def
+        WHERE created_at < '2020-08-1')
+    AND app_user_usage.date >= '2020-01-6'
+GROUP BY monthly
+ORDER BY monthly DESC
+                           
+WITH filter_observe_total AS
+  (SELECT app_user.client_id,
+          SUM(CASE
+                  WHEN app_user_usage.date < '2020-08-1' THEN app_user_usage.filter
+              END) AS filter_usage_before_release,
+          SUM(CASE
+                  WHEN app_user_usage.date >= '2020-08-1' THEN app_user_usage.filter
+              END) AS filter_usage_after_release,
+          SUM(CASE
+                  WHEN app_user_usage.date < '2020-08-1' THEN app_user_usage.observe
+              END) AS observe_usage_before_release,
+          SUM(CASE
+                  WHEN app_user_usage.date >= '2020-08-1' THEN app_user_usage.observe
+              END) AS observe_usage_after_release
+   FROM app_user_usage
+   INNER JOIN app_user ON app_user_usage.app_user_id = app_user.id
+   WHERE app_user.login_name NOT LIKE '%bebit%'
+     AND app_user.is_staff = 0
+     AND app_user.client_id IN
+       (SELECT client_id
+        FROM be_def
+        WHERE created_at < '2020-08-1'
+        UNION SELECT client_id
+        FROM contact_def
+        WHERE created_at < '2020-08-1')
+     AND app_user_usage.date >= '2020-01-6'
+   GROUP BY app_user.client_id)
+SELECT client_id,
+       (filter_usage_after_release - filter_usage_before_release) AS filter_total,
+       (observe_usage_after_release - observe_usage_before_release) AS observe_total
+FROM filter_observe_total
+ORDER BY filter_total DESC
+
 
 -- link to jso sql array 
 -- https://dev.mysql.com/doc/refman/8.0/en/json.html
