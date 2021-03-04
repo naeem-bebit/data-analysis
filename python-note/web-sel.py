@@ -1,9 +1,11 @@
+# from fake_useragent import UserAgent
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 import time
 
 
@@ -13,7 +15,8 @@ start = time.time()
 # Run the scrapping with headless
 # google "my user agent"
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_2_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36"
-
+# ua = UserAgent()
+# user_agent = ua.random
 options = webdriver.ChromeOptions()
 # options.headless = True
 options.add_argument(f'user-agent={user_agent}')
@@ -32,23 +35,36 @@ options.add_argument('--enable-logging')
 
 PATH = "/usr/local/bin/chromedriver"
 driver = webdriver.Chrome(PATH, options=options)
+wait = WebDriverWait(driver, 10)
 # driver = webdriver.Chrome()
-# driver.get("https://www.airasia.com/en/gb")
-driver.get("https://www.techwithtim.net/")
+driver.get("https://www.airasia.com/en/gb")
 print(driver.title)
-# assert "airasia.com" in driver.title
+assert "airasia.com" in driver.title
 
-# try:
-#     element = WebDriverWait(driver, 15).until(
-#         EC.presence_of_element_located((By.LINK_TEXT, "Flights"))
-#     )
-#     element.click()
-# except:
-#     driver.quit()
+wait.until(EC.element_to_be_clickable((By.XPATH, "//p[contains(text(),'Flights')]"))).click()
+origin = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@id='origin']")))
+origin.click()
+origin.send_keys("Kuala Lumpur (KUL)")
+destination = wait.until(EC.element_to_be_clickable((By.XPATH, "//input[@id='destination']")))
+destination.send_keys("Johor Bahru (JHB)")
 
-# content = driver.find_element_by_css_selector('p.Tile__InnerWrapper-sc-36ntfl-3 cQuWCb tile-inner-wrapper')
-# print(link)
-# link.click()
+depart_date = wait.until(EC.element_to_be_clickable((By.XPATH, "//p[contains(text(),'Depart')]")))
+depart_date.click()
+# depart_date.send_keys(Keys.CONTROL + 'a', Keys.BACKSPACE)
+depart_date.send_keys("05-05-2021")
+# wait.until(EC.presence_of_element_located((By.ID, "div-2021-4-9"))).click()
+# return_date = wait.until(EC.element_to_be_clickable((By.XPATH, "//p[contains(text(),'Return')]")))
+# return_date.click()
+# wait.until(EC.element_to_be_clickable((By.ID, "div-2021-5-9"))).click()
+# depart_date.send_keys(Keys.BACKSPACE)
+# print(depart_date)
+# depart_date.clear()
+
+# return_date = wait.until(EC.element_to_be_clickable((By.XPATH, "//p[contains(text(),'Depart')]")))
+# return_date.click()
+# return_date.send_keys("06/05/2021")
+# wait.until(EC.element_to_be_clickable((By.XPATH, "//a[contains(text(),'Search')]"))).click()
+
 
 time.sleep(5)
 driver.quit()
