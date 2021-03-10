@@ -11,13 +11,13 @@ for page in range(first_page,last_page):
     url_page = url+str(page)
     scrape = requests.get(url_page)
     soup = BeautifulSoup(scrape.content, 'lxml')
-    link = soup.find_all('div',{'class':'item','class':'summary'})
+    link = soup.find_all('div',{'class':'item','class':'summary', 'class':'price-section'})
     print(link)
     length = len(link)
 
 product_names=[]
 for i in range(0,length):
-    product_title = link[i].a.get('title')
+    product_title = link[i].a.get('discountpercentage')
     product_names.append(product_title)
 
 # write to csv
