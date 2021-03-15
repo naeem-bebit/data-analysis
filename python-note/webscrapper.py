@@ -26,13 +26,21 @@ for page in range(first_page,last_page):
 # # product_title = link[1].a.get('discountpercentage')
 # print(product_title)
 
-
-product_names=[]
+# append the title to the price
+# data = []
+product = pd.DataFrame()
 for i in range(0,length):
-    product_title = link[i].a.b.get('discountpercentage')
-    product_names.append(product_title)
-
-# write to csv
+    # product_price = link[i].a.b.get('data-price')
+    # product_title = link[i].a.get('title')
+    # print(product_title)
+    # product.append(product_price)  'title': product_title
+    product = product.append(pd.DataFrame({'prodcut_price': link[i].a.b.get('data-price'), 
+                                        'product_title' : link[i].a.get('title')}, index=[0]), ignore_index=True)
+    # product = product.append(pd.DataFrame({'data_price': product_price}, index=[0]))
+    # product.append(pd.DataFrame({'data_price': product_title}, index=[0]))
+    # data.append(product_price)
+# print(data)
+print(product)
 # convert the list to a pandas dataframe
-df = pd.DataFrame({'name':product_names})
-# df.to_csv('scrapped_data.csv', index=False)
+# df = pd.DataFrame({'product title':data})
+# product.to_csv('scrapped_data.csv', index=False)
