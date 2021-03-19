@@ -12,6 +12,7 @@ for page in range(first_page,last_page):
     scrape = requests.get(url_page)
     soup = BeautifulSoup(scrape.content, 'lxml')
     link = soup.find_all('div',{'class':'item','class':'summary'})
+    # print(link)
     length = len(link)
 
 # scrape = requests.get('https://www.lelong.com.my/catalog/all/list?TheKeyword=macbook+pro&D=1')

@@ -11,7 +11,12 @@ return_date = '2021-05-03'
 url = f'https://www.airasia.com/select/en/gb/{origin}/{destination}/{depart_date}/{return_date}/1/0/0/R/N/MYR/ST'
 print(url)
 
-
+scrape = requests.get(url)
+soup = BeautifulSoup(scrape.content, 'lxml')
+link = soup.find_all('div',{'class':'ng-star-inserted'})
+print(link)
+# price = link[i].a.b.get('data-price')
+# print(price)
 # for page in range(first_page,last_page):
 #     url_page = url+str(page)
 #     scrape = requests.get(url_page)
