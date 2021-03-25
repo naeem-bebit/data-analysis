@@ -1,20 +1,24 @@
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+import string
 
-first_page = 1
-last_page = 2
-origin = 'KUL'
-destination = 'KCH'
-depart_date = '2021-05-01'
-return_date = '2021-05-03'
-url = f'https://www.airasia.com/select/en/gb/{origin}/{destination}/{depart_date}/{return_date}/1/0/0/R/N/MYR/ST'
+url = 'https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:_Z'
 print(url)
+# scrape = requests.get(url)
+# soup = BeautifulSoup(scrape.content, 'lxml')
+# link = soup.find_all('div',{'class':'price'})
+# print(link)
 
-scrape = requests.get(url)
-soup = BeautifulSoup(scrape.content, 'lxml')
-link = soup.find_all('div',{'class':'price'})
-print(link)
+# scrape = requests.get('https://www.lelong.com.my/catalog/all/list?TheKeyword=macbook+pro&D=1')
+# soup = BeautifulSoup(scrape.content, 'lxml')
+# # link = soup.find_all('div',{'class':'item','class':'summary', 'class':'price-section'})
+# link = soup.find_all('div',{'class':'item','class':'summary'})
+
+for i in string.ascii_uppercase:
+    url = f'https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:_{i}'
+    # print(url)
+
 # price = link[i].a.b.get('data-price')
 # print(price)
 # for page in range(first_page,last_page):
