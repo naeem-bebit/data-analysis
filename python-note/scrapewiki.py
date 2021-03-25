@@ -5,10 +5,10 @@ import string
 
 url = 'https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:_Z'
 print(url)
-# scrape = requests.get(url)
-# soup = BeautifulSoup(scrape.content, 'lxml')
-# link = soup.find_all('div',{'class':'price'})
-# print(link)
+scrape = requests.get(url)
+soup = BeautifulSoup(scrape.content, 'lxml')
+link = soup.find_all('div',{'class':'price'})
+print(link)
 
 # scrape = requests.get('https://www.lelong.com.my/catalog/all/list?TheKeyword=macbook+pro&D=1')
 # soup = BeautifulSoup(scrape.content, 'lxml')
