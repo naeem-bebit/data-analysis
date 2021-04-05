@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 import string
 
-# url = 'https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:_Z'
+url = 'https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:_Z'
 # print(url)
 # scrape = requests.get(url)
 # soup = BeautifulSoup(scrape.content, 'lxml')
@@ -37,13 +37,32 @@ for i in string.ascii_uppercase:
 # print(product)
 # product.to_csv('scrapped_data.csv', index=False)
 
-url = "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population"
+# url = "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population"
 print(url)
 s = requests.Session()
 response = s.get(url, timeout=10)
-#response2 = s.get(url2, timeout=5)
 response
 
 soup = BeautifulSoup(response.content, 'html.parser')
 pretty_soup = soup.prettify()
 print(soup.title.string)
+
+right_table=soup.find('table', {"class":'wikitable sortable'})
+for row in right_table.findAll("tr"):
+    cells = row.findAll('td')
+
+print(len(cells))
+
+rows = right_table.findAll("tr")
+print(len(rows))
+# print(rows[0])
+
+header = [th.text.rstrip() for th in rows[0].find_all('th')]
+print(header)
+# print(header[3])
+# print('------------')
+# print(len(header))
+# for th in rows[0].find_all('th'):
+#     # print(th)
+#     print(th.text.rstrip())
+
