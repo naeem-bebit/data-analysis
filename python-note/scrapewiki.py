@@ -17,8 +17,8 @@ import string
 # # link = soup.find_all('div',{'class':'item','class':'summary', 'class':'price-section'})
 # link = soup.find_all('div',{'class':'item','class':'summary'})
 
-for i in string.ascii_uppercase:
-    url = f'https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:_{i}'
+# for i in string.ascii_uppercase:
+#     url = f'https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:_{i}'
     # print(url)
 
 # price = link[i].a.b.get('data-price')
@@ -54,7 +54,7 @@ right_table=soup.find('table', {"class":'wikitable'})
 
 
 for row in right_table.findAll("tr"):
-    cells = row.findAll('td')
+    cells = row.findAll('th')
     # print(cells)
 
 # print(row[0])
@@ -64,45 +64,19 @@ rows = right_table.findAll("tr")
 print("ROWS: ", len(rows))
 # print(rows[0])
 
-header = [th.text.rstrip() for th in rows[0].find_all('th')]
-# print(header)
-# print(header[3])
-# print('------------')
-# print(len(header))
+header = [th.text.rstrip() for th in rows[0].find_all('th')][1:]
+a0 = []
+a1 = []
+a2 = []
+a3 = []
+a4 = []
+for d in right_table.findAll('tr')[1:242]:
+    cells = d.findAll('td')
+    a0.append(cells[0].find('a').text)   
+    a1.append(cells[1].find(text=True))
+    a2.append(cells[2].find(text=True))
+    a3.append(cells[3].find(text=True))
+    a4.append(cells[4].find(text=True))
 
-# for th in rows[0].find_all('th'):
-#     # print(th)
-#     print(th.text.rstrip())
-
-
-c1=[]
-c2=[]
-c3=[]
-c4=[]
-c5=[]
-c6=[]
-c7=[]
-for row in right_table.findAll("tr"):
-    cells = row.findAll('td')
-    # if len(cells)==6: #Only extract table body not heading
-    c1.append(cells[0].find(text=True))
-    c2.append(cells[1].find('a').text)  # fetch the text of the url in td tag. 
-    c3.append(cells[2].find(text=True))
-    c4.append(cells[3].find(text=True))
-    c5.append(cells[4].find(text=True))
-    c6.append(cells[5].find(text=True))
-    c7.append(cells[5].find('a').get('href'))
-
-d = dict([(x,0) for x in header])
-d['Rank'] = c1
-d['Country(or dependent territory)']= c2
-d['Population']=c3
-d['Date']=c4
-d['% of worldpopulation']=c5
-d['Source']=c6
-d['SourceLink']=c7
-
-df_table = pd.DataFrame(d)
-# print(df_table.head(5))
-# print(df_table)
-print(d)
+df = pd.DataFrame(zip(a0,a1,a2,a3,a4),columns = header)
+print(df.head())
