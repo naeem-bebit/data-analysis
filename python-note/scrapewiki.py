@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
-import string
 
 # url = 'https://en.wikipedia.org/wiki/List_of_airports_by_IATA_airport_code:_Z'
 # print(url)
@@ -41,26 +40,22 @@ url = "https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_popul
 print(url)
 s = requests.Session()
 response = s.get(url, timeout=10)
-response
-
 soup = BeautifulSoup(response.content, 'html.parser')
 pretty_soup = soup.prettify()
 print(soup.title.string)
-
-all_tables=soup.find_all('table')
+# all_tables=soup.find_all('table')
 # print(all_tables)
-right_table=soup.find('table', {"class":'wikitable'})
-# print(right_table)
+wiki_table=soup.find('table', {"class":'wikitable'})
+# print(wiki_table)
 
-
-for row in right_table.findAll("tr"):
+for row in wiki_table.findAll("tr"):
     cells = row.findAll('th')
     # print(cells)
 
 # print(row[0])
 print("COLUMNS: ", len(cells))
 
-rows = right_table.findAll("tr")
+rows = wiki_table.findAll("tr")
 print("ROWS: ", len(rows))
 # print(rows[0])
 
@@ -70,13 +65,18 @@ a1 = []
 a2 = []
 a3 = []
 a4 = []
-for d in right_table.findAll('tr')[1:242]:
+for d in wiki_table.findAll('tr'):
+    # header = d.findAll('th')
+    # print(header[0].text.rstrip()) #To extract Rank since it's in the "th"
     cells = d.findAll('td')
-    a0.append(cells[0].find('a').text)   
-    a1.append(cells[1].find(text=True))
-    a2.append(cells[2].find(text=True))
-    a3.append(cells[3].find(text=True))
-    a4.append(cells[4].find(text=True))
+    if len(cells) == 5:
+        # print(cells[1].text.rstrip()) #similar to find(text=True)
+        a0.append(cells[0].find('a').text)   
+        a1.append(cells[1].find(text=True))
+        a2.append(cells[2].find(text=True))
+        a3.append(cells[3].find(text=True))
+        a4.append(cells[4].find(text=True))
 
-df = pd.DataFrame(zip(a0,a1,a2,a3,a4),columns = header)
+df = pd.DataFrame(list(zip(a0,a1,a2,a3,a4)),columns = header)
 print(df.head())
+# df.to_csv('World population.csv')
