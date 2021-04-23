@@ -43,15 +43,22 @@ soup = BeautifulSoup(response.content, 'html.parser')
 ratings = []
 for rating in soup.find_all('a',{'class':'ui_bubble_rating'}):
     ratings.append(rating['alt'])
+# print(ratings)
 
 hotel = []
 for name in soup.findAll('div',{'class':'listing_title'}):
     hotel.append(name.text.strip())
+# print(hotel)
 
 price = []
-
 for p in soup.findAll('div',{'class':'price-wrap'}):
     price.append(p.text) 
-price[:5]
+# print(price)
 
-pd.DataFrame(hotel)
+df_hotel = pd.DataFrame({'price':price,
+                  'hotel':hotel,
+                  'ratings':ratings})
+df_hotel['price']= df_hotel['price'].str.split('MYR',expand=True)[2].str.replace(',', '').astype(float)
+df_hotel['ratings'] = df_hotel['ratings'].str.split('of',expand=True)[0].astype(float)
+
+print(df_hotel.head())
