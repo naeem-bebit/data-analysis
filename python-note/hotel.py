@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-%matplotlib inline
+# %matplotlib inline
 import warnings
 warnings.filterwarnings("ignore")
 pd.set_option('display.max_columns', None) # Set columns mac without truncated
@@ -23,7 +23,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score, precision_score
 
-df = pd.read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv',
+                 usecols = ['hotel', 'is_canceled', 'adults', 'children', 'babies', 'meal', 'country', 'market_segment', 'distribution_channel', 'reserved_room_type', 'booking_changes', 'deposit_type', 'days_in_waiting_list', 'customer_type', 'required_car_parking_spaces', 'total_of_special_requests'])
 df.head()
 
 df.shape # Size of the dataframe
@@ -36,7 +37,7 @@ df.isnull().sum() #Row with NaN value
 
 df.isnull().sum().sum() # Total NaN value
 
-df[df.isnull().T.any()] || df[df.isnull().any(axis=1)] #Rows with NaN value
+df[df.isnull().T.any()] #|| df[df.isnull().any(axis=1)] #Rows with NaN value
 
 df['hotel'].value_counts().plot.bar() #count the main column value and plot
 
@@ -44,6 +45,16 @@ pd.crosstab(df['hotel'], df['is_canceled'], margins=True, margins_name = 'Total'
 pd.crosstab(df['adults'], df['children'], margins=True, margins_name = 'Total')
 
 df.isna().sum()/len(df)*100 # Percentage of NaN value
+
+# Preprocessing
+mode_binary = Pipeline([
+    ('encoder', SimpleImputer(strategy = 'most_frequent')),
+    ('binary', BinaryEncoder())])
+
+transformer = ColumnTransformer([
+    ('one hot', OneHotEncoder(handle_unknown = 'ignore'), [ 'hotel', 'meal', 'market_segment', 'distribution_channel', 'reserved_room_type', 'deposit_type', 'customer_type']),
+    ('mode binary', mode_binary, ['country']),
+    ('impute mode', SimpleImputer(strategy = 'most_frequent'), ['children'])], remainder = 'passthrough')
 
 X = df.drop('is_canceled', axis = 1)
 y = df['is_canceled']
@@ -126,4 +137,4 @@ best_summary = pd.DataFrame({
     'method': method_name,
     'score': score_list
 })
-best_summary
+print(best_summary)
