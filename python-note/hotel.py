@@ -46,6 +46,15 @@ pd.crosstab(df['adults'], df['children'], margins=True, margins_name = 'Total')
 
 df.isna().sum()/len(df)*100 # Percentage of NaN value
 
+df.dtypes #Get the type of the column data
+list(df.select_dtypes(include=['object']).columns) # Get the list of object category
+
+# Run the processing using the categorical preprocessing
+cat_columns = list(df.select_dtypes(include=['object']).columns)
+df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes)
+
+# Correlation
+
 # Preprocessing
 mode_binary = Pipeline([
     ('encoder', SimpleImputer(strategy = 'most_frequent')),
@@ -55,6 +64,8 @@ transformer = ColumnTransformer([
     ('one hot', OneHotEncoder(handle_unknown = 'ignore'), [ 'hotel', 'meal', 'market_segment', 'distribution_channel', 'reserved_room_type', 'deposit_type', 'customer_type']),
     ('mode binary', mode_binary, ['country']),
     ('impute mode', SimpleImputer(strategy = 'most_frequent'), ['children'])], remainder = 'passthrough')
+
+#https://scikit-learn.org/stable/modules/compose.html#columntransformer-for-heterogeneous-data
 
 X = df.drop('is_canceled', axis = 1)
 y = df['is_canceled']
