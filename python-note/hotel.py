@@ -54,6 +54,12 @@ cat_columns = list(df.select_dtypes(include=['object']).columns)
 df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes)
 
 # Correlation
+df_corr = df
+cat_columns = list(df_corr.select_dtypes(include=['object']).columns)
+df_corr[cat_columns] = df_corr[cat_columns].apply(lambda x: x.astype('category').cat.codes)
+plt.figure(figsize=(15,8))
+corrMatrix = df_corr.corr()
+sns.heatmap(corrMatrix, annot= True, fmt='.0%')
 
 # Preprocessing
 mode_binary = Pipeline([
