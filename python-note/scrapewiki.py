@@ -68,6 +68,13 @@ a4 = []
 for d in wiki_table.findAll('tr'):
     # header = d.findAll('th')
     # print(header[0].text.rstrip()) #To extract Rank since it's in the "th"
+    max_row.append(len(row))
+    if len(row) == max(max_row):
+    iata_rowA.append(row.text.rstrip())
+    #     elif len(row) == 2: 
+    else:
+        continue
+
     cells = d.findAll('td')
     if len(cells) == 5:
         # print(cells[1].text.rstrip()) #similar to find(text=True)
