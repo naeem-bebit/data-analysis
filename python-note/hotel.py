@@ -51,6 +51,12 @@ df['column_1'].str.split('-',expand=True)[1].reset_index(drop=True) #spread the 
 df.dtypes #Get the type of the column data
 list(df.select_dtypes(include=['object']).columns) # Get the list of object category
 
+plt.figure(figsize=(15,8)) # Plot the data with threshold
+df_count_country = df_test[3].value_counts()
+df_count_country['other']=df_count_country[df_count_country < 10].sum()
+df_count_country = df_count_country[df_count_country > 10]
+df_count_country.plot(kind='bar')
+
 # Run the processing using the categorical preprocessing
 cat_columns = list(df.select_dtypes(include=['object']).columns)
 df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes)
