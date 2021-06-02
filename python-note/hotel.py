@@ -59,6 +59,9 @@ df_count_country.plot(kind='bar')
 
 df.groupby(['column 1', 'column 2']).size().reset_index(name='counts') # Groupby
 
+df[df.duplicated()] #check for duplicate in any column
+pd.to_datetime(df['Column']) #change column to datetime
+
 # Run the processing using the categorical preprocessing
 cat_columns = list(df.select_dtypes(include=['object']).columns)
 df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes)
