@@ -20,3 +20,18 @@ def grubbs_test(x):
         "Reject null hypothesis and conclude that there is an outliers\n")
 grubbs_test(x)
 grubbs_test(y)
+
+out=[]
+def Zscore_outlier(df):
+    m = np.mean(df)
+    sd = np.std(df)
+    for i in df: 
+        z = (i-m)/sd
+        print(z)
+        if np.abs(z) > 2: 
+            out.append(i)
+            print(out)
+    print("Outliers:",out)
+
+Zscore_outlier(x) 
+Zscore_outlier(y)
