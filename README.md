@@ -1,21 +1,8 @@
-## Data Analysis
-Basic data analysis sample file
 
- - Logistic regression
- - Linear regression
- - Clustering
- - Random forest classification
-```
-├── README.md
-├── clustering
-│   ├── clustering.py
-│   └── requirements.txt
-├── linear-regression
-│   ├── linear-regression.py
-│   └── requirements.txt
-├── logistic-regression
-│   ├── logistic-regression.py
-│   └── requirements.txt
-└── random_forest
-    └── random_forest_classifier.py
-```
+# miscellaneous python code
+
+miscellaneous python code for quick reference and testing
+
+## Acknowledgements
+
+ - [Awesome Readme Editor](https://readme.so/editor)
