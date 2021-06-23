@@ -7,7 +7,7 @@ df = pd.read_sql_query('SELECT * FROM books;',db)
 new_data = {'id':'12','author': 'Naeem'}
 df = df.append(new_data, ignore_index=True)
 
-data.to_sql('books', db, if_exists = 'replace', index = False)
+df.to_sql('books', db, if_exists = 'replace', index = False)
 cur = db.cursor()
 
 cur.execute('''()''')
@@ -16,7 +16,7 @@ cur.executemany()
 
 cur.execute('SELECT * FROM books')
 
-for new_line in cur.fetchall()
+for new_line in cur.fetchall():
     print(new_line)
 
 print(cur.fetchall)
