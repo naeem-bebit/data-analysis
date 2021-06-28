@@ -1,5 +1,7 @@
 import boto3
 import xml.etree.ElementTree as ET
+from datetime import datetime
+
 s3 = boto3.resource('s3')
 bucket = s3.Bucket('future-markets-prod-s3-datalakebucket')
 objs = list(bucket.objects.filter(Prefix='Malaysia/Bookings/2021-06-21/QRH002936_20210621_150318.xml'))
@@ -20,6 +22,9 @@ for obj in bucket.objects.filter(Prefix='Malaysia/Bookings/2021-06-21/QRH002936_
         for ch in child:
             print(ch.tag, ch.attrib)
         print(child.tag, child.attrib)
+
+pd.date_range(start="2021-02-01",end="2021-02-05"):
+
 (datetime.now() - pd.to_datetime(date_test)) < timedelta(minutes=15)
 if (datetime.now() - pd.to_datetime(date_test)) < timedelta(minutes=15):
     print('Yes')
