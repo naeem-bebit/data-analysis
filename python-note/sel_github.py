@@ -14,4 +14,10 @@ driver.execute_cdp_cmd('Page.setDownloadBehavior', params)
 
 driver.get('https://github.com/naeem-bebit')
 
+driver.find_element_by_xpath('//span[@title="streamlit-data"]').click()
+
+driver.find_element_by_xpath('//summary[@class="btn btn-primary"]').click()
+
+driver.find_element_by_xpath('//a[@data-open-app="link"]').click()
+
 driver.close()
