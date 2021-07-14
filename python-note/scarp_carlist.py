@@ -1,6 +1,14 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import json 
+
+url = 'https://www.carlist.my/used-cars-for-sale/malaysia?page_number='
+first_page = '1'
+last_page = '2'
+
+url_inspected = 'https://www.carlist.my/cars-for-sale/malaysia?inspected=true'
+full_url = url+first_page
+print(full_url)
 # changeType = lambda i: int(i) if i.isdigit() else float(i) if i.replace('.', '').isdigit() else i
 # result = [(soup:=bs(requests.get(i).content, 'lxml')) and {'url': i,'name': soup.find(
 #     'h1', class_='listing__title').text.strip(),'image': [i['data-src'] for i in soup.find('div', class_='gallery').findAll(
@@ -22,4 +30,4 @@ import json
 #                                                                     r:=[i.text for i in i.findAll('span')]) and [(s:=r[0].title().replace(' ', '')) and s[0].lower()+s[1:], changeType(
 #                                                                         r[1])] for i in i[1].findAll('div', class_='list-item'))] for i in s) for i in soup.find('div',class_='specifications').findAll('div', class_='cycle-slide')]))} for i in [i.find(
 #                                                                             'a')['href'] for i in bs(requests.get('https://www.carlist.my/new-cars-for-sale/malaysia?page_size=50').content, 'lxml').findAll('h2', class_='listing__title')]]
-print(json.dump(result, open('result.json', 'w'), indent=4))
+# print(json.dump(result, open('result.json', 'w'), indent=4))
