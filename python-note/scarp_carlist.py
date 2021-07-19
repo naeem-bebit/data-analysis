@@ -31,3 +31,8 @@ print(full_url)
 #                                                                         r[1])] for i in i[1].findAll('div', class_='list-item'))] for i in s) for i in soup.find('div',class_='specifications').findAll('div', class_='cycle-slide')]))} for i in [i.find(
 #                                                                             'a')['href'] for i in bs(requests.get('https://www.carlist.my/new-cars-for-sale/malaysia?page_size=50').content, 'lxml').findAll('h2', class_='listing__title')]]
 # print(json.dump(result, open('result.json', 'w'), indent=4))
+
+
+/en-at/|/de-at/|en-be|fr-be|en-bg|bg-bg|en-hr|hr-hr|en-cy|en-cz|cs-cz|en-de|de-de|es-es |en-fi|fr-fr|el-gr|en-gr|en-hu|hu-hu|en-ie|it-it|en-nl|en-ro|ro-ro
+
+/en-at|/de-at|/en-be|/fr-be|/en-bg|/bg-bg|/en-hr|/hr-hr|/en-cy|/en-cz|/cs-cz|/en-de|/de-de|/es-es|/en-fi|/fr-fr|/el-gr|/en-gr|/en-hu|/hu-hu|/en-ie|/it-it|/en-nl|/en-ro|/ro-ro

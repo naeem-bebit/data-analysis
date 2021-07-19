@@ -1,4 +1,4 @@
-# Scrapy settings for weblazada project
+# Scrapy settings for carlistscrapper project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,14 +7,14 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'weblazada'
+BOT_NAME = 'carlistscrapper'
 
-SPIDER_MODULES = ['weblazada.spiders']
-NEWSPIDER_MODULE = 'weblazada.spiders'
+SPIDER_MODULES = ['carlistscrapper.spiders']
+NEWSPIDER_MODULE = 'carlistscrapper.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'weblazada (+http://www.yourdomain.com)'
+#USER_AGENT = 'carlistscrapper (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -45,13 +45,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'weblazada.middlewares.WeblazadaSpiderMiddleware': 543,
+#    'carlistscrapper.middlewares.CarlistscrapperSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'weblazada.middlewares.WeblazadaDownloaderMiddleware': 543,
+#    'carlistscrapper.middlewares.CarlistscrapperDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    'weblazada.pipelines.WeblazadaPipeline': 300,
+#    'carlistscrapper.pipelines.CarlistscrapperPipeline': 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
