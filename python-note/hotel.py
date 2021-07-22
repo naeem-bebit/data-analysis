@@ -47,6 +47,7 @@ pd.crosstab(df['adults'], df['children'], margins=True, margins_name = 'Total')
 df.isna().sum()/len(df)*100 # Percentage of NaN value
 
 df['column_1'].str.split('-',expand=True)[1].reset_index(drop=True) #spread the string column by '-' and select the second column
+df['Time Zone'].str.split('/',expand=True)[[0,1]].reset_index(drop=True).rename(columns={0: 'continent', 1:'city'}) #spread and rename two columns
 
 df.dtypes #Get the type of the column data
 list(df.select_dtypes(include=['object']).columns) # Get the list of object category
