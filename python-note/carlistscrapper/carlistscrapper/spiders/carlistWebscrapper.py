@@ -18,3 +18,10 @@ class carlistWebscrapper(scrapy.Spider):
                     'price':carlist.css('div.listing__price::text').get().replace('RM ',''),
                     'link':carlist.css('a.listing__overlay').attrib['href'],
                 }
+    
+    def pagination(self, response):
+        for pagination in response.css('div.pagination--footer'):
+            try:
+                pagination.css('a').attrib['href']
+            except:
+                pass
