@@ -19,9 +19,7 @@ class carlistWebscrapper(scrapy.Spider):
                     'link':carlist.css('a.listing__overlay').attrib['href'],
                 }
     
-    def pagination(self, response):
-        for pagination in response.css('div.pagination--footer'):
-            try:
-                pagination.css('a').attrib['href']
-            except:
-                pass
+        next_page = response.css('li.next').css('a').attrib['href']
+        print('THIS IS NEXT PAGE', next_page)
+        if next_page is not None:
+            yield response.follow(next_page, callback=self.parse)
