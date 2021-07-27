@@ -10,7 +10,8 @@ last_page = 2
 for page in range(first_page,last_page):
     url_page = url+str(page)
     scrape = requests.get(url_page)
-    soup = BeautifulSoup(scrape.content, 'lxml')
+    soup = BeautifulSoup(scrape.text, 'html.parser')
+    # soup = BeautifulSoup(scrape.content, 'lxml') #both can be utilized for scrapping
     link = soup.find_all('div',{'class':'item','class':'summary'})
     # print(link)
     length = len(link)
