@@ -25,7 +25,7 @@ def add_country():
     return {"error": "Request must be JSON"}, 415
 
 
-curl --location --request POST 'https://api-lite.qr.live.goquo.io/api/v1/package/site-info' \
+curl --location --request POST 'https://api-lite.qr.live.goquo.io/api/v1/package/search?startSearch=true' \
 --header 'x-access-site: 42fa0786-7f02-4a84-b675-3577c153b07e' \
 --header 'x-access-token: Qatar Airways Holidays' \
 --header 'Cookie: UserId=7b870581-b7f4-4434-be83-b613db306221; UserId=7b870581-b7f4-4434-be83-b613db306221' \
@@ -37,3 +37,4 @@ curl --location --request POST 'https://api-lite.mhh.live.goquo.io/api/v1/packag
 --header 'x-access-token: MHholidays' \
 --header 'x-token: Q3it85M5lUWCApmSlpss3c0DrUZ4XVZK' \
 --header 'Cookie: UserId=56fdb175-d54d-4985-9eb1-3515482e46fa; UserId=56fdb175-d54d-4985-9eb1-3515482e46fa'
+
