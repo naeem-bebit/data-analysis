@@ -24,6 +24,13 @@ def add_country():
         return country, 201
     return {"error": "Request must be JSON"}, 415
 
+curl -i http://127.0.0.1:5000/countries \
+-X POST \
+-H 'Content-Type: application/json' \
+-d '{"name":"Germany", "capital": "Berlin", "area": 357022}'
+
+curl -i http://127.0.0.1:5000/countries
+
 
 curl --location --request POST 'https://api-lite.qr.live.goquo.io/api/v1/package/search?startSearch=true' \
 --header 'x-access-site: 42fa0786-7f02-4a84-b675-3577c153b07e' \
