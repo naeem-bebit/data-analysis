@@ -60,6 +60,8 @@ df_count_country['other']=df_count_country[df_count_country < 10].sum()
 df_count_country = df_count_country[df_count_country > 10]
 df_count_country.plot(kind='bar')
 
+df['column'].str.replace('UTC ', '') #remove UTC from the string in pandas column
+
 df.groupby(['column 1', 'column 2']).size().reset_index(name='counts') # Groupby
 
 df[df.duplicated()] #check for duplicate in any column
@@ -70,6 +72,10 @@ df['Column Name'].value_counts().reset_index().rename(columns={'index': 'New_nam
 # Run the processing using the categorical preprocessing
 cat_columns = list(df.select_dtypes(include=['object']).columns)
 df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes)
+
+df[~df['Pax Email'].isin(ex_email+scam_email)] #isin
+
+df.rename(columns={"Destination": "iata_code"}) #rename the column
 
 # Correlation
 df_corr = df
