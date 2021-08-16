@@ -87,3 +87,9 @@ for d in wiki_table.findAll('tr'):
 df = pd.DataFrame(list(zip(a0,a1,a2,a3,a4)),columns = header)
 print(df.head())
 # df.to_csv('World population.csv')
+
+# -----
+# Pandas read html
+
+dpop = pd.read_html('https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population')
+dpop[0]
