@@ -69,6 +69,13 @@ pd.to_datetime(df['Column']) #change column to datetime
 
 df['Column Name'].value_counts().reset_index().rename(columns={'index': 'New_name'})
 
+df[df['Column name'].notnull()] #find row with nan value
+df[df['Column name'].isnull()] #find row with not nan value
+
+df.columns = ['Column 1', 'Column 2','Column 3'] #rename all columns
+
+[col[0] for col in df.columns] #multiindex column
+
 # Run the processing using the categorical preprocessing
 cat_columns = list(df.select_dtypes(include=['object']).columns)
 df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes)
