@@ -53,3 +53,5 @@ finally:
             print("PostgreSQL connection is closed")
     except:
         print("Connection timeout")
+
+df_sql.shape
