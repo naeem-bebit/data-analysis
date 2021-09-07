@@ -54,6 +54,8 @@ list(df.select_dtypes(include=['object']).columns) # Get the list of object cate
 
 df.query('column_name == "string_value"') #query
 
+pd.merge(df1,df2, on="columns")
+
 plt.figure(figsize=(15,8)) # Plot the data with threshold
 df_count_country = df[3].value_counts()
 df_count_country['other']=df_count_country[df_count_country < 10].sum()
@@ -83,6 +85,8 @@ df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes
 df[~df['Pax Email'].isin(ex_email+scam_email)] #isin
 
 df.rename(columns={"Destination": "iata_code"}) #rename the column
+
+df.groupby(['Fruit','Name'])['Number'].sum()
 
 # Correlation
 df_corr = df
