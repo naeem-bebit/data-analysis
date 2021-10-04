@@ -235,18 +235,13 @@ WITH filterUSD as (
 select B.* from dbo."GoQuoEngine_Bookings" B
 inner join dbo."View_RB_QRH_FIFAReport_SellingCurrency" F on F."Confirm Ref" = B."BookingConfirmRef" 
 where "Currency" = 'USD' and B."BookingStatus" = 2 and B."PaymentStatus" = 30),
-filternonUSD as ( select * from dbo."GoQuoEngine_Bookings_ExchangeRates"
-)
+filternonUSD as ( 
+select B.* from dbo."GoQuoEngine_Bookings" B
+inner join dbo."View_RB_QRH_FIFAReport_SellingCurrency" F on F."Confirm Ref" = B."BookingConfirmRef" 
+inner join dbo."GoQuoEngine_Bookings_ExchangeRates" E on E."BookingId" = B."Id"
+where E."ToCurrency" = 'USD' and B."BookingStatus" = 2 and B."PaymentStatus" = 30)
 select * from filternonUSD
---select B."BookingConfirmRef", B."TotalPrice", B."BookingDate",E.*, E."Rate"*B."TotalPrice" as total_usd 
---from filterUSD B 
---with another table
---inner join dbo."GoQuoEngine_Bookings_ExchangeRates" E on (E."BookingId" = B."Id" and E."FromCurrency" = B."Currency")
---inner join dbo."View_RB_QRH_FIFAReport_SellingCurrency" F on F."Confirm Ref" = B."BookingConfirmRef"
---where B."BookingStatus" = 2 and B."PaymentStatus" = 3
-
 
 -- link to jso sql array 
 -- https://dev.mysql.com/doc/refman/8.0/en/json.html
 -- https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html
-
