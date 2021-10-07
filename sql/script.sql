@@ -230,17 +230,18 @@ SELECT client_id,
 FROM filter_observe_total
 ORDER BY filter_total DESC
 
-
 WITH filterUSD as (
-select B.* from dbo."GoQuoEngine_Bookings" B
+select B."TotalPrice" as totalinUSD, B."BookingConfirmRef", B."BookingDate" from dbo."GoQuoEngine_Bookings" B
 inner join dbo."View_RB_QRH_FIFAReport_SellingCurrency" F on F."Confirm Ref" = B."BookingConfirmRef" 
 where "Currency" = 'USD' and B."BookingStatus" = 2 and B."PaymentStatus" = 30),
 filternonUSD as ( 
-select B.* from dbo."GoQuoEngine_Bookings" B
+select B."TotalPrice", B."BookingDate",B."BookingConfirmRef", E."Rate",B."TotalPrice"*E."Rate" as totalinUSD from dbo."GoQuoEngine_Bookings" B
 inner join dbo."View_RB_QRH_FIFAReport_SellingCurrency" F on F."Confirm Ref" = B."BookingConfirmRef" 
 inner join dbo."GoQuoEngine_Bookings_ExchangeRates" E on E."BookingId" = B."Id"
 where E."ToCurrency" = 'USD' and B."BookingStatus" = 2 and B."PaymentStatus" = 30)
-select * from filternonUSD
+select "BookingDate","BookingConfirmRef",totalinUSD  from filterUSD
+union
+select "BookingDate","BookingConfirmRef",totalinUSD from filternonUSD
 
 -- link to jso sql array 
 -- https://dev.mysql.com/doc/refman/8.0/en/json.html
