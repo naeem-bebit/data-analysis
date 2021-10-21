@@ -7,8 +7,10 @@ services:
     volumes:
       - .:/code
       - logvolume01:/var/log
+    env_file:
+      - .env
     environment:
-      FLASK_ENV: development
+      FLASK_ENV: production
     links:
       - redis
   redis:
