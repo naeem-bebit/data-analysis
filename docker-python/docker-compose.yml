@@ -1,3 +1,16 @@
+# version: "3.9"
+# services:
+#   web:
+#     build: .
+#     ports:
+#       - "5000:5000"
+#     volumes:
+#       - .:/code
+#     environment:
+#       FLASK_ENV: development
+#   redis:
+  # image: "redis:alpine"
+
 version: "3.9"
 services:
   web:
@@ -6,14 +19,16 @@ services:
       - "5000:5000"
     volumes:
       - .:/code
-      - logvolume01:/var/log
-    env_file:
-      - .env
+      # - logvolume01:/var/log
+    # env_file:
+      # - .env
+      # FLASK_ENV: development
     environment:
-      FLASK_ENV: production
-    links:
-      - redis
+      FLASK_ENV: development
+      # FLASK_ENV: production
+    # links:
+    #   - redis
   redis:
     image: "redis:alpine"
-volumes:
-  logvolume01: {}
+# volumes:
+#   logvolume01: {}
