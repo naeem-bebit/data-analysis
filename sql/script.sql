@@ -243,6 +243,23 @@ select "BookingDate","BookingConfirmRef",totalinUSD  from filterUSD
 union
 select "BookingDate","BookingConfirmRef",totalinUSD from filternonUSD
 
+WITH top2 as (SELECT
+  FORMAT_DATE("%Y", date_local) AS Year,
+  country_name AS Country,
+  SUM(gmv_local) AS TotalGMV,
+vendor_id
+FROM
+  `astral-comfort-175406.foodpanda.orders`
+GROUP BY
+  Year,
+  vendor_id,
+  Country
+ORDER BY
+  Country,
+  TotalGMV)
+select Country,Year,vendor_id, RANK() OVER (PARTITION BY Country,Year,vendor_id ORDER BY TotalGMV DESC) AS price_rank
+from top2
+
 -- link to jso sql array 
 -- https://dev.mysql.com/doc/refman/8.0/en/json.html
 -- https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html
