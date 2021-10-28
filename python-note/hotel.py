@@ -88,6 +88,30 @@ df.rename(columns={"Destination": "iata_code"}) #rename the column
 
 df.groupby(['Fruit','Name'])['Number'].sum()
 
+#Feature engineering - Mutual Information
+from sklearn.feature_selection import mutual_info_regression
+
+def make_mi_scores(X, y, discrete_features):
+    mi_scores = mutual_info_regression(X, y, discrete_features=discrete_features)
+    mi_scores = pd.Series(mi_scores, name="MI Scores", index=X.columns)
+    mi_scores = mi_scores.sort_values(ascending=False)
+    return mi_scores
+
+mi_scores = make_mi_scores(X, y, discrete_features)
+mi_scores[::3] 
+
+def plot_mi_scores(scores):
+    scores = scores.sort_values(ascending=True)
+    width = np.arange(len(scores))
+    ticks = list(scores.index)
+    plt.barh(width, scores)
+    plt.yticks(width, ticks)
+    plt.title("Mutual Information Scores")
+
+
+plt.figure(dpi=100, figsize=(8, 5))
+plot_mi_scores(mi_scores)
+
 # Correlation
 df_corr = df
 cat_columns = list(df_corr.select_dtypes(include=['object']).columns)
