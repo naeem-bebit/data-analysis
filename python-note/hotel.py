@@ -120,6 +120,17 @@ plt.figure(figsize=(15,8))
 corrMatrix = df_corr.corr()
 sns.heatmap(corrMatrix, annot= True, fmt='.0%')
 
+#PCA - Principal Component Analysis https://www.kaggle.com/ryanholbrook/principal-component-analysis
+from sklearn.decomposition import PCA
+
+# Create principal components
+pca = PCA()
+X_pca = pca.fit_transform(X_scaled)
+
+# Convert to dataframe
+component_names = [f"PC{i+1}" for i in range(X_pca.shape[1])]
+X_pca = pd.DataFrame(X_pca, columns=component_names)
+
 # Preprocessing
 mode_binary = Pipeline([
     ('encoder', SimpleImputer(strategy = 'most_frequent')),
