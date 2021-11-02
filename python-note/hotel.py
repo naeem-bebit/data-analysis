@@ -120,7 +120,7 @@ plt.figure(figsize=(15,8))
 corrMatrix = df_corr.corr()
 sns.heatmap(corrMatrix, annot= True, fmt='.0%')
 
-#PCA - Principal Component Analysis https://www.kaggle.com/ryanholbrook/principal-component-analysis
+## PCA - Principal Component Analysis https://www.kaggle.com/ryanholbrook/principal-component-analysis
 from sklearn.decomposition import PCA
 
 # Create principal components
@@ -131,7 +131,21 @@ X_pca = pca.fit_transform(X_scaled)
 component_names = [f"PC{i+1}" for i in range(X_pca.shape[1])]
 X_pca = pd.DataFrame(X_pca, columns=component_names)
 
-# Preprocessing
+
+## Target Encoding
+from category_encoders import MEstimateEncoder
+
+# Create the encoder instance. Choose m to control noise.
+encoder = MEstimateEncoder(cols=["Zipcode"], m=5.0)
+
+# Fit the encoder on the encoding split.
+encoder.fit(X_encode, y_encode)
+
+# Encode the Zipcode column to create the final training data
+X_train = encoder.transform(X_pretrain)
+
+
+## Preprocessing
 mode_binary = Pipeline([
     ('encoder', SimpleImputer(strategy = 'most_frequent')),
     ('binary', BinaryEncoder())])
