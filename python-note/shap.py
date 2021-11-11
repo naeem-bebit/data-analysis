@@ -56,3 +56,14 @@ shap_values = explainer.shap_values(val_X)
 
 # Make plot. Index of [1] is explained in text below.
 shap.summary_plot(shap_values[1], val_X)
+
+import shap  # package used to calculate Shap values
+
+# Create object that can calculate shap values
+explainer = shap.TreeExplainer(my_model)
+
+# calculate shap values. This is what we will plot.
+shap_values = explainer.shap_values(X)
+
+# make plot.
+shap.dependence_plot('Ball Possession %', shap_values[1], X, interaction_index="Goal Scored")
