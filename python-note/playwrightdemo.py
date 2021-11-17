@@ -14,3 +14,14 @@ with sync_playwright() as p:
     soup = BeautifulSoup(html, 'html.parser')
     total_orders = soup.find('h2', {'class': 'pull-right'}).text
     print(f'total orders = {total_orders}')
+
+
+#Example2
+from playwright.sync_api import sync_playwright
+with sync_playwright() as p:
+    for browser_type in [p.chromium, p.firefox, p.webkit]:
+        browser = browser_type.launch()
+        page = browser.new_page()
+        page.goto('http://whatsmyuseragent.org/')
+        page.screenshot(path=f'example-{browser_type.name}.png')
+        browser.close()
