@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False, slow_mo=50)
+    # browser = p.chromium.launch() # remove the browser popup
     page = browser.new_page()
     page.goto('https://demo.opencart.com/admin/')
     page.fill('input#input-username', 'demo')
@@ -14,6 +15,7 @@ with sync_playwright() as p:
     soup = BeautifulSoup(html, 'html.parser')
     total_orders = soup.find('h2', {'class': 'pull-right'}).text
     print(f'total orders = {total_orders}')
+    browser.close()
 
 
 #Example2
