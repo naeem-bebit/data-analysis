@@ -17,3 +17,75 @@ for page in range(first_page,last_page):
     length = len(link)
 
 print(length)
+
+import atexit
+
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+
+URL = ("https://www.booking.com/searchresults.en-gb.html?"
+       "label=gen173nr-1FCAEoggI46AdIM1gEaK4BiAEBmAEJuAEXyAEM2AEB6AEB-AELiAIBqAIDuALnhOzyBcACAQ"
+       "&lang=en-gb&sid=422b3ff3c0e98b522259ad1cad2505ea&sb=1&src=searchresults&src_elem=sb"
+       "&error_url=https%3A%2F%2Fwww.booking.com%2Fsearchresults.en-gb.html%3Flabel%3Dgen173nr-"
+       "1FCAEoggI46AdIM1gEaK4BiAEBmAEJuAEXyAEM2AEB6AEB-AELiAIBqAIDuALnhOzyBcACAQ%3Bsid%3D422b3ff"
+       "3c0e98b522259ad1cad2505ea%3Btmpl%3Dsearchresults%3Bclass_interval%3D1%3Bdest_id%3D-150690"
+       "9%3Bdest_type%3Dcity%3Bdtdisc%3D0%3Bfrom_sf%3D1%3Bgroup_adults%3D2%3Bgroup_children%3D0%3"
+       "Binac%3D0%3Bindex_postcard%3D0%3Blabel_click%3Dundef%3Bno_rooms%3D1%3Boffset%3D0%3Bpostcar"
+       "d%3D0%3Braw_dest_type%3Dcity%3Broom1%3DA%252CA%3Bsb_price_type%3Dtotal%3Bshw_aparth%3D1%3Bs"
+       "lp_r_match%3D0%3Bsrc%3Dindex%3Bsrc_elem%3Dsb%3Bsrpvid%3D912403b6d1220012%3Bss%3DAuckland%3B"
+       "ss_all%3D0%3Bssb%3Dempty%3Bsshis%3D0%3Bssne%3DAuckland%3Bssne_untouched%3DAuckland%3Btop_ufi"
+       "s%3D1%26%3B&sr_autoscroll=1&ss=Auckland&is_ski_area=0&ssne=Auckland&ssne_untouched=Auckland&ci"
+       "ty=-1506909&checkin_year=2020&checkin_month=9&checkin_monthday=1&checkout_year=2020&checkout_m"
+       "onth=9&checkout_monthday=2&group_adults=2&group_children=0&no_rooms=1&from_sf=1'")
+
+print(URL)
+class page_loaded:
+    def __call__(self, driver):
+        document_ready = driver.execute_script("return document.readyState;") == "complete"
+        jquery_ready = driver.execute_script("return jQuery.active == 0;")
+        print(f"document ready: [({type(document_ready).__name__}){document_ready}]")
+        print(f"jquery  ready: [({type(jquery_ready).__name__}){jquery_ready}]")
+        return document_ready and jquery_ready
+
+
+def wait_for_page_to_load(driver, timeout_seconds=20):
+    WebDriverWait(driver, timeout_seconds, 0.2).until(page_loaded(), f"Page could not load in {timeout_seconds} s.!")
+
+
+def go_to_url(driver, url):
+    driver.get(url)
+    wait_for_page_to_load(driver)
+
+
+def get_orange_prices(soup):
+    return [price_label.get_text(strip=True)
+            for price_label
+            in soup.select("label.tpi_price_label.tpi_price_label__orange")]
+
+
+def get_normal_prices(soup):
+    return [price_label.get_text(strip=True)
+            for price_label
+            in soup.select("div[class*=fde444d7ef _c445487e2]")]
+
+
+def start_driver():
+    driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver")
+    atexit.register(driver.quit)
+    driver.maximize_window()
+    return driver
+
+
+def main():
+    driver = start_driver()
+    go_to_url(driver, URL)
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    orange_prices = get_orange_prices(soup)
+    print(orange_prices)
+    normal_prices = get_normal_prices(soup)
+    print(normal_prices)
+
+
+if __name__ == '__main__':
+    main()
