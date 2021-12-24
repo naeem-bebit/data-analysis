@@ -80,6 +80,10 @@ df.columns = ['Column 1', 'Column 2','Column 3'] #rename all columns
 
 [col[0] for col in df.columns] #multiindex column
 
+df.to_csv('sme2.csv', encoding='utf-8') #save to csv
+
+
+
 # Run the processing using the categorical preprocessing
 cat_columns = list(df.select_dtypes(include=['object']).columns)
 df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes)
@@ -121,6 +125,11 @@ df_corr[cat_columns] = df_corr[cat_columns].apply(lambda x: x.astype('category')
 plt.figure(figsize=(15,8))
 corrMatrix = df_corr.corr()
 sns.heatmap(corrMatrix, annot= True, fmt='.0%')
+
+cor_matrix = df.corr().abs()
+upper_tri = cor_matrix.where(np.triu(np.ones(cor_matrix.shape),k=1).astype(np.bool))
+to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > 0.95)]
+df1 = df.drop(df.columns[to_drop], axis=1)
 
 ## PCA - Principal Component Analysis https://www.kaggle.com/ryanholbrook/principal-component-analysis
 from sklearn.decomposition import PCA
