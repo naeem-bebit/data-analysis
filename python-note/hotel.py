@@ -131,6 +131,16 @@ upper_tri = cor_matrix.where(np.triu(np.ones(cor_matrix.shape),k=1).astype(np.bo
 to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > 0.95)]
 df1 = df.drop(df.columns[to_drop], axis=1)
 
+#correlation more than 0.8 will be removed
+
+correlated_features = set()
+correlation_matrix = paribas_data.corr()
+for i in range(len(correlation_matrix .columns)):
+    for j in range(i):
+        if abs(correlation_matrix.iloc[i, j]) > 0.8:
+            colname = correlation_matrix.columns[i]
+            correlated_features.add(colname)
+
 ## PCA - Principal Component Analysis https://www.kaggle.com/ryanholbrook/principal-component-analysis
 from sklearn.decomposition import PCA
 
