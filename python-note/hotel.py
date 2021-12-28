@@ -141,6 +141,24 @@ for i in range(len(correlation_matrix .columns)):
             colname = correlation_matrix.columns[i]
             correlated_features.add(colname)
 
+## yellowbrick 
+
+from sklearn import datasets
+from yellowbrick.target import FeatureCorrelation
+
+# Load the regression dataset
+data = datasets.load_diabetes()
+X, y = data['data'], data['target']
+
+# Create a list of the feature names
+features = np.array(data['feature_names'])
+
+# Instantiate the visualizer
+visualizer = FeatureCorrelation(labels=features)
+
+visualizer.fit(X, y)        # Fit the data to the visualizer
+visualizer.show() 
+
 ## PCA - Principal Component Analysis https://www.kaggle.com/ryanholbrook/principal-component-analysis
 from sklearn.decomposition import PCA
 
