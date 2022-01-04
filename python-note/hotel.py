@@ -1,3 +1,6 @@
+%load_ext autotime #At the beginning of the jupyter notebook to measure the execution time
+%unload_ext autotime #To unload 
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -82,9 +85,9 @@ df.columns = ['Column 1', 'Column 2','Column 3'] #rename all columns
 
 [col[0] for col in df.columns] #multiindex column
 
-df.to_csv('sme2.csv', encoding='utf-8') #save to csv
-
-
+df.to_csv('df_name.csv', encoding='utf-8') #save to csv
+path = '/home/path/work/path/Data/'
+df.to_csv(path+'df_name.csv',index=False)
 
 # Run the processing using the categorical preprocessing
 cat_columns = list(df.select_dtypes(include=['object']).columns)
