@@ -48,6 +48,8 @@ df['hotel'].value_counts().plot.bar() #count the main column value and plot
 
 list(df), df.columns.tolist() #List all long columns names
 
+df1.append(df2, ignore_index=True) # stack dataframes with similar columns, ignore index
+
 pd.crosstab(df['hotel'], df['is_canceled'], margins=True, margins_name = 'Total')
 pd.crosstab(df['adults'], df['children'], margins=True, margins_name = 'Total')
 
