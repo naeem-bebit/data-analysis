@@ -32,6 +32,8 @@ df = pd.read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/
                  usecols = ['hotel', 'is_canceled', 'adults', 'children', 'babies', 'meal', 'country', 'market_segment', 'distribution_channel', 'reserved_room_type', 'booking_changes', 'deposit_type', 'days_in_waiting_list', 'customer_type', 'required_car_parking_spaces', 'total_of_special_requests'])
 df.head()
 
+df.pd.read_csv('file_name.csv', low_memory=False) #set for large data or assign data type to the particular columns
+
 df.shape # Size of the dataframe
 
 df.info() # Basic info of the table such as type
@@ -56,7 +58,8 @@ pd.crosstab(df['adults'], df['children'], margins=True, margins_name = 'Total')
 df.isna().sum()/len(df)*100 # Percentage of NaN value
 
 df['column_1'].str.split('-',expand=True)[1].reset_index(drop=True) #spread the string column by '-' and select the second column
-df['Time Zone'].str.split('/',expand=True)[[0,1]].reset_index(drop=True).rename(columns={0: 'continent', 1:'city'}) #spread and rename two columns
+df['column_name'].str.split('/',expand=True)[[0,1]].reset_index(drop=True).rename(columns={0: 'continent', 1:'city'}) #spread and rename two columns
+df.join(df.pop('column_name').str.split('-', n=1, expand=True)).rename({0: 'fips', 2: 'row'}, axis=1) #remove the column and join, get only the first split and rename the columns
 
 df.dtypes #Get the type of the column data
 list(df.select_dtypes(include=['object']).columns) # Get the list of object category
