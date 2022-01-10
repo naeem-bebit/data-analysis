@@ -65,6 +65,7 @@ df.dtypes #Get the type of the column data
 list(df.select_dtypes(include=['object']).columns) # Get the list of object category
 
 df.query('column_name == "string_value"') #query
+df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", engine='python').reset_index()
 
 pd.merge(df1,df2, on="columns")
 
@@ -98,7 +99,7 @@ df.to_csv(path+'df_name.csv',index=False)
 cat_columns = list(df.select_dtypes(include=['object']).columns)
 df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes)
 
-df[~df['Pax Email'].isin(ex_email+scam_email)] #isin
+df[~df['column_name'].isin(list_of_data)] #isin
 
 df.rename(columns={"Destination": "iata_code"}) #rename the column
 
