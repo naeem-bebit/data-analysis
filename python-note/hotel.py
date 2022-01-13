@@ -140,7 +140,10 @@ sns.heatmap(corrMatrix, annot= True, fmt='.0%')
 cor_matrix = df.corr().abs()
 upper_tri = cor_matrix.where(np.triu(np.ones(cor_matrix.shape),k=1).astype(np.bool))
 to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > 0.95)]
-df1 = df.drop(df.columns[to_drop], axis=1)
+
+df1 = df.drop(df.columns[to_drop_columns], axis=1) #drop multiple columns 
+
+df['Target'] = np.where(df['column_name'].isin(df1['column_name']), 'Fail', 'Pass') #create failed pass column
 
 #correlation more than 0.8 will be removed
 
