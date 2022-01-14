@@ -64,6 +64,10 @@ df.join(df.pop('column_name').str.split('-', n=1, expand=True)).rename({0: 'fips
 df.dtypes #Get the type of the column data
 list(df.select_dtypes(include=['object']).columns) # Get the list of object category
 
+df['Target'] = np.where(df['column_name'].isin(df1['column_name']), 'Fail', 'Pass') #create failed pass column
+
+df.drop(['columns2','column1'], axis = 1)
+
 df.query('column_name == "string_value"') #query
 df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", engine='python').reset_index()
 
@@ -140,10 +144,7 @@ sns.heatmap(corrMatrix, annot= True, fmt='.0%')
 cor_matrix = df.corr().abs()
 upper_tri = cor_matrix.where(np.triu(np.ones(cor_matrix.shape),k=1).astype(np.bool))
 to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > 0.95)]
-
-df1 = df.drop(df.columns[to_drop_columns], axis=1) #drop multiple columns 
-
-df['Target'] = np.where(df['column_name'].isin(df1['column_name']), 'Fail', 'Pass') #create failed pass column
+df1 = df.drop(df.columns[to_drop], axis=1) 
 
 #correlation more than 0.8 will be removed
 
@@ -215,6 +216,20 @@ y = df['is_canceled']
 
 # Train test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, stratify = y, test_size = 0.2, random_state = 1515)
+
+# Feature Scaling after split
+from sklearn.preprocessing import StandardScaler
+# Fit and transfrom only for training data and transform for only test data
+sc = StandardScaler()
+X_train = sc.fit_transform(X_train)
+X_test = sc.transform(X_test)
+
+## Or
+
+sc = StandardScaler()
+sc.fit(X_train)
+X_train = sc.transform(X_train)
+X_test = sc.transform(X_test)
 
 # Modelling
 ## KNN add MinMaxScaler
