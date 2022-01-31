@@ -73,6 +73,10 @@ df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", e
 
 pd.merge(df1,df2, on="columns")
 
+df['column_name'].min() | df['column_name'].max()
+
+pd.to_datetime(df['column_name'], format="%m/%d/%y")
+
 plt.figure(figsize=(15,8)) # Plot the data with threshold
 df_count_country = df[3].value_counts()
 df_count_country['other']=df_count_country[df_count_country < 10].sum()
