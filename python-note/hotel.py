@@ -36,9 +36,13 @@ df.pd.read_csv('file_name.csv', low_memory=False) #set for large data or assign 
 
 df.shape # Size of the dataframe
 
+df
+
 df.info() # Basic info of the table such as type
 
-df.describe() # Distribution data
+# Distribution data
+df.describe() 
+df['column_name'].describe()
 
 df.isnull().sum() #Row with NaN value
 
@@ -111,7 +115,7 @@ df[~df['column_name'].isin(list_of_data)] #isin
 
 df.rename(columns={"Destination": "iata_code"}) #rename the column
 
-df.groupby(['Fruit','Name'])['Number'].sum()
+df.groupby(['Column_name1','Column_name2'])['Column_name3'].sum() #showing Column_name3 and groupby by column_name1 & column_name2
 
 #Feature engineering - Mutual Information
 from sklearn.feature_selection import mutual_info_regression
