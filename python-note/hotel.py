@@ -36,7 +36,9 @@ df.pd.read_csv('file_name.csv', low_memory=False) #set for large data or assign 
 
 df.shape # Size of the dataframe
 
-df
+df = pd.concat([df_1, df_2], axis=0) #concat both dataframe with same columns
+
+df.sort_values("column_name")
 
 df.info() # Basic info of the table such as type
 
