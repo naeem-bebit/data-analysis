@@ -66,6 +66,7 @@ df.isna().sum()/len(df)*100 # Percentage of NaN value
 df['column_1'].str.split('-',expand=True)[1].reset_index(drop=True) #spread the string column by '-' and select the second column
 df['column_name'].str.split('/',expand=True)[[0,1]].reset_index(drop=True).rename(columns={0: 'continent', 1:'city'}) #spread and rename two columns
 df.join(df.pop('column_name').str.split('-', n=1, expand=True)).rename({0: 'fips', 2: 'row'}, axis=1) #remove the column and join, get only the first split and rename the columns
+df['column_name'].str.split(",").str.get(0) #get the first value after the split and split by comma(,)
 
 df.dtypes #Get the type of the column data
 list(df.select_dtypes(include=['object']).columns) # Get the list of object category
