@@ -439,3 +439,8 @@ pd.crosstab(test['species'], preds,
 
 # View a list of the features and their importance scores
 list(zip(train[features], clf.feature_importances_))
+
+import fuzzywuzzy
+from fuzzywuzzy import process
+
+ fuzzywuzzy.process.extract("south korea", countries, limit=10, scorer=fuzzywuzzy.fuzz.token_sort_ratio)
