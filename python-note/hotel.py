@@ -357,6 +357,11 @@ feature_names
 
 forest_importances.sort_values(ascending=False)
 
+#Connection postgresql, encoding password
+import urllib.parse
+urllib.parse.quote_plus("password")
+https://docs.sqlalchemy.org/en/14/core/engines.html 
+
 
 # Random forest
 # https://chrisalbon.com/machine_learning/trees_and_forests/random_forest_classifier_example/
