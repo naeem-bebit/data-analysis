@@ -448,6 +448,8 @@ list(zip(train[features], clf.feature_importances_))
 import fuzzywuzzy
 from fuzzywuzzy import process
 
+fuzz.ratio("this is a coding", "this is code")
+
 fuzzywuzzy.process.extract("south korea", countries, limit=10, scorer=fuzzywuzzy.fuzz.token_sort_ratio)
 def replace_matches_in_column(df, column, string_to_match, min_ratio = 47):
     # get a list of unique strings
@@ -456,3 +458,4 @@ def replace_matches_in_column(df, column, string_to_match, min_ratio = 47):
     # get the top 10 closest matches to our input string
     matches = fuzzywuzzy.process.extract(string_to_match, strings, 
                                          limit=10, scorer=fuzzywuzzy.fuzz.token_sort_ratio)
+
