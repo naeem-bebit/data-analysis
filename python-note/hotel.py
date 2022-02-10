@@ -449,6 +449,9 @@ import fuzzywuzzy
 from fuzzywuzzy import process
 
 fuzz.ratio("this is a coding", "this is code")
+fuzz.partial_ratio("this is a coding", "this is code")
+fuzz.token_sort_ratio("this is a coding", "this is code")
+fuzz.token_set_ratio("this is a coding", "this is code")
 
 fuzzywuzzy.process.extract("south korea", countries, limit=10, scorer=fuzzywuzzy.fuzz.token_sort_ratio)
 def replace_matches_in_column(df, column, string_to_match, min_ratio = 47):
