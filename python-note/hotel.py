@@ -97,6 +97,9 @@ df.groupby(['column 1', 'column 2']).size().reset_index(name='counts') # Groupby
 df[df.duplicated()] #check for duplicate in any column
 pd.to_datetime(df['Column']) #change column to datetime
 
+from datetime import datetime
+datetime.today().strftime('%Y-%m-%d-%H:%M:%S') #Get the date for today
+
 df['Column Name'].value_counts().reset_index().rename(columns={'index': 'New_name'})
 
 df[df['Column name'].notnull()] #find row with nan value
@@ -357,12 +360,6 @@ feature_names
 
 forest_importances.sort_values(ascending=False)
 
-#Connection postgresql, encoding password
-import urllib.parse
-urllib.parse.quote_plus("password")
-https://docs.sqlalchemy.org/en/14/core/engines.html 
-
-
 # Random forest
 # https://chrisalbon.com/machine_learning/trees_and_forests/random_forest_classifier_example/
 # Load the library with the iris dataset
@@ -462,3 +459,19 @@ def replace_matches_in_column(df, column, string_to_match, min_ratio = 47):
     matches = fuzzywuzzy.process.extract(string_to_match, strings, 
                                          limit=10, scorer=fuzzywuzzy.fuzz.token_sort_ratio)
 
+#Connection postgresql, encoding password
+import urllib.parse
+urllib.parse.quote_plus("password")
+https://docs.sqlalchemy.org/en/14/core/engines.html 
+
+from sqlalchemy import create_engine
+import pymssql
+import pickle
+import psycopg2
+USERNAME = 'email@email.com'
+PASSWORD = 'password'
+engine = create_engine('postgresql://' + USERNAME + ':' + PASSWORD + 'locationof_the_database')
+column_1_value = 'example_%%'
+Columns_2_value = 'example'
+sql = f"select * FROM d.database WHERE column_1 like '{column_1_value}' and column_2 = '{Columns_2_value}' limit 10"
+pd.read_sql(sql,engine)
