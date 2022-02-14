@@ -281,3 +281,9 @@ ORDER BY
 -- link to jso sql array 
 -- https://dev.mysql.com/doc/refman/8.0/en/json.html
 -- https://dev.mysql.com/doc/refman/5.7/en/json-search-functions.html
+
+--first 2 strings of product_id and start with C & D and for the last 5 minutes
+SELECT datetime_col, LEFT(product_id,2) AS product_id
+FROM database_name 
+WHERE product_id SIMILAR TO 'C%|D%' --WHERE product_id LIKE 'C3_%%' 
+AND datetime_col >= GETDATE() - INTERVAL '5 minutes'
