@@ -46,6 +46,9 @@ df.info() # Basic info of the table such as type
 df.describe() 
 df['column_name'].describe()
 
+df.drop_duplicates(keep=False) #drop duplicates row in the dataframe
+df.drop_duplicates(subset=['column_name'], keep=False) #drop duplicates based on the column_name
+
 df.isnull().sum() #Row with NaN value
 
 df.isnull().sum().sum() # Total NaN value
@@ -471,7 +474,7 @@ import psycopg2
 USERNAME = 'email@email.com'
 PASSWORD = 'password'
 engine = create_engine('postgresql://' + USERNAME + ':' + PASSWORD + 'locationof_the_database')
-column_1_value = 'example_%%'
+column_1_value = 'example_%%' # double percentage is necassary due to python syntax
 Columns_2_value = 'example'
 sql = f"select * FROM d.database WHERE column_1 like '{column_1_value}' and column_2 = '{Columns_2_value}' limit 10"
 pd.read_sql(sql,engine)
