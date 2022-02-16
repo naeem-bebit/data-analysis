@@ -78,8 +78,10 @@ df['Target'] = np.where(df['column_name'].isin(df1['column_name']), 'Fail', 'Pas
 
 df.drop(['columns2','column1'], axis = 1)
 
-df.query('column_name == "string_value"') #query
+#Query
+df.query('column_name == "string_value"') 
 df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", engine='python').reset_index()
+df.query("column == 'something' & column == 'something' | column == ''") #emptynan
 
 pd.merge(df1,df2, on="columns")
 
@@ -98,6 +100,8 @@ df['column'].str.replace('UTC ', '') #remove UTC from the string in pandas colum
 df.groupby(['column 1', 'column 2']).size().reset_index(name='counts') # Groupby
 
 df[df.duplicated()] #check for duplicate in any column
+df[df.duplicated(subset=['column_name'], keep=False)] # Check duplicate value for a particular column
+
 pd.to_datetime(df['Column']) #change column to datetime
 
 from datetime import datetime
