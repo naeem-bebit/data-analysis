@@ -83,6 +83,8 @@ df.query('column_name == "string_value"')
 df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", engine='python').reset_index()
 df.query("column == 'something' & column == 'something' | column == ''") #emptynan
 
+df.loc[(df['column_name'] == 'somev_alue') | (df['column2'] >= 90)] #alternative to query
+
 pd.merge(df1,df2, on="columns")
 
 df['column_name'].min() | df['column_name'].max()
