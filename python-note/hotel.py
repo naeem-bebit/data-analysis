@@ -82,6 +82,7 @@ df.drop(['columns2','column1'], axis = 1)
 df.query('column_name == "string_value"') 
 df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", engine='python').reset_index()
 df.query("column == 'something' & column == 'something' | column == ''") #emptynan
+df.query("column == 'something' & column == 'something' | column == ''").nunique() #unique value for each columns
 
 df.loc[(df['column_name'] == 'somev_alue') | (df['column2'] >= 90)] #alternative to query
 
