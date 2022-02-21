@@ -83,6 +83,10 @@ df.query('column_name == "string_value"')
 df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", engine='python').reset_index()
 df.query("column == 'something' & column == 'something' | column == ''") #emptynan
 df.query("column == 'something' & column == 'something' | column == ''").nunique() #unique value for each columns
+df.query('column1 == "something" & column2 <= "something2" & (column3 == 0 | column4 == 6)').nunique() #or and &
+
+#change column type and add zfill
+df['column1'].astype(str) + '-' + df['column2'].astype(str).str.zfill(2) +'-'+ df['column3'].astype(str).str.zfill(2) +'-'+ df['column4'].astype(str).str.zfill(2)
 
 df.loc[(df['column_name'] == 'somev_alue') | (df['column2'] >= 90)] #alternative to query
 
