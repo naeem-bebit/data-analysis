@@ -78,6 +78,8 @@ df['Target'] = np.where(df['column_name'].isin(df1['column_name']), 'Fail', 'Pas
 
 df.drop(['columns2','column1'], axis = 1)
 
+df.groupby([pd.Grouper(freq='5min', key='date_column'), 'column1','column2']).size().unstack(fill_value=0) #Group data by 5 min
+
 #Query
 df.query('column_name == "string_value"') 
 df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", engine='python').reset_index()
