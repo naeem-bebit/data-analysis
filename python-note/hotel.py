@@ -87,6 +87,9 @@ df.query("column == 'something' & column == 'something' | column == ''") #emptyn
 df.query("column == 'something' & column == 'something' | column == ''").nunique() #unique value for each columns
 df.query('column1 == "something" & column2 <= "something2" & (column3 == 0 | column4 == 6)').nunique() #or and &
 
+#Apply groupby
+g[['column1', 'column2']].apply(lambda x: x / x.sum())
+
 #change column type and add zfill
 df['column1'].astype(str) + '-' + df['column2'].astype(str).str.zfill(2) +'-'+ df['column3'].astype(str).str.zfill(2) +'-'+ df['column4'].astype(str).str.zfill(2)
 
