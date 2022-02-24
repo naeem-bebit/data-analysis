@@ -100,6 +100,7 @@ pd.merge(df1,df2, on="columns")
 df['column_name'].min() | df['column_name'].max()
 
 pd.to_datetime(df['column_name'], format="%m/%d/%y")
+df[df['date_time_column'].between("2022-10-01 00:20:00|start_time", "2022-10-01 00:40:00|end_time")]
 
 plt.figure(figsize=(15,8)) # Plot the data with threshold
 df_count_country = df[3].value_counts()
