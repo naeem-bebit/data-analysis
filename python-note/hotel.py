@@ -80,6 +80,9 @@ df.drop(['columns2','column1'], axis = 1)
 
 df.groupby([pd.Grouper(freq='5min', key='date_column'), 'column1','column2']).size().unstack(fill_value=0) #Group data by 5 min
 
+variable_1 = variable_2 = df['datetime_column'].min() # Assign two variables with same value
+
+
 #Query
 df.query('column_name == "string_value"') 
 df.query("column_name.str.startswith('D') or column_name.str.startswith('C')", engine='python').reset_index()
@@ -508,3 +511,9 @@ a=[]
 for i in range(5):    
     a.append(i)
 print(a)
+
+colors = np.where(((df["column1"] <= -0.1) | (df["column2"] >= 0.1)) & (df['column3'] >=20),'r','k')
+df.reset_index().plot.scatter(x='time_end', y = 'delta_mean', s = 100, c=colors)
+plt.gcf().set_size_inches((20, 18))   
+[plt.axhline(y=i, color='y', linestyle='-') for i in [0.1,-0.1]]
+# plt.show()
