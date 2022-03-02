@@ -512,8 +512,12 @@ for i in range(5):
     a.append(i)
 print(a)
 
+#Scatter plot
 colors = np.where(((df["column1"] <= -0.1) | (df["column2"] >= 0.1)) & (df['column3'] >=20),'r','k')
-df.reset_index().plot.scatter(x='time_end', y = 'delta_mean', s = 100, c=colors)
+df.reset_index().plot.scatter(x='column_x|datetime', y = 'column_y', s = 100, c=colors)
 plt.gcf().set_size_inches((20, 18))   
-[plt.axhline(y=i, color='y', linestyle='-') for i in [0.1,-0.1]]
+[plt.axhline(y=i, color='y', linestyle='-') for i in [0.1,-0.1]] #draw a line at y axis
 # plt.show()
+
+#Line Plot
+df.plot.line(x='column1', y='column2')
