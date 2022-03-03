@@ -3,7 +3,7 @@
 
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # from matplotlib import pyplot as plt
 # %matplotlib inline
 import warnings
 warnings.filterwarnings("ignore")
@@ -521,3 +521,6 @@ plt.gcf().set_size_inches((20, 18))
 
 #Line Plot
 df.plot.line(x='column1', y='column2')
+df.query('column1 == "someString" & column2 == "someString"'
+                    ).plot(kind='line', x='column3', y='column4',figsize=(18,10),marker='o', markerfacecolor='red')
+[plt.pyplot.axhline(y=i, color='y', linestyle='-') for i in [0.1,-0.1]] # a stright line at y axis
