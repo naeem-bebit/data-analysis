@@ -124,7 +124,7 @@ pd.to_datetime(df['Column']) #change column to datetime
 from datetime import datetime
 datetime.today().strftime('%Y-%m-%d-%H:%M:%S') #Get the date for today
 
-df['Column Name'].value_counts().reset_index().rename(columns={'index': 'New_name'})
+df['spec_version'].value_counts().reset_index().rename(columns={'index': 'spec_version', 'spec_version':'count'})
 
 df[df['Column name'].notnull()] #find row with nan value
 df[df['Column name'].isnull()] #find row with not nan value
@@ -524,3 +524,7 @@ df.plot.line(x='column1', y='column2')
 df.query('column1 == "someString" & column2 == "someString"'
                     ).plot(kind='line', x='column3', y='column4',figsize=(18,10),marker='o', markerfacecolor='red')
 [plt.pyplot.axhline(y=i, color='y', linestyle='-') for i in [0.1,-0.1]] # a stright line at y axis
+
+#bar plot
+
+df.plot(kind='bar')
