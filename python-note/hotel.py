@@ -90,6 +90,10 @@ df.query("column == 'something' & column == 'something' | column == ''") #emptyn
 df.query("column == 'something' & column == 'something' | column == ''").nunique() #unique value for each columns
 df.query('column1 == "something" & column2 <= "something2" & (column3 == 0 | column4 == 6)').nunique() #or and &
 
+#Checking duplicate column or checking the value in both columns are the same
+df.T.drop_duplicates().T
+df[df['column_same1'] != df['column_same2']] #checking the diff of the column
+
 #Apply groupby
 g[['column1', 'column2']].apply(lambda x: x / x.sum())
 
