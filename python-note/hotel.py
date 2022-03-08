@@ -45,6 +45,9 @@ df.info() # Basic info of the table such as type
 # Distribution data
 df.describe() 
 df['column_name'].describe()
+df['column_name'].quantile(0.1) #Find the quantile for the distribution
+df['column_name'].hist() # Plot the histogram and distribution
+df['column_name'].plot(kind='kde')
 
 df.drop_duplicates(keep=False) #drop duplicates row in the dataframe
 df.drop_duplicates(subset=['column_name'], keep=False) #drop duplicates based on the column_name
