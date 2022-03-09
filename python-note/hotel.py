@@ -83,6 +83,9 @@ df.drop(['columns2','column1'], axis = 1)
 
 df.groupby([pd.Grouper(freq='5min', key='date_column'), 'column1','column2']).size().unstack(fill_value=0) #Group data by 5 min
 
+#groupby column2 and find unique record for column2 and find value more than 1
+df.groupby(['column1'])['column2'].nunique().reset_index(name="count").query('count > 1')
+
 variable_1 = variable_2 = df['datetime_column'].min() # Assign two variables with same value
 
 
@@ -529,7 +532,7 @@ plt.gcf().set_size_inches((20, 18))
 #Line Plot
 df.plot.line(x='column1', y='column2')
 df.query('column1 == "someString" & column2 == "someString"'
-                    ).plot(kind='line', x='column3', y='column4',figsize=(18,10),marker='o', markerfacecolor='red')
+                    ).plot(kind='line', x=['column3','column4','column5'], y='column4',figsize=(18,10),marker='o', markerfacecolor='red')
 [plt.pyplot.axhline(y=i, color='y', linestyle='-') for i in [0.1,-0.1]] # a stright line at y axis
 
 #bar plot
