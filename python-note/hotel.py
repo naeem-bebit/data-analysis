@@ -108,6 +108,12 @@ df['column1'].astype(str) + '-' + df['column2'].astype(str).str.zfill(2) +'-'+ d
 
 df.loc[(df['column_name'] == 'somev_alue') | (df['column2'] >= 90)] #alternative to query
 
+idx = df['column1'].eq('a').idxmax() # find the a in column1
+df.loc[[idx]]
+
+idx = ((df['column1'] != 'a').idxmax() - 1) #get dataframe last row of containing a
+df.loc[0:idx]
+
 pd.merge(df1,df2, on="columns")
 
 df['column_name'].min() | df['column_name'].max()
