@@ -114,6 +114,9 @@ df.loc[[idx]]
 idx = ((df['column1'] != 'a').idxmax() - 1) #get dataframe last row of containing a
 df.loc[0:idx]
 
+idx = ((df[::-1]['column1'] != 'a').idxmax() + 1) # swap the position of dataframe bottom to up and get the dataframe for only contains a
+df[::-1].loc[:idx]
+
 pd.merge(df1,df2, on="columns")
 
 df['column_name'].min() | df['column_name'].max()
