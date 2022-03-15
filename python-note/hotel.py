@@ -81,6 +81,18 @@ df['Target'] = np.where(df['column_name'].isin(df1['column_name']), 'Fail', 'Pas
 
 df.drop(['columns2','column1'], axis = 1)
 
+for index, row in df.iterrows(): #dataframe
+    print(row['column_name'])
+    print(index)
+
+for index, value in df['column_name'].iteritems(): #dataseries
+    print(index)
+    print(value)
+    
+s = pd.Series(['A', 'B', 'C'])
+for index, value in s.items():
+    print(f"Index : {index}, Value : {value}")
+
 df.groupby([pd.Grouper(freq='5min', key='date_column'), 'column1','column2']).size().unstack(fill_value=0) #Group data by 5 min
 
 #groupby column2 and find unique record for column2 and find value more than 1
