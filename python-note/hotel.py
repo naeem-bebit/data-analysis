@@ -97,6 +97,7 @@ df.groupby([pd.Grouper(freq='5min', key='date_column'), 'column1','column2']).si
 
 #groupby column2 and find unique record for column2 and find value more than 1
 df.groupby(['column1'])['column2'].nunique().reset_index(name="count").query('count > 1')
+df.groupby(['column1'])['column2'].unique() #will list out the unique value in column2
 
 variable_1 = variable_2 = df['datetime_column'].min() # Assign two variables with same value
 
@@ -561,3 +562,6 @@ plt.legend()
 #bar plot
 
 df.plot(kind='bar')
+
+df[(df['column1'] == 'some_variable')].plot(kind = 'scatter', x='column_date_time', y = 'column2', s = 10, c='r', figsize=(12,6))
+plt.axvline(pd.Timestamp('2022-01-10 09:40:28'),color='b')
