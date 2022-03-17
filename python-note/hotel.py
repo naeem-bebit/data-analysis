@@ -565,3 +565,13 @@ df.plot(kind='bar')
 
 df[(df['column1'] == 'some_variable')].plot(kind = 'scatter', x='column_date_time', y = 'column2', s = 10, c='r', figsize=(12,6))
 plt.axvline(pd.Timestamp('2022-01-10 09:40:28'),color='b')
+
+fig, ax = plt.subplots()
+for name, group in df.groupby('columntobegrouped'):
+    group.plot('datetime_column', y='column_relatedto_columntobegrouped',label=name,  ax=ax,figsize=(18,10))
+
+import seaborn as sns
+sns.set(rc={"figure.figsize": (18, 8)})
+sns.set_style("dark")
+sns.lineplot(data=df, x='datetime_column', y='value_column', hue='multiple_value_column', 
+             style="multiple_value_column",markers=True, dashes=False, err_style="bars", ci=68,legend="full")
