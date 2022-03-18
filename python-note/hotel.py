@@ -101,6 +101,8 @@ df.groupby(['column1'])['column2'].unique() #will list out the unique value in c
 
 variable_1 = variable_2 = df['datetime_column'].min() # Assign two variables with same value
 
+five_mins_ago = datetime.datetime.now() - datetime.timedelta(minutes=5) #get the time for last 5 minutes
+five_mins_ago
 
 #Query
 df.query('column_name == "string_value"') 
@@ -572,6 +574,6 @@ for name, group in df.groupby('columntobegrouped'):
 
 import seaborn as sns
 sns.set(rc={"figure.figsize": (18, 8)})
-sns.set_style("dark")
+sns.set_style("dark") #{darkgrid, whitegrid, dark, white, ticks} options
 sns.lineplot(data=df, x='datetime_column', y='value_column', hue='multiple_value_column', 
              style="multiple_value_column",markers=True, dashes=False, err_style="bars", ci=68,legend="full")
