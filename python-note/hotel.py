@@ -553,6 +553,9 @@ plt.gcf().set_size_inches((20, 18))
 [plt.axhline(y=i, color='y', linestyle='-') for i in [0.1,-0.1]] #draw a line at y axis
 # plt.show()
 
+import matplotlib as mpl
+mpl.rc('figure', max_open_warning = 0) #ignore warning
+
 #Line Plot
 df.plot.line(x='column1', y='column2')
 df.query('column1 == "someString" & column2 == "someString"'
