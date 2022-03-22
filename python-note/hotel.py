@@ -181,6 +181,9 @@ df.rename(columns={"Destination": "iata_code"}) #rename the column
 
 df.groupby(['Column_name1','Column_name2'])['Column_name3'].sum() #showing Column_name3 and groupby by column_name1 & column_name2
 
+df1 = df.groupby(['column_name1','column_name2'], as_index=False).agg({'column_datetime': ['min','count'],'column3': 'sum'})
+df1.columns = list(map('_'.join, df1.columns.values))
+
 #Feature engineering - Mutual Information
 from sklearn.feature_selection import mutual_info_regression
 
@@ -560,7 +563,7 @@ mpl.rc('figure', max_open_warning = 0) #ignore warning
 df.plot.line(x='column1', y='column2')
 df.query('column1 == "someString" & column2 == "someString"'
                     ).plot(kind='line', x=['column3','column4','column5'], y='column4',figsize=(18,10),marker='o', markerfacecolor='red',
-                     label=['column3','column4','column5'])
+                     label=['column3','column4','column5']# or label=value)
 [plt.pyplot.axhline(y=i, color='y', linestyle='-') for i in [0.1,-0.1]] # a stright line at y axis
 [plt.pyplot.axhline(y=i, color='y', linestyle='-') for i in [0]] # second stright line at y axis in the same fig
 plt.legend()
