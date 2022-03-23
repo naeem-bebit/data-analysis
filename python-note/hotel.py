@@ -2,6 +2,7 @@
 %unload_ext autotime #To unload 
 
 import pandas as pd
+from pyrsistent import b
 import seaborn as sns
 import matplotlib.pyplot as plt # from matplotlib import pyplot as plt
 # %matplotlib inline
@@ -182,7 +183,7 @@ df.rename(columns={"Destination": "iata_code"}) #rename the column
 df.groupby(['Column_name1','Column_name2'])['Column_name3'].sum() #showing Column_name3 and groupby by column_name1 & column_name2
 
 df1 = df.groupby(['column_name1','column_name2'], as_index=False).agg({'column_datetime': ['min','count'],'column3': 'sum'})
-df1.columns = list(map('_'.join, df1.columns.values))
+df1.columns = list(map(''.join, df1.columns.values))
 
 #Feature engineering - Mutual Information
 from sklearn.feature_selection import mutual_info_regression
@@ -583,3 +584,8 @@ sns.set(rc={"figure.figsize": (18, 8)})
 sns.set_style("dark") #{darkgrid, whitegrid, dark, white, ticks} options
 sns.lineplot(data=df, x='datetime_column', y='value_column', hue='multiple_value_column', 
              style="multiple_value_column",markers=True, dashes=False, err_style="bars", ci=68,legend="full")
+
+def afunction():
+    return a, b
+
+a,b = afunction()
