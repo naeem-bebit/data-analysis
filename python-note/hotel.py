@@ -59,6 +59,10 @@ df.isnull().sum().sum() # Total NaN value
 
 df[df.isnull().T.any()] #|| df[df.isnull().any(axis=1)] #Rows with NaN value
 
+df['column_1'] = df['column_1'].replace([332,333,342], 6) #replace 332,333,342 with 6
+
+df.melt(id_vars=['column_name'])
+
 df['hotel'].value_counts().plot.bar() #count the main column value and plot
 
 list(df), df.columns.tolist() #List all long columns names
