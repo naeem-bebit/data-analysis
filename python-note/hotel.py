@@ -63,6 +63,9 @@ df['column_1'] = df['column_1'].replace([332,333,342], 6) #replace 332,333,342 w
 
 df.melt(id_vars=['column_name'])
 
+pd.pivot_table(df, values='column1', index=['column2', 'column3'], columns=['column4'],
+ aggfunc={'column5': np.mean, 'column6': [min, max, np.mean]}, fill_value=0) #pivot and sum
+
 df['hotel'].value_counts().plot.bar() #count the main column value and plot
 
 list(df), df.columns.tolist() #List all long columns names
