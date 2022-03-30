@@ -587,9 +587,9 @@ for name, group in df.groupby('columntobegrouped'):
     group.plot('datetime_column', y='column_relatedto_columntobegrouped',label=name,  ax=ax,figsize=(18,10))
 
 import seaborn as sns
-sns.set(rc={"figure.figsize": (18, 8)})
-sns.set_style("dark") #{darkgrid, whitegrid, dark, white, ticks} options
-sns.lineplot(data=df, x='datetime_column', y='value_column', hue='multiple_value_column', 
+ax = sns.set(rc={"figure.figsize": (18, 8)})
+ax = sns.set_style("dark") #{darkgrid, whitegrid, dark, white, ticks} options
+ax = sns.lineplot(data=df, x='datetime_column', y='value_column', hue='multiple_value_column', 
              style="multiple_value_column",markers=True, dashes=False, err_style="bars", ci=68,legend="full")
 
 ax = sns.barplot(x="column1", y="column2", hue="column3", data=df)
