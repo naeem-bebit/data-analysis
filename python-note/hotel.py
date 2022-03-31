@@ -598,3 +598,13 @@ def afunction():
     return a, b
 
 a,b = afunction()
+
+#pandas sample for testing
+df = pd.DataFrame({'num_legs': [2, 4, 8, 0],
+                   'num_wings': [2, 0, 0, 0],
+                   'num_specimen_seen': [10, 2, 1, 8]},
+                  index=['falcon', 'dog', 'spider', 'fish'])
+
+# check list for more than 1
+mylist = ['A','A','B','C','D','E','D']
+set([i for i in mylist if mylist.count(i)>1])
