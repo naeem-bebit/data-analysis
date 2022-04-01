@@ -57,6 +57,8 @@ df.isnull().sum() #Row with NaN value
 
 df.isnull().sum().sum() # Total NaN value
 
+df.loc[:, df_error_code].sum(axis=1)
+
 df[df.isnull().T.any()] #|| df[df.isnull().any(axis=1)] #Rows with NaN value
 
 df['column_1'] = df['column_1'].replace([332,333,342], 6) #replace 332,333,342 with 6
@@ -69,11 +71,14 @@ pd.pivot_table(df, values='column1', index=['column2', 'column3'], columns=['col
 df['hotel'].value_counts().plot.bar() #count the main column value and plot
 
 list(df), df.columns.tolist() #List all long columns names
+df.index.values.tolist() #get the index of the df and put into a list
 
 df1.append(df2, ignore_index=True) # stack dataframes with similar columns, ignore index
 
 pd.crosstab(df['hotel'], df['is_canceled'], margins=True, margins_name = 'Total')
 pd.crosstab(df['adults'], df['children'], margins=True, margins_name = 'Total')
+
+df1.set_index('column1').combine_first(df2.set_index('column1')).reset_index() #combine two uneven df columns 
 
 df.isna().sum()/len(df)*100 # Percentage of NaN value
 
@@ -185,7 +190,7 @@ df[cat_columns] = df[cat_columns].apply(lambda x: x.astype('category').cat.codes
 
 df[~df['column_name'].isin(list_of_data)] #isin
 
-df.rename(columns={"Destination": "iata_code"}) #rename the column
+df.rename(columns={"Destination": "iata_code"}, inplace=True) #rename the column
 
 df.groupby(['Column_name1','Column_name2'])['Column_name3'].sum() #showing Column_name3 and groupby by column_name1 & column_name2
 
