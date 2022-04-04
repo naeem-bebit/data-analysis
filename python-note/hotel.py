@@ -107,6 +107,7 @@ for index, value in s.items():
     print(f"Index : {index}, Value : {value}")
 
 df.groupby([pd.Grouper(freq='5min', key='date_column'), 'column1','column2']).size().unstack(fill_value=0) #Group data by 5 min
+# https://pandas.pydata.org/pandas-docs/stable/user_guide/timeseries.html#offset-aliases 
 
 #groupby column2 and find unique record for column2 and find value more than 1
 df.groupby(['column1'])['column2'].nunique().reset_index(name="count").query('count > 1')
@@ -173,8 +174,8 @@ datetime.today().strftime('%Y-%m-%d-%H:%M:%S') #Get the date for today
 
 df['spec_version'].value_counts().reset_index().rename(columns={'index': 'spec_version', 'spec_version':'count'})
 
-df[df['Column name'].notnull()] #find row with nan value
-df[df['Column name'].isnull()] #find row with not nan value
+df[df['Column name'].notnull()] #find row with not nan value 
+df[df['Column name'].isnull()] #find row with nan value
 
 df.columns = ['Column 1', 'Column 2','Column 3'] #rename all columns
 
@@ -591,18 +592,29 @@ fig, ax = plt.subplots()
 for name, group in df.groupby('columntobegrouped'):
     group.plot('datetime_column', y='column_relatedto_columntobegrouped',label=name,  ax=ax,figsize=(18,10))
 
-import seaborn as sns
-ax = sns.set(rc={"figure.figsize": (18, 8)})
-ax = sns.set_style("dark") #{darkgrid, whitegrid, dark, white, ticks} options
+import seaborn as sns 
+#https://seaborn.pydata.org/generated/seaborn.scatterplot.html
+sns.set(rc={"figure.figsize": (18, 8)})
+sns.set_theme(style="whitegrid") #or
+sns.set_style("dark") #{darkgrid, whitegrid, dark, white, ticks} options
 ax = sns.lineplot(data=df, x='datetime_column', y='value_column', hue='multiple_value_column', 
              style="multiple_value_column",markers=True, dashes=False, err_style="bars", ci=68,legend="full")
 
+ax = sns.scatterplot(data=df, x="timecolumn", y="column2") 
 ax = sns.barplot(x="column1", y="column2", hue="column3", data=df)
+
+
 
 def afunction():
     return a, b
 
 a,b = afunction()
+
+if i > 3 and i == 4:
+    print('AND')
+
+if i > 3 & i == 4:
+    print('OR')
 
 #pandas sample for testing
 df = pd.DataFrame({'num_legs': [2, 4, 8, 0],
