@@ -623,5 +623,10 @@ df = pd.DataFrame({'num_legs': [2, 4, 8, 0],
                   index=['falcon', 'dog', 'spider', 'fish'])
 
 # check list for more than 1
-mylist = ['A','A','B','C','D','E','D']
-set([i for i in mylist if mylist.count(i)>1])
+mylist = ['A','A','B','A','D','E','D','B','B']
+
+if 'B' in set([i for i in mylist if mylist.count(i) >= 3]):
+    print('yes')
+
+pd.DataFrame({'unique_value': [1,2]}) #creating emtpy dataframe with one column and 2 sample rows   
+   
