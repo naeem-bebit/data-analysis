@@ -629,4 +629,23 @@ if 'B' in set([i for i in mylist if mylist.count(i) >= 3]):
     print('yes')
 
 pd.DataFrame({'unique_value': [1,2]}) #creating emtpy dataframe with one column and 2 sample rows   
-   
+
+# config.py #file stored in the same folder of below code
+RTTCserver = "00.00.00.00"
+RTTCAccount = "username"
+RTTCPass = "password"
+RTTCschema = 'schema_name'
+
+import config
+import pymysql
+pymysql.install_as_MySQLdb()
+import MySQLdb
+mcon = MySQLdb.connect(host=config.RTPMserver,
+                          port=3309,
+                          user=config.RTPMAccount, 
+                          passwd=config.RTPMPass, 
+                          db=config.RTPMschema)
+sql = "select *\
+        from database limit 10"
+df=pd.read_sql(sql,con)
+con.close()
