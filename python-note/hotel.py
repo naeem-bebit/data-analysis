@@ -631,10 +631,10 @@ if 'B' in set([i for i in mylist if mylist.count(i) >= 3]):
 pd.DataFrame({'unique_value': [1,2]}) #creating emtpy dataframe with one column and 2 sample rows   
 
 # config.py #file stored in the same folder of below code
-RTTCserver = "00.00.00.00"
-RTTCAccount = "username"
-RTTCPass = "password"
-RTTCschema = 'schema_name'
+RTPMserver = "00.00.00.00"
+RTPMAccount = "username"
+RTPMPass = "password"
+RTPMschema = 'schema_name'
 
 import config
 import pymysql
@@ -649,3 +649,6 @@ sql = "select *\
         from database limit 10"
 df=pd.read_sql(sql,con)
 con.close()
+
+df.to_pickle("./df_name.pkl") #to store the dataframe
+pd.read_pickle("./df_name.pkl") #read the pickle back
