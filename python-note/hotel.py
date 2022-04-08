@@ -38,6 +38,8 @@ df.pd.read_csv('file_name.csv', low_memory=False) #set for large data or assign 
 df.shape # Size of the dataframe
 
 df = pd.concat([df_1, df_2], axis=0) #concat both dataframe with same columns
+dfa.combine_first(dfb) #fastest way to concat two dataframe
+pd.concat([dfa,dfb]) #or this one
 
 df.sort_values("column_name")
 
@@ -604,10 +606,17 @@ ax = sns.scatterplot(data=df, x="timecolumn", y="column2")
 ax = sns.barplot(x="column1", y="column2", hue="column3", data=df)
 
 
-
-def afunction():
-    return a, b
-
+# return 2 values from a function, generate documentation by using vs code extension "mintlify doc writer"
+def afunction(a,b):
+    """
+    It takes two numbers, adds them together, and returns the sum and the second number
+    
+    :param a: a number
+    :param b: a list of numbers
+    :return: c, b
+    """
+    c = a + b
+    return c, b
 a,b = afunction()
 
 if i > 3 and i == 4:
