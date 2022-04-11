@@ -61,6 +61,8 @@ df.isnull().sum().sum() # Total NaN value
 
 df.loc[:, df_error_code].sum(axis=1)
 
+df[df['column1'].str.len() > 0]  # count the length of each row in a column and get the row which length row more than 0
+
 df[df.isnull().T.any()] #|| df[df.isnull().any(axis=1)] #Rows with NaN value
 
 df['column_1'] = df['column_1'].replace([332,333,342], 6) #replace 332,333,342 with 6
@@ -136,6 +138,8 @@ g[['column1', 'column2']].apply(lambda x: x / x.sum())
 
 #change column type and add zfill
 df['column1'].astype(str) + '-' + df['column2'].astype(str).str.zfill(2) +'-'+ df['column3'].astype(str).str.zfill(2) +'-'+ df['column4'].astype(str).str.zfill(2)
+
+df['column_int'] = df['column_int'].astype(int) #change the column type to int
 
 df.loc[(df['column_name'] == 'somev_alue') | (df['column2'] >= 90)] #alternative to query
 
