@@ -665,3 +665,17 @@ con.close()
 
 df.to_pickle("./df_name.pkl") #to store the dataframe
 pd.read_pickle("./df_name.pkl") #read the pickle back
+
+#basic pickle
+mylist = [1,2,3,'4']
+with open('sample.pkl', 'wb') as f:
+    pickle.dump(mylist, f)
+with open('sample.pkl', 'rb') as f:
+    mynewlist = pickle.load(f)
+mynewlist
+
+#pickle one liner
+mylist = [1,2,3,4,'5'] 
+pickle.dump(mylist, open('sample_file.pkl', 'wb'))
+mynewlist = pickle.load(open('sample_file.pkl', 'rb'))
+mynewlist
