@@ -679,3 +679,7 @@ mylist = [1,2,3,4,'5']
 pickle.dump(mylist, open('sample_file.pkl', 'wb'))
 mynewlist = pickle.load(open('sample_file.pkl', 'rb'))
 mynewlist
+
+from collections import deque
+lst = deque([], maxlen=4) #empty deque
+lst
