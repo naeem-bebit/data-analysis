@@ -102,6 +102,12 @@ for index, row in df.iterrows(): #dataframe
     print(row['column_name'])
     print(index)
 
+#iterate dataframe and append to new dataframe using itertuples
+temp_df = pd.DataFrame()
+for row in df.itertuples(index=False):
+    temp_df = temp_df.append(pd.DataFrame([row],columns = row._fields))
+temp_df.reset_index(drop=True)
+
 for index, value in df['column_name'].iteritems(): #dataseries
     print(index)
     print(value)
