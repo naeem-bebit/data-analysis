@@ -98,9 +98,20 @@ df['Target'] = np.where(df['column_name'].isin(df1['column_name']), 'Fail', 'Pas
 
 df.drop(['columns2','column1'], axis = 1)
 
+#iterrows access row value
 for index, row in df.iterrows(): #dataframe
     print(row['column_name'])
     print(index)
+
+# iterrows append new dataframe
+new_df = pd.DataFrame()
+for index,row in df.iterrows():
+    new_df = new_df.append(row)
+
+#sample namedtuple
+Point = namedtuple('Point', ['x', 'y'])
+points = [Point(1, 2), Point(3, 4)]
+pd.DataFrame(points, columns=Point._fields)
 
 #iterate dataframe and append to new dataframe using itertuples
 temp_df = pd.DataFrame()
@@ -640,6 +651,8 @@ df = pd.DataFrame({'num_legs': [2, 4, 8, 0],
                    'num_wings': [2, 0, 0, 0],
                    'num_specimen_seen': [10, 2, 1, 8]},
                   index=['falcon', 'dog', 'spider', 'fish'])
+
+df = pd.DataFrame(np.random.randn(40000,3),columns = ['col1','col2','col3']) #df to test the time for execution time
 
 # check list for more than 1
 mylist = ['A','A','B','A','D','E','D','B','B']
