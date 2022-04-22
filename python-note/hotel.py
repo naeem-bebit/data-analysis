@@ -702,3 +702,19 @@ mynewlist
 from collections import deque
 lst = deque([], maxlen=4) #empty deque
 lst
+
+import timeit
+import sys
+
+def for_loop(n=1_000):
+    s = 0
+    for i in range(n):
+        s += i
+    return s
+
+def main():
+    print(" ",timeit.timeit(for_loop, number=1))
+
+if __name__ == "__main__":
+    # main()
+    sys.exit(main())
