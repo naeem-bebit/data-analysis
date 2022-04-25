@@ -672,15 +672,23 @@ import config
 import pymysql
 pymysql.install_as_MySQLdb()
 import MySQLdb
-mcon = MySQLdb.connect(host=config.RTPMserver,
+databasecon = MySQLdb.connect(host=config.RTPMserver,
                           port=3309,
                           user=config.RTPMAccount, 
-                          passwd=config.RTPMPass, 
-                          db=config.RTPMschema)
+                          password=config.RTPMPass, 
+                          database=config.RTPMschema,
+                          charset="utf8")
 sql = "select *\
         from database limit 10"
-df=pd.read_sql(sql,con)
+df=pd.read_sql(sql,databasecon)
 con.close()
+
+
+with databasecon.cursor() as cursor:
+    sql = "INSERT INTO data_table (column1, column2, column3) \
+    VALUES ('LEC 4178', NOW()--datetime, 'DAO-YP2')"
+    cursor.execute(sql)
+rttccon.commit()
 
 df.to_pickle("./df_name.pkl") #to store the dataframe
 pd.read_pickle("./df_name.pkl") #read the pickle back
@@ -716,5 +724,5 @@ def main():
     print(" ",timeit.timeit(for_loop, number=1))
 
 if __name__ == "__main__":
-    # main()
-    sys.exit(main())
+    main()
+    # sys.exit(main()) https://docs.python.org/3/library/__main__.html
