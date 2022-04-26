@@ -675,20 +675,21 @@ import MySQLdb
 databasecon = MySQLdb.connect(host=config.RTPMserver,
                           port=3309,
                           user=config.RTPMAccount, 
-                          password=config.RTPMPass, 
-                          database=config.RTPMschema,
+                          passwd=config.RTPMPass, 
+                          db=config.RTPMschema,
                           charset="utf8")
 sql = "select *\
         from database limit 10"
 df=pd.read_sql(sql,databasecon)
 con.close()
-
+https://dev.mysql.com/doc/connector-python/en/connector-python-example-cursor-transaction.html 
 
 with databasecon.cursor() as cursor:
     sql = "INSERT INTO data_table (column1, column2, column3) \
     VALUES ('LEC 4178', NOW()--datetime, 'DAO-YP2')"
     cursor.execute(sql)
 rttccon.commit()
+rttccon.close()
 
 df.to_pickle("./df_name.pkl") #to store the dataframe
 pd.read_pickle("./df_name.pkl") #read the pickle back
