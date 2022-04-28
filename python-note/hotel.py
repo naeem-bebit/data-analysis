@@ -736,3 +736,22 @@ while True:
   print(result, end="", flush=True)
   print("\r", end="", flush=True)
   sleep(5) # s
+
+# Handling exception
+from contextlib import suppress
+
+with suppress(IDontLikeYouException, YouAreBeingMeanException):
+     do_something()
+
+try:
+    1/0
+except (NameError, ZeroDivisionError):
+    pass
+except (IDontLikeYouException, YouAreBeingMeanException) as e:
+    pass
+
+# to check if dataframe is empty
+if df.empty: 
+    print('DataFrame is empty!')
+
+len(df.index) == 0
