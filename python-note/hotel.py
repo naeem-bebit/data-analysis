@@ -11,6 +11,9 @@ warnings.filterwarnings("ignore")
 pd.set_option('display.max_columns', None) # Set columns mac without truncated
 pd.set_option('display.max_rows', None) # Set display max
 
+with pd.option_context('display.max_colwidth', None): #showing max column 
+  display(df)
+
 # PreProcessing
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
@@ -58,6 +61,12 @@ df.drop_duplicates(subset=['column_name'], keep=False) #drop duplicates based on
 df.isnull().sum() #Row with NaN value
 
 df.isnull().sum().sum() # Total NaN value
+
+df.fillna(0, inplace=True) #fill NaN value with 0
+
+#find max value in row
+df['max_value'] = df.max(axis=1)
+df[['a', 'b', 'c']].idxmax(1) #return which column 
 
 df.loc[:, df_error_code].sum(axis=1)
 
@@ -136,8 +145,9 @@ df.groupby(['column1'])['column2'].unique() #will list out the unique value in c
 
 variable_1 = variable_2 = df['datetime_column'].min() # Assign two variables with same value
 
+from datetime import datetime, timedelta
 five_mins_ago = datetime.datetime.now() - datetime.timedelta(minutes=5) #get the time for last 5 minutes
-five_mins_ago
+d = datetime.today() - timedelta(hours=0, minutes=50) #hours and minutes
 
 #Query
 df.query('column_name == "string_value"') 
