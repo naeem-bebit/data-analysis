@@ -765,3 +765,5 @@ if df.empty:
     print('DataFrame is empty!')
 
 len(df.index) == 0
+
+s.mask(s > 0)
