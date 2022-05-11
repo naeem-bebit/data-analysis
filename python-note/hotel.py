@@ -214,6 +214,8 @@ df.columns = ['Column 1', 'Column 2','Column 3'] #rename all columns
 
 [col[0] for col in df.columns] #multiindex column
 
+df['column_1'].apply(lambda x: 'PRMNG_' + x if x == '0006' else 'FTNG_' + x) #x is the value of the row in the column_1
+
 df.to_csv('df_name.csv', encoding='utf-8') #save to csv
 path = '/home/path/work/path/Data/'
 df.to_csv(path+'df_name.csv',index=False)
