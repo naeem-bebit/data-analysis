@@ -206,7 +206,7 @@ from datetime import datetime
 datetime.today().strftime('%Y-%m-%d-%H:%M:%S') #Get the date for today
 
 df['spec_version'].value_counts().reset_index().rename(columns={'index': 'spec_version', 'spec_version':'count'})
-
+df[df.columns.intersection(set(['0006','0332','0333','0342']))] #checking if the columns exist and select only the existing columns
 df[df['Column name'].notnull()] #find row with not nan value 
 df[df['Column name'].isnull()] #find row with nan value
 
