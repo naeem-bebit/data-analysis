@@ -47,6 +47,8 @@ pd.concat([dfa,dfb]) #or this one
 df.sort_values("column_name")
 
 df.info() # Basic info of the table such as type
+df.info(memory_usage='deep') # The memory usage
+df.memory_usage(deep=True) # breakdown of the memory usage each columns
 
 # Distribution data
 df.describe() 
@@ -147,7 +149,7 @@ variable_1 = variable_2 = df['datetime_column'].min() # Assign two variables wit
 
 from datetime import datetime, timedelta
 five_mins_ago = datetime.datetime.now() - datetime.timedelta(minutes=5) #get the time for last 5 minutes
-d = datetime.today() - timedelta(hours=0, m inutes=50) #hours and minutes
+d = datetime.today() - timedelta(hours=0, minutes=50) #hours and minutes
 
 #Query
 df.query('column_name == "string_value"') 
