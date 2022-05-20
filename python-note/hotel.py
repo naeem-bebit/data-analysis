@@ -129,6 +129,10 @@ df1.set_index('column1').combine_first(df2.set_index('column1')
 
 df.isna().sum()/len(df)*100  # Percentage of NaN value
 
+# groupby daily mean of column1
+df.resample('D', on="datetime")['column1'].mean()
+
+
 # spread the string column by '-' and select the second column
 df['column_1'].str.split('-', expand=True)[1].reset_index(drop=True)
 df['column_name'].str.split('/', expand=True)[[0, 1]].reset_index(drop=True).rename(
@@ -297,6 +301,8 @@ df1 = df.groupby(['column_name1', 'column_name2'], as_index=False).agg(
 df1.columns = list(map(''.join, df1.columns.values))
 
 # Feature engineering - Mutual Information
+
+df.interpolate()  # fill the missing value
 
 
 def make_mi_scores(X, y, discrete_features):
