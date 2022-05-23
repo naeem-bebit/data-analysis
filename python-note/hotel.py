@@ -237,6 +237,7 @@ idx = ((df[::-1]['column1'] != 'a').idxmax() + 1)
 df[::-1].loc[:idx]
 
 pd.merge(df1, df2, on="columns")
+pd.merge(df1, df2, how="inner", validate='one_to_many')
 
 df['column_name'].min() | df['column_name'].max()
 
@@ -264,6 +265,9 @@ df[df.duplicated(subset=['column_name'], keep=False)]
 pd.to_datetime(df['Column'])  # change column to datetime
 
 datetime.today().strftime('%Y-%m-%d-%H:%M:%S')  # Get the date for today
+
+df.T  # transpose
+df.describe().T  # transpose describe
 
 df['spec_version'].value_counts().reset_index().rename(
     columns={'index': 'spec_version', 'spec_version': 'count'})
