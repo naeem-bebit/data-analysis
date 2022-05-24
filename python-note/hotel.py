@@ -856,3 +856,13 @@ s.mask(s > 0)
 df['column1'].round(2)
 for row in df.itertuples():
     print(round(row.column1, 2))
+
+# Example Pandas dataframe
+
+pd.DataFrame({'col one': [100, 200], 'col two': [300, 400]})
+pd.DataFrame(np.random.rand(4, 8), columns=list('abcdefgh'))
+pd.util.testing.makeDataFrame().head()
+pd.util.testing.makeMissingDataframe().head()
+pd.util.testing.makeTimeDataFrame().head()
+pd.util.testing.makeMixedDataFrame()
+[x for x in dir(pd.util.testing) if x.startswith('make')]
