@@ -866,3 +866,8 @@ pd.util.testing.makeMissingDataframe().head()
 pd.util.testing.makeTimeDataFrame().head()
 pd.util.testing.makeMixedDataFrame()
 [x for x in dir(pd.util.testing) if x.startswith('make')]
+
+from sklearn.feature_selection import VarianceThreshold
+X=[[0, 0, 1], [0, 1, 0], [1, 0, 0], [0, 1, 1], [0, 1, 0], [0, 1, 1]]
+sel=VarianceThreshold(threshold=(.8 * (1 - .8)))
+sel.fit_transform(X)
