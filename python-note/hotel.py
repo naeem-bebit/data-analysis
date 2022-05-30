@@ -344,7 +344,7 @@ sns.heatmap(corrMatrix, annot=True, fmt='.0%')
 
 cor_matrix = df.corr().abs()
 upper_tri = cor_matrix.where(
-    np.triu(np.ones(cor_matrix.shape), k=1).astype(np.bool))
+    np.triu(np.ones(cor_matrix.shape), k=1).astype(bool))
 to_drop = [column for column in upper_tri.columns if any(
     upper_tri[column] > 0.95)]
 df1 = df.drop(df.columns[to_drop], axis=1)
@@ -352,14 +352,12 @@ df1 = df.drop(df.columns[to_drop], axis=1)
 # correlation more than 0.8 will be removed
 
 correlated_features = set()
-correlation_matrix = paribas_data.corr()
+correlation_matrix = df.corr()
 for i in range(len(correlation_matrix .columns)):
     for j in range(i):
         if abs(correlation_matrix.iloc[i, j]) > 0.8:
             colname = correlation_matrix.columns[i]
             correlated_features.add(colname)
-
-# yellowbrick
 
 
 # Load the regression dataset
@@ -715,7 +713,8 @@ sns.set_style("dark")  # {darkgrid, whitegrid, dark, white, ticks} options
 ax=sns.lineplot(data=df, x='datetime_column', y='value_column', hue='multiple_value_column',
              style="multiple_value_column", markers=True, dashes=False, err_style="bars", ci=68, legend="full")
 
-ax=sns.scatterplot(data=df, x="timecolumn", y="column2", hue="column3 -must categorical")
+ax=sns.scatterplot(data=df, x="timecolumn", y="column2",
+                   hue="column3 -must categorical")
 ax=sns.barplot(x="column1", y="column2", hue="column3", data=df)
 
 
