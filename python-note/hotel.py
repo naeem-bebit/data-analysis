@@ -870,3 +870,13 @@ from sklearn.feature_selection import VarianceThreshold
 X=[[0, 0, 1], [0, 1, 0], [1, 0, 0], [0, 1, 1], [0, 1, 0], [0, 1, 1]]
 sel=VarianceThreshold(threshold=(.8 * (1 - .8)))
 sel.fit_transform(X)
+
+from sklearn import datasets
+iris=datasets.load_iris()
+X=iris.data
+target=iris.target
+names=iris.target_names
+df=pd.DataFrame(X, columns=iris.feature_names)
+df['species']=iris.target
+df['species']=df['species'].replace(to_replace=[0, 1, 2], value=[
+                                    'setosa', 'versicolor', 'virginica'])
