@@ -871,12 +871,29 @@ X=[[0, 0, 1], [0, 1, 0], [1, 0, 0], [0, 1, 1], [0, 1, 0], [0, 1, 1]]
 sel=VarianceThreshold(threshold=(.8 * (1 - .8)))
 sel.fit_transform(X)
 
-from sklearn import datasets
-iris=datasets.load_iris()
-X=iris.data
+
+# full complete set
+from sklearn.metrics import accuracy_score, confusion_matrix, recall_score, roc_auc_score, precision_score
+from sklearn.datasets import load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
+iris=load_iris()
+data=iris.data
 target=iris.target
 names=iris.target_names
-df=pd.DataFrame(X, columns=iris.feature_names)
+df=pd.DataFrame(data, columns=iris.feature_names)
 df['species']=iris.target
-df['species']=df['species'].replace(to_replace=[0, 1, 2], value=[
-                                    'setosa', 'versicolor', 'virginica'])
+# df['species']=df['species'].replace(to_replace=[0, 1, 2], value=['setosa', 'versicolor', 'virginica'])
+X=df.drop(['species'], axis=1)
+y=df['species']
+scaler=StandardScaler()
+X_std=scaler.fit_transform(X)
+clf=LogisticRegression(random_state=0, class_weight="balanced")
+model=clf.fit(X_std, y)
+new_observation=[[.5, .5, .5, .5]]
+model.predict(new_observation)
+model.predict_proba(new_observation)
+print(model.score(X_std, y))
+pd. concat([pd.DataFrame(model.predict_proba(X_std).max(1), columns=['proba_1']),
+            pd.DataFrame(model.predict(X_std), columns=['prediction']),
+           y.rename("passfail")], axis=1)
