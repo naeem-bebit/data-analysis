@@ -872,7 +872,7 @@ sel=VarianceThreshold(threshold=(.8 * (1 - .8)))
 sel.fit_transform(X)
 
 
-# full complete set
+# full training without split
 from sklearn.metrics import accuracy_score, confusion_matrix, recall_score, roc_auc_score, precision_score
 from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
@@ -883,7 +883,7 @@ target=iris.target
 names=iris.target_names
 df=pd.DataFrame(data, columns=iris.feature_names)
 df['species']=iris.target
-# df['species']=df['species'].replace(to_replace=[0, 1, 2], value=['setosa', 'versicolor', 'virginica'])
+# df['species']=df['species'].replace(to_replace=[0, 1, 2], value=['setosa', 'versicolor', 'virginica']) # Replace with name
 X=df.drop(['species'], axis=1)
 y=df['species']
 scaler=StandardScaler()
@@ -897,3 +897,31 @@ print(model.score(X_std, y))
 pd. concat([pd.DataFrame(model.predict_proba(X_std).max(1), columns=['proba_1']),
             pd.DataFrame(model.predict(X_std), columns=['prediction']),
            y.rename("passfail")], axis=1)
+
+# Sample of ROC
+
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_curve, roc_auc_score
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+
+X, y=make_classification(n_samples=10000,
+                           n_features=10,
+                           n_classes=2,
+                           n_informative=3,
+                           random_state=3)
+
+X_train, X_test, y_train, y_test=train_test_split(
+    X, y, test_size=0.1, random_state=1)
+clf=LogisticRegression()
+clf.fit(X_train, y_train)
+y_score=clf.predict_proba(X_test)[:, 1]
+false_positive_rate, true_positive_rate, threshold=roc_curve(y_test, y_score)
+plt.title('Receiver Operating Characteristic')
+plt.plot(false_positive_rate, true_positive_rate)
+plt.plot([0, 1], ls="--")
+plt.plot([0, 0], [1, 0], c=".7"), plt.plot([1, 1], c=".7")
+plt.ylabel('True Positive Rate')
+plt.xlabel('False Positive Rate')
+plt.show()
