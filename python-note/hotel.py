@@ -925,3 +925,8 @@ plt.plot([0, 0], [1, 0], c=".7"), plt.plot([1, 1], c=".7")
 plt.ylabel('True Positive Rate')
 plt.xlabel('False Positive Rate')
 plt.show()
+
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+lda=LinearDiscriminantAnalysis(n_components=1)
+X_lda=lda.fit(X, y).transform(X)
+lda.explained_variance_ratio_
