@@ -239,6 +239,11 @@ df[::-1].loc[:idx]
 pd.merge(df1, df2, on="columns")
 pd.merge(df1, df2, how="inner", validate='one_to_many')
 
+# code below produce the same output with concat will not rename the duplicate columns and merge will rename it
+pd.merge(df1, df2.drop(['columnToDrop'], axis=1),
+         left_index=True, right_index=True, how='left')
+pd.concat([df1, df2.drop(['columnToDrop'], axis=1)], axis=1)
+
 df['column_name'].min() | df['column_name'].max()
 
 pd.to_datetime(df['column_name'], format="%m/%d/%y")
