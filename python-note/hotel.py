@@ -142,6 +142,8 @@ df.join(df.pop('column_name').str.split('-', n=1, expand=True)
         ).rename({0: 'fips', 2: 'row'}, axis=1)
 # get the first value after the split and split by comma(,)
 df['column_name'].str.split(",").str.get(0)
+# split the second element and leave the first
+df.index.str.rsplit("-",  n=2, expand=True)
 
 df.dtypes  # Get the type of the column data
 # Get the list of object category
