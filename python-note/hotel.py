@@ -381,14 +381,15 @@ visualizer.fit(X, y)        # Fit the data to the visualizer
 visualizer.show()
 
 # PCA - Principal Component Analysis https://www.kaggle.com/ryanholbrook/principal-component-analysis
-
 # Create principal components
-pca = PCA()
-X_pca = pca.fit_transform(X_scaled)
-
-# Convert to dataframe
+pca = PCA(n_components=2)  # the number of features
+X_pca = pca.fit_transform(X_scaled)  # normalize the value (standardScaler)
 component_names = [f"PC{i+1}" for i in range(X_pca.shape[1])]
 X_pca = pd.DataFrame(X_pca, columns=component_names)
+
+print(pca.components_)  # variance value for each components
+print(pca.explained_variance_)
+# https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
 
 
 # Target Encoding
