@@ -304,6 +304,10 @@ df[~df['column_name'].isin(list_of_data)]  # isin
 df.rename(columns={"Destination": "iata_code"},
           inplace=True)  # rename the column
 
+df.add_suffix('_some_suffix')  # rename all columns with suffix
+df.add_prefix('some_prefix_')  # rename all columns with prefix
+df.rename('some_prefix_{}'.format, axis=1)
+
 # showing Column_name3 and groupby by column_name1 & column_name2
 df.groupby(['Column_name1', 'Column_name2'])['Column_name3'].sum()
 
