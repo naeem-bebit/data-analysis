@@ -315,6 +315,23 @@ df1 = df.groupby(['column_name1', 'column_name2'], as_index=False).agg(
     {'column_datetime': ['min', 'count'], 'column3': 'sum'})
 df1.columns = list(map(''.join, df1.columns.values))
 
+if not os.path.exists(path + "Data/"+folderName):
+    os.makedirs(path + "Data/"+folderName)
+pickledir = str(Path(os.getcwd()).parents[0]) + \
+    '/data.cache/folder.name/{}/'.format(config.model_code)
+Path(pickledir).mkdir(parents=True, exist_ok=True)
+
+if not os.path.isfile("./df_all_data.pkl"):
+    df_5_min.to_pickle("./df_all_data.pkl")
+else:
+    df_all = pd.read_pickle("./df_all_data.pkl")
+    if df_5_min['test_date_time'].min() - df_all['test_date_time'].max() > datetime.timedelta(hours=1):
+        df_5_min.to_pickle("./df_all_data.pkl")
+    else:
+        df_all = pd.concat([df_all, df_5_min]).drop_duplicates(
+            subset=['slider_id'], keep='first').tail(1_000_000)
+        df_all.to_pickle("./df_all_data.pkl")
+
 # Feature engineering - Mutual Information
 
 df.interpolate()  # fill the missing value
