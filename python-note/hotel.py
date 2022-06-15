@@ -1,3 +1,4 @@
+from IPython.core.display import display, HTML
 import matplotlib as mpl
 import psycopg2
 import pickle
@@ -41,6 +42,9 @@ https: // dev.to/adamlombard/how-to-use-the-black-python-code-formatter-in-vscod
 https: // flake8.pycqa.org/en/latest/
 https: // pre-commit.com/
 
+# change the width of the jupyter notebook
+%pylab inline
+display(HTML("<style>.container { width:90% !important; }</style>"))
 # %matplotlib inline
 warnings.filterwarnings("ignore")
 pd.set_option('display.max_columns', None)  # Set columns mac without truncated
