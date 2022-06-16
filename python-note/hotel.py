@@ -1,3 +1,4 @@
+import re
 from IPython.core.display import display, HTML
 import matplotlib as mpl
 import psycopg2
@@ -172,6 +173,15 @@ for index, row in df.iterrows():
 Point = namedtuple('Point', ['x', 'y'])
 points = [Point(1, 2), Point(3, 4)]
 pd.DataFrame(points, columns=Point._fields)
+
+# regex findall
+text = "string"  # some string
+re.findall(
+    "[a-zA-Z0-9]{1,10}-[a-zA-Z0-9]{1,10}-[a-zA-Z0-9]{1,10}-[a-zA-Z0-9]{1,10}G", text)  # ['80-56-17801-512G', '80-56-17801-512G']
+re.findall("[0-9]{10}", text)  # ['1965917932']
+# ['130MB/s', '130MB/s', '130MB/s', '130MB/s', '130MB/s']
+re.findall("[0-9]{1,10}MB/s", text)
+re.findall("Made in [a-zA-Z1-9]{1,10}", text)  # ['Made in China']
 
 # iterate dataframe and append to new dataframe using itertuples
 temp_df = pd.DataFrame()
