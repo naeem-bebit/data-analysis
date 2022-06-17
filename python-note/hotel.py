@@ -1,3 +1,5 @@
+from glob import glob
+from os import path
 import re
 from IPython.core.display import display, HTML
 import matplotlib as mpl
@@ -66,6 +68,18 @@ df[~df['Hotel'].str.contains('CZK|Hyatt.com|Trip.com|Hotels.com|Sponsored|Bookin
 df = pd.read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv',
                  usecols=['hotel', 'is_canceled', 'adults', 'children', 'babies', 'meal', 'country', 'market_segment', 'distribution_channel', 'reserved_room_type', 'booking_changes', 'deposit_type', 'days_in_waiting_list', 'customer_type', 'required_car_parking_spaces', 'total_of_special_requests'])
 df.head()
+
+# glob
+
+
+def find_ext(dr, ext):
+    return glob(path.join(dr, f"*.{ext}"))
+
+
+find_ext(".", "pdf")
+
+for i in glob("*.pdf"):
+    print(i)
 
 # set for large data or assign data type to the particular columns
 df.pd.read_csv('file_name.csv', low_memory=False)
@@ -182,6 +196,7 @@ re.findall("[0-9]{10}", text)  # ['1965917932']
 # ['130MB/s', '130MB/s', '130MB/s', '130MB/s', '130MB/s']
 re.findall("[0-9]{1,10}MB/s", text)
 re.findall("Made in [a-zA-Z1-9]{1,10}", text)  # ['Made in China']
+
 
 # iterate dataframe and append to new dataframe using itertuples
 temp_df = pd.DataFrame()
