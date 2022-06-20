@@ -56,24 +56,16 @@ pd.set_option('display.max_rows', None)  # Set display max
 with pd.option_context('display.max_colwidth', None):  # showing max column
   display(df)
 
-# PreProcessing
-
-# Splitting Data
-
-# Modeling
-
 df[~df['Hotel'].str.contains('CZK|Hyatt.com|Trip.com|Hotels.com|Sponsored|Booking.com|Agoda.com|Expedia.com|FindHotel').fillna(
     False)].reset_index(drop=True)
 
 df = pd.read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-11/hotels.csv',
                  usecols=['hotel', 'is_canceled', 'adults', 'children', 'babies', 'meal', 'country', 'market_segment', 'distribution_channel', 'reserved_room_type', 'booking_changes', 'deposit_type', 'days_in_waiting_list', 'customer_type', 'required_car_parking_spaces', 'total_of_special_requests'])
-df.head()
-
-# glob
 
 
 def find_ext(dr, ext):
     return glob(path.join(dr, f"*.{ext}"))
+# glob to search the same file in the directory
 
 
 find_ext(".", "pdf")
@@ -83,8 +75,6 @@ for i in glob("*.pdf"):
 
 # set for large data or assign data type to the particular columns
 df.pd.read_csv('file_name.csv', low_memory=False)
-
-df.shape  # Size of the dataframe
 
 df = pd.concat([df_1, df_2], axis=0)  # concat both dataframe with same columns
 dfa.combine_first(dfb)  # fastest way to concat two dataframe
@@ -150,7 +140,6 @@ df.isna().sum()/len(df)*100  # Percentage of NaN value
 
 # groupby daily mean of column1
 df.resample('D', on="datetime")['column1'].mean()
-
 
 # spread the string column by '-' and select the second column
 df['column_1'].str.split('-', expand=True)[1].reset_index(drop=True)
@@ -957,7 +946,6 @@ pd. concat([pd.DataFrame(model.predict_proba(X_std).max(1), columns=['proba_1'])
            y.rename("passfail")], axis=1)
 
 # Sample of ROC
-
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_curve, roc_auc_score
