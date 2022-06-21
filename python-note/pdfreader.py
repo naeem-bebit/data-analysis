@@ -1,3 +1,18 @@
+from pdfminer.layout import LTTextBoxHorizontal
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfinterp import PDFPageInterpreter
+from pdfminer.pdfinterp import PDFResourceManager
+from pdfminer.converter import PDFPageAggregator
+from pdfminer.layout import LAParams
+import io
+import re
+from pdfminer3.converter import TextConverter
+from pdfminer3.converter import PDFPageAggregator
+from pdfminer3.pdfinterp import PDFPageInterpreter
+from pdfminer3.pdfinterp import PDFResourceManager
+from pdfminer3.pdfpage import PDFPage
+from pdfminer3.layout import LAParams, LTTextBox
+from PyPDF2 import PdfFileReader
 from PyPDF2 import PdfFileReader, PdfFileWriter
 
 file_path = 'sample2.pdf'
@@ -8,7 +23,7 @@ with open('sample2.txt', 'w') as f:
         # print('Page: {0}'.format(page_num))
         pageObj = pdf.getPage(page_num)
 
-        try: 
+        try:
             txt = pageObj.extractText()
             print(''.center(100, '-'))
             print(txt)
@@ -20,7 +35,6 @@ with open('sample2.txt', 'w') as f:
 #             f.write(txt)
     f.close()
 
-from PyPDF2 import PdfFileReader
 
 def extract_information(pdf_path):
     with open(pdf_path, 'rb') as f:
@@ -42,24 +56,19 @@ def extract_information(pdf_path):
     print(txt)
     return information
 
+
 if __name__ == '__main__':
     path = 'sample2.pdf'
     information = extract_information(path)
 
-#pdfminer library focuses entirely on getting and analyzing text data
+# pdfminer library focuses entirely on getting and analyzing text data
 # The result more refine text extraction
 
-from pdfminer3.layout import LAParams, LTTextBox
-from pdfminer3.pdfpage import PDFPage
-from pdfminer3.pdfinterp import PDFResourceManager
-from pdfminer3.pdfinterp import PDFPageInterpreter
-from pdfminer3.converter import PDFPageAggregator
-from pdfminer3.converter import TextConverter
-import io
 
 resource_manager = PDFResourceManager()
 fake_file_handle = io.StringIO()
-converter = TextConverter(resource_manager, fake_file_handle, laparams=LAParams())
+converter = TextConverter(
+    resource_manager, fake_file_handle, laparams=LAParams())
 page_interpreter = PDFPageInterpreter(resource_manager, converter)
 
 with open('80-56-17801-512G_SDCZ430_G46_specs.pdf', 'rb') as fh:
@@ -78,13 +87,6 @@ fake_file_handle.close()
 print(text)
 
 
-from pdfminer.layout import LAParams
-from pdfminer.converter import PDFPageAggregator
-from pdfminer.pdfinterp import PDFResourceManager
-from pdfminer.pdfinterp import PDFPageInterpreter
-from pdfminer.pdfpage import PDFPage
-from pdfminer.layout import LTTextBoxHorizontal
-
 def parsedocument(document):
     # convert all horizontal text into a lines list (one entry per line)
     # document is a file stream
@@ -94,9 +96,19 @@ def parsedocument(document):
     device = PDFPageAggregator(rsrcmgr, laparams=laparams)
     interpreter = PDFPageInterpreter(rsrcmgr, device)
     for page in PDFPage.get_pages(document):
-            interpreter.process_page(page)
-            layout = device.get_result()
-            for element in layout:
-                if isinstance(element, LTTextBoxHorizontal):
-                    lines.extend(element.get_text().splitlines())
+        interpreter.process_page(page)
+        layout = device.get_result()
+        for element in layout:
+            if isinstance(element, LTTextBoxHorizontal):
+                lines.extend(element.get_text().splitlines())
     return lines
+
+
+# regex findall
+text = "string"  # some string
+re.findall(
+    "[a-zA-Z0-9]{1,10}-[a-zA-Z0-9]{1,10}-[a-zA-Z0-9]{1,10}-[a-zA-Z0-9]{1,10}G", text)  # ['80-56-17801-512G', '80-56-17801-512G']
+re.findall("[0-9]{10}", text)  # ['1965917932']
+# ['130MB/s', '130MB/s', '130MB/s', '130MB/s', '130MB/s']
+re.findall("[0-9]{1,10}MB/s", text)
+re.findall("Made in [a-zA-Z1-9]{1,10}", text)  # ['Made in China']
