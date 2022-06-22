@@ -1,3 +1,4 @@
+from PyPDF2 import PdfWriter, PdfReader
 from pdfminer.layout import LTTextBoxHorizontal
 from pdfminer.pdfpage import PDFPage
 from pdfminer.pdfinterp import PDFPageInterpreter
@@ -112,3 +113,14 @@ re.findall("[0-9]{10}", text)  # ['1965917932']
 # ['130MB/s', '130MB/s', '130MB/s', '130MB/s', '130MB/s']
 re.findall("[0-9]{1,10}MB/s", text)
 re.findall("Made in [a-zA-Z1-9]{1,10}", text)  # ['Made in China']
+
+
+reader = PdfReader("input.pdf")
+writer = PdfWriter()
+
+
+writer.add_page(reader.pages[0])
+writer.pages[0].rotate(90)
+
+with open("output.pdf", "wb") as fp:
+    writer.write(fp)
