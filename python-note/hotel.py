@@ -976,3 +976,9 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 lda=LinearDiscriminantAnalysis(n_components=1)
 X_lda=lda.fit(X, y).transform(X)
 lda.explained_variance_ratio_
+
+# create a new path
+from pathlib import Path
+cwd=Path.cwd()
+joined_path=cwd / 'Output'
+joined_path.mkdir(exist_ok=True)
