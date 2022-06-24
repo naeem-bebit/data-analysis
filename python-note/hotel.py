@@ -1,3 +1,4 @@
+from sklearn.preprocessing import MultiLabelBinarizer
 from glob import glob
 from os import path
 import re
@@ -405,6 +406,10 @@ for i in range(len(correlation_matrix .columns)):
             colname = correlation_matrix.columns[i]
             correlated_features.add(colname)
 
+y = df['column_name']
+one_hot = MultiLabelBinarizer()
+one_hot.fit_transform(y)
+one_hot.classes_  # view classes
 
 # Load the regression dataset
 data = datasets.load_diabetes()
