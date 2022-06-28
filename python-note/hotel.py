@@ -1,3 +1,4 @@
+from collections import Counter
 from sklearn.preprocessing import MultiLabelBinarizer
 from glob import glob
 from os import path
@@ -214,6 +215,10 @@ df.groupby(['column1'])['column2'].unique()
 
 # Assign two variables with same value
 variable_1 = variable_2 = df['datetime_column'].min()
+
+# count occurances in a list
+a = ['a', 'b', 'r', 'a', 'c', 'a', 'd', 'a', 'b', 'r', 'a']
+Counter(a).most_common()
 
 # get the time for last 5 minutes
 five_mins_ago = datetime.datetime.now() - datetime.timedelta(minutes=5)
