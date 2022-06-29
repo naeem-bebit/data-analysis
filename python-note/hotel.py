@@ -220,6 +220,11 @@ variable_1 = variable_2 = df['datetime_column'].min()
 a = ['a', 'b', 'r', 'a', 'c', 'a', 'd', 'a', 'b', 'r', 'a']
 Counter(a).most_common()
 
+# compare two lists if both exists in those two lists
+np.intersect1d(list_1, df.columns).tolist()
+# compare two lists and show only the difference
+np.setdiff1d(list_1, df.columns).tolist()
+
 # get the time for last 5 minutes
 five_mins_ago = datetime.datetime.now() - datetime.timedelta(minutes=5)
 d = datetime.today() - timedelta(hours=0, minutes=50)  # hours and minutes
