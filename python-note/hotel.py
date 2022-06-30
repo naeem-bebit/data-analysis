@@ -997,3 +997,9 @@ from pathlib import Path
 cwd=Path.cwd()
 joined_path=cwd / 'Output'
 joined_path.mkdir(exist_ok=True)
+
+# Create a perceptron object with the parameters: 40 iterations (epochs) over the data, and a learning rate of 0.1
+ppn=Perceptron(n_iter=40, eta0=0.1, random_state=0)
+
+# Train the perceptron
+ppn.fit(X_train_std, y_train)
