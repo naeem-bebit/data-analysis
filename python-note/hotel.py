@@ -1003,3 +1003,14 @@ ppn=Perceptron(n_iter=40, eta0=0.1, random_state=0)
 
 # Train the perceptron
 ppn.fit(X_train_std, y_train)
+
+# detecting outlier
+from sklearn.covariance import EllipticEnvelope
+# Create detector
+outlier_detector=EllipticEnvelope(contamination=.1)
+
+# Fit detector
+outlier_detector.fit(X)
+
+# Predict outliers
+outlier_detector.predict(X)
