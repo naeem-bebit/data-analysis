@@ -162,7 +162,7 @@ list(df.select_dtypes(include=['object']).columns)
 df['Target'] = np.where(df['column_name'].isin(
     df1['column_name']), 'Fail', 'Pass')  # create failed pass column
 
-df.drop(['columns2', 'column1'], axis=1)
+df.drop(['columns2', 'column1'], axis=1)  # Drop columns
 
 # iterrows access row value
 for index, row in df.iterrows():  # dataframe
@@ -444,6 +444,11 @@ X_pca = pd.DataFrame(X_pca, columns=component_names)
 print(pca.components_)  # variance value for each components
 print(pca.explained_variance_)
 # https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
+
+from sklearn.decomposition import PCA
+pca = PCA(n_components = 2)
+X_train = pca.fit_transform(X_train) # standardize X_train and X_test
+X_test = pca.transform(X_test)
 
 
 # Target Encoding
