@@ -445,9 +445,8 @@ print(pca.components_)  # variance value for each components
 print(pca.explained_variance_)
 # https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html
 
-from sklearn.decomposition import PCA
-pca = PCA(n_components = 2)
-X_train = pca.fit_transform(X_train) # standardize X_train and X_test
+pca = PCA(n_components=2)
+X_train = pca.fit_transform(X_train)  # standardize X_train and X_test
 X_test = pca.transform(X_test)
 
 
@@ -996,6 +995,11 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 lda=LinearDiscriminantAnalysis(n_components=1)
 X_lda=lda.fit(X, y).transform(X)
 lda.explained_variance_ratio_
+
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+lda=LDA(n_components=2)
+X_train=lda.fit_transform(X_train, y_train)
+X_test=lda.transform(X_test)
 
 # create a new path
 from pathlib import Path
