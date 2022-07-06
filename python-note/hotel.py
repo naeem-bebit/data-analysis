@@ -1,3 +1,4 @@
+from sklearn.decomposition import KernelPCA  # Kernel PCA
 from collections import Counter
 from sklearn.preprocessing import MultiLabelBinarizer
 from glob import glob
@@ -449,6 +450,9 @@ pca = PCA(n_components=2)
 X_train = pca.fit_transform(X_train)  # standardize X_train and X_test
 X_test = pca.transform(X_test)
 
+kpca = KernelPCA(n_components=2, kernel='rbf')
+X_train = kpca.fit_transform(X_train)
+X_test = kpca.transform(X_test)
 
 # Target Encoding
 
