@@ -822,6 +822,10 @@ mylist=['A', 'A', 'B', 'A', 'D', 'E', 'D', 'B', 'B']
 if 'B' in set([i for i in mylist if mylist.count(i) >= 3]):
     print('yes')
 
+from apyori import apriori
+rules=apriori(transactions=df, min_support=0.003,
+              min_confidence=0.2, min_lift=3, min_length=2, max_length=2)
+
 # creating emtpy dataframe with one column and 2 sample rows
 pd.DataFrame({'unique_value': [1, 2]})
 
