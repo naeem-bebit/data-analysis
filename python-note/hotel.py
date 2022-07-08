@@ -619,6 +619,9 @@ feature_names
 
 forest_importances.sort_values(ascending=False)
 
+kmeans = KMeans(n_clusters=5, init='k-means++', random_state=42)
+y_kmeans = kmeans.fit_predict(X)
+
 # Random forest
 # https://chrisalbon.com/machine_learning/trees_and_forests/random_forest_classifier_example/
 # Load the library with the iris dataset
