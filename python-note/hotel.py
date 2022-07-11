@@ -362,6 +362,21 @@ else:
             subset=['slider_id'], keep='first').tail(1_000_000)
         df_all.to_pickle("./df_all_data.pkl")
 
+# Wrapper method
+from mlxtend.feature_selection import SequentialFeatureSelector as SFS
+sfs1 = SFS(#knn(n_neighbors=3),
+           #rfc(n_jobs=8),
+           LGR(max_iter=1000),
+           k_features='best', 
+           forward=True, 
+           floating=False, 
+           verbose=2,
+           #scoring = 'neg_mean_squared_error',  # sklearn regressors
+           scoring='accuracy',  # sklearn classifiers
+           cv=0)
+
+sfs1 = sfs1.fit(X, y,custom_feature_names=feature_names)   
+
 # Feature engineering - Mutual Information
 
 df.interpolate()  # fill the missing value
