@@ -362,6 +362,12 @@ else:
             subset=['slider_id'], keep='first').tail(1_000_000)
         df_all.to_pickle("./df_all_data.pkl")
 
+from sklearn.feature_selection import f_regression, SelectKBest
+
+fs = SelectKBest(score_func=f_regression,k=30) ## Select k as per your business understanding
+# Apply feature selection
+fit = fs.fit(X,y)
+
 # Wrapper method
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 sfs1 = SFS(#knn(n_neighbors=3),
