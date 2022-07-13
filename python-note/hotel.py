@@ -1,3 +1,5 @@
+from mlxtend.feature_selection import SequentialFeatureSelector as SFS
+from sklearn.feature_selection import f_regression, SelectKBest
 from sklearn.decomposition import KernelPCA  # Kernel PCA
 from collections import Counter
 from sklearn.preprocessing import MultiLabelBinarizer
@@ -362,26 +364,41 @@ else:
             subset=['slider_id'], keep='first').tail(1_000_000)
         df_all.to_pickle("./df_all_data.pkl")
 
-from sklearn.feature_selection import f_regression, SelectKBest
 
-fs = SelectKBest(score_func=f_regression,k=30) ## Select k as per your business understanding
+def correlation(dataset, threshold):
+    col_corr = set()  # Set of all the names of correlated columns
+    corr_matrix = dataset.corr()
+    for i in range(len(corr_matrix.columns)):
+        for j in range(i):
+            # we are interested in absolute coeff value
+            if abs(corr_matrix.iloc[i, j]) > threshold:
+                colname = corr_matrix.columns[i]  # getting the name of column
+                col_corr.add(colname)
+    return col_corr
+
+
+corr_features = correlation(X_train, 0.8)
+print('correlated features: ', len(set(corr_features)))
+
+
+# Select k as per your business understanding
+fs = SelectKBest(score_func=f_regression, k=30)
 # Apply feature selection
-fit = fs.fit(X,y)
+fit = fs.fit(X, y)
 
 # Wrapper method
-from mlxtend.feature_selection import SequentialFeatureSelector as SFS
-sfs1 = SFS(#knn(n_neighbors=3),
-           #rfc(n_jobs=8),
+sfs1 = SFS(  # knn(n_neighbors=3),
+           # rfc(n_jobs=8),
            LGR(max_iter=1000),
-           k_features='best', 
-           forward=True, 
-           floating=False, 
+           k_features='best',
+           forward=True,
+           floating=False,
            verbose=2,
-           #scoring = 'neg_mean_squared_error',  # sklearn regressors
+           # scoring = 'neg_mean_squared_error',  # sklearn regressors
            scoring='accuracy',  # sklearn classifiers
            cv=0)
 
-sfs1 = sfs1.fit(X, y,custom_feature_names=feature_names)   
+sfs1 = sfs1.fit(X, y, custom_feature_names=feature_names)
 
 # Feature engineering - Mutual Information
 
