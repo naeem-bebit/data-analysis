@@ -1,3 +1,4 @@
+import optuna
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 from sklearn.feature_selection import f_regression, SelectKBest
 from sklearn.decomposition import KernelPCA  # Kernel PCA
@@ -399,6 +400,37 @@ sfs1 = SFS(  # knn(n_neighbors=3),
            cv=0)
 
 sfs1 = sfs1.fit(X, y, custom_feature_names=feature_names)
+
+# hyperparameter using Optune
+
+
+def objective(trial):
+
+    rf_n_estimators = trial.suggest_int("rf_n_estimators", 100, 1000)
+    rf_criterion = trial.suggest_categorical(
+        "rf_criterion", ['gini', 'entropy'])
+    rf_max_depth = trial.suggest_int("rf_max_depth", 1, 4)
+    rf_min_samples_split = trial.suggest_float("rf_min_samples_split", 0.01, 1)
+
+    model = RandomForestClassifier(
+        n_estimators=rf_n_estimators,
+        criterion=rf_criterion,
+        max_depth=rf_max_depth,
+        min_samples_split=rf_min_samples_split,
+    )
+
+    score = cross_val_score(model, X_train, y_train, cv=3)
+    accuracy = score.mean()
+    return accuracy
+
+
+study = optuna.create_study(
+    direction="maximize",
+    sampler=optuna.samplers.RandomSampler(),
+)
+
+
+study.optimize(objective, n_trials=5)
 
 # Feature engineering - Mutual Information
 
