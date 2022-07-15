@@ -1017,6 +1017,7 @@ from sklearn.feature_selection import VarianceThreshold
 X=[[0, 0, 1], [0, 1, 0], [1, 0, 0], [0, 1, 1], [0, 1, 0], [0, 1, 1]]
 sel=VarianceThreshold(threshold=(.8 * (1 - .8)))
 sel.fit_transform(X)
+sum(sel.get_support())  # sum of features that not quasi-constant
 
 
 # full training without split
