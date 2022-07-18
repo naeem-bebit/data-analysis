@@ -1105,3 +1105,11 @@ outlier_detector.fit(X)
 
 # Predict outliers
 outlier_detector.predict(X)
+
+# corr
+corrmat=X_train.corr()
+corrmat=corrmat.abs().unstack()  # absolute value of corr coef
+corrmat=corrmat.sort_values(ascending=False)
+corrmat=corrmat[corrmat >= 0.8]
+corrmat=corrmat[corrmat < 1]
+corrmat=pd.DataFrame(corrmat).reset_index()
