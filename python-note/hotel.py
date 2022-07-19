@@ -434,6 +434,13 @@ study.optimize(objective, n_trials=5)
 
 # Feature engineering - Mutual Information
 
+from sklearn.feature_selection import mutual_info_classif, mutual_info_regression
+mi = mutual_info_classif(X_train, y_train)
+mi = pd.Series(mi)
+mi.index = X_train.columns
+mi.sort_values(ascending=False).plot.bar(figsize=(20, 6))
+plt.ylabel('Mutual Information')
+
 df.interpolate()  # fill the missing value
 
 
