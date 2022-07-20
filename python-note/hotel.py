@@ -1,3 +1,4 @@
+from sklearn.feature_selection import mutual_info_classif, mutual_info_regression
 import optuna
 from mlxtend.feature_selection import SequentialFeatureSelector as SFS
 from sklearn.feature_selection import f_regression, SelectKBest
@@ -434,7 +435,6 @@ study.optimize(objective, n_trials=5)
 
 # Feature engineering - Mutual Information
 
-from sklearn.feature_selection import mutual_info_classif, mutual_info_regression
 mi = mutual_info_classif(X_train, y_train)
 mi = pd.Series(mi)
 mi.index = X_train.columns
@@ -1120,3 +1120,7 @@ corrmat=corrmat.sort_values(ascending=False)
 corrmat=corrmat[corrmat >= 0.8]
 corrmat=corrmat[corrmat < 1]
 corrmat=pd.DataFrame(corrmat).reset_index()
+
+# Univariate feature selection
+from sklearn.feature_selection import f_classif, f_regression
+univariate=f_classif(X_train, y_train)
