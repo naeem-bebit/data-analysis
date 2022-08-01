@@ -1124,3 +1124,16 @@ corrmat=pd.DataFrame(corrmat).reset_index()
 # Univariate feature selection
 from sklearn.feature_selection import f_classif, f_regression
 univariate=f_classif(X_train, y_train)
+
+# helper.py
+# -------------------------------------
+import logging
+logger=logging.getLogger(__name__)
+logger.info('HELLO')
+
+# main.py
+# -------------------------------------
+import logging
+logging.basicConfig(level=logging.INFO,
+                    format='%(name)s - %(levelname)s - %(message)s')
+import helper
