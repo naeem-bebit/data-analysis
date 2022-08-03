@@ -1138,7 +1138,6 @@ logging.basicConfig(level=logging.INFO,
                     format='%(name)s - %(levelname)s - %(message)s')
 import helper
 
-
 # logging.conf or logging.ini
 [loggers]
 keys=root, simpleExample
@@ -1167,3 +1166,13 @@ args=(sys.stdout,)
 
 [formatter_simpleFormatter]
 format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
+
+# Lambda
+def myfunc(n):
+    return lambda x: x * n
+
+doubler=myfunc(2)
+print(doubler(6))  # 12
+
+tripler=myfunc(3)
+print(tripler(6))  # 18
