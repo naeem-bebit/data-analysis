@@ -1165,7 +1165,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
+format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1201,3 +1201,8 @@ except ValueTooHighError as e:
     print(e)
 except ValueTooLowError as e:
     print(e.message, 'The value is:', e.value)
+
+import json
+person={"name": "John", "age": 30, "city": "New York",
+    "hasChildren": False, "titles": ["engineer", "programmer"]}
+person_json=json.dumps(person)
