@@ -1165,7 +1165,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
+format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1206,3 +1206,9 @@ import json
 person={"name": "John", "age": 30, "city": "New York",
     "hasChildren": False, "titles": ["engineer", "programmer"]}
 person_json=json.dumps(person)
+
+
+import heapq
+test_list=[1, 2, 3, 50, 60, 70]
+print(heapq.nlargest(3, test_list))
+print(heapq.nsmallest(3, test_list))
