@@ -104,3 +104,10 @@ os.makedirs(cfg.OUTPUT_DIR, exist_ok=True)
 trainer = DefaultTrainer(cfg)
 trainer.resume_or_load(resume=False)
 trainer.train()
+
+# Inference should use the config with parameters that are used in training
+# cfg now already contains everything we've set previously. We changed it a little bit for inference:
+# path to the model we just trained
+cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7   # set a custom testing threshold
+predictor = DefaultPredictor(cfg)
