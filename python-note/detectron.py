@@ -1,3 +1,5 @@
+from detectron2.data import build_detection_test_loader
+from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 from detectron2.utils.visualizer import ColorMode
 from detectron2.engine import DefaultTrainer
 from detectron2.structures import BoxMode
@@ -126,3 +128,8 @@ for d in random.sample(dataset_dicts, 3):
                    )
     out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
     cv2_imshow(out.get_image()[:, :, ::-1])
+
+evaluator = COCOEvaluator("balloon_val", output_dir="./output")
+val_loader = build_detection_test_loader(cfg, "balloon_val")
+print(inference_on_dataset(predictor.model, val_loader, evaluator))
+# another equivalent way to evaluate the model is to use `trainer.test`
