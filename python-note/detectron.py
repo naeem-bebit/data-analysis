@@ -1,3 +1,4 @@
+from detectron2.utils.visualizer import ColorMode
 from detectron2.engine import DefaultTrainer
 from detectron2.structures import BoxMode
 import random
@@ -111,3 +112,17 @@ trainer.train()
 cfg.MODEL.WEIGHTS = os.path.join(cfg.OUTPUT_DIR, "model_final.pth")
 cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7   # set a custom testing threshold
 predictor = DefaultPredictor(cfg)
+
+dataset_dicts = get_balloon_dicts("balloon/val")
+for d in random.sample(dataset_dicts, 3):
+    im = cv2.imread(d["file_name"])
+    # format is documented at https://detectron2.readthedocs.io/tutorials/models.html#model-output-format
+    outputs = predictor(im)
+    v = Visualizer(im[:, :, ::-1],
+                   metadata=balloon_metadata,
+                   scale=0.5,
+                   # remove the colors of unsegmented pixels. This option is only available for segmentation models
+                   instance_mode=ColorMode.IMAGE_BW
+                   )
+    out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+    cv2_imshow(out.get_image()[:, :, ::-1])
