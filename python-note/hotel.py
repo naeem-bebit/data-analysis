@@ -1165,7 +1165,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
+format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1212,3 +1212,12 @@ import heapq
 test_list=[1, 2, 3, 50, 60, 70]
 print(heapq.nlargest(3, test_list))
 print(heapq.nsmallest(3, test_list))
+
+
+df=pd.read_csv('spaceship_imbalanced.csv')
+from imblearn.over_sampling import RandomOverSampler, SMOTE
+from imblearn.under_sampling import RandomUnderSampler
+resamp=RandomUnderSampler()
+balX, baly=resamp.fit_resample(X, y)
+sns.countplot(x=baly)
+plt.show()
