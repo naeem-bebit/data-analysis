@@ -133,3 +133,17 @@ evaluator = COCOEvaluator("balloon_val", output_dir="./output")
 val_loader = build_detection_test_loader(cfg, "balloon_val")
 print(inference_on_dataset(predictor.model, val_loader, evaluator))
 # another equivalent way to evaluate the model is to use `trainer.test`
+
+# Inference with a keypoint detection model
+cfg = get_cfg()   # get a fresh new config
+cfg.merge_from_file(model_zoo.get_config_file(
+    "COCO-Keypoints/keypoint_rcnn_R_50_FPN_3x.yaml"))
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.7  # set threshold for this model
+cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(
+    "COCO-Keypoints/keypoint_rcnn_R_50_FPN_3x.yaml")
+predictor = DefaultPredictor(cfg)
+outputs = predictor(im)
+v = Visualizer(
+    im[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
+out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+cv2_imshow(out.get_image()[:, :, ::-1])
