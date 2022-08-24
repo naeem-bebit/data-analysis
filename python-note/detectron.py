@@ -1,3 +1,4 @@
+from IPython.display import YouTubeVideo, display
 from detectron2.data import build_detection_test_loader
 from detectron2.evaluation import COCOEvaluator, inference_on_dataset
 from detectron2.utils.visualizer import ColorMode
@@ -147,3 +148,8 @@ v = Visualizer(
     im[:, :, ::-1], MetadataCatalog.get(cfg.DATASETS.TRAIN[0]), scale=1.2)
 out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
 cv2_imshow(out.get_image()[:, :, ::-1])
+
+# Video detectron2
+# This is the video we're going to process
+video = YouTubeVideo("ll8TgCZ0plk", width=500)
+display(video)
