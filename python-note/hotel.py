@@ -1319,3 +1319,21 @@ for t in range(0, 10):
     time.sleep(pause_time)
 
     a=np.random.rand(3, 3)
+
+s3_resource=boto3.resource('s3',
+                             endpoint_url='http://s3.xx.com',
+                             aws_access_key_id='xxx',
+                             aws_secret_access_key='xxx')
+
+my_bucket=s3_resource.Bucket('bucket_name')
+prefix='mho_path/images/ph_name/path_name'
+files=list(my_bucket.objects.filter(Prefix=prefix))
+files  # list all files
+
+for obj in list(my_bucket.objects.filter(Prefix=prefix)):  # iterate and show all images
+    print(obj.key)
+    image=my_bucket.Object(obj.key)
+    img_data=image.get()['Body'].read()
+    img=Image.open(io.BytesIO(img_data))
+    plt.imshow(img)
+    plt.show()
