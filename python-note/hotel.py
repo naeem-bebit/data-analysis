@@ -1221,3 +1221,15 @@ resamp=RandomUnderSampler()
 balX, baly=resamp.fit_resample(X, y)
 sns.countplot(x=baly)
 plt.show()
+
+data.text=b'Code is like humor. When you have to explain it, its bad.'
+f=open("data.txt", "rb")
+# sets Reference point to tenth
+# position to the left from end
+f.seek(-10, 2)
+# prints current position
+print(f.tell())
+# Converting binary to string and
+# printing
+print(f.readline().decode('utf-8'))
+f.close()
