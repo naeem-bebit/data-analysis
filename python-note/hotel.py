@@ -1255,3 +1255,17 @@ print(file.read())
 
 file.close()
 print("Is the file closed?", file.closed)
+
+init_string=b'hello'
+in_memory=io.BytesIO(init_string)
+# in_memory.seek(0, 2)
+in_memory.write(b' world')
+in_memory.seek(0)
+print(in_memory.read())
+string='This is initial string.'
+file=StringIO(string)
+# print(file.read())
+print(file.getvalue())
+file.write('world')
+print(file.read())
+print(file.getvalue())
