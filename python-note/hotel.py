@@ -1233,3 +1233,25 @@ print(f.tell())
 # printing
 print(f.readline().decode('utf-8'))
 f.close()
+
+string='This is initial string.'
+file=StringIO(string)
+print("Is the file stream interactive?", file.isatty())
+print("Is the file stream readable?", file.readable())
+print("Is the file stream writable?", file.writable())
+print("Is the file stream seekable?", file.seekable())
+print("Is the file closed?", file.closed)
+print(file.read())
+file.write(" Welcome to geeksforgeeks.")
+print(file.tell())
+print(file.getvalue())
+file.seek(0)
+
+print(file.tell())
+print('The string after writing is:', file.read())
+file.seek(0)
+file.truncate(22)
+print(file.read())
+
+file.close()
+print("Is the file closed?", file.closed)
