@@ -1269,3 +1269,28 @@ print(file.getvalue())
 file.write('world')
 print(file.read())
 print(file.getvalue())
+
+import boto3
+
+def s3_con(aaki, asak, endpoint_url):
+    session=boto3.session.Session()
+    s3_client=session.client(
+    service_name='s3',
+    aws_access_key_id=aaki,
+    aws_secret_access_key=asak,
+    endpoint_url=endpoint_url
+    )
+    return s3_client
+aws_access_key_id='keyid'
+aws_secret_access_key='secretid'
+endpoint_url='http://s3.xx.xx.com'
+bucket='bucket_name'
+
+s3_client=s3_con(aws_access_key_id, aws_secret_access_key, endpoint_url)
+for obj in s3_client.list_objects(Bucket=bucket, Prefix='mho_path/images/some_path')['Contents']:
+#     print(obj)
+    try:
+        print(obj['Key'])
+#         s3_client.download_file(bucket,obj['Key'],file_path+obj['Key'].rsplit('/', 1)[1])
+    except:
+        continue
