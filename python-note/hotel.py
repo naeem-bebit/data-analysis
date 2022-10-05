@@ -1165,7 +1165,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
+format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1294,3 +1294,28 @@ for obj in s3_client.list_objects(Bucket=bucket, Prefix='mho_path/images/some_pa
 #         s3_client.download_file(bucket,obj['Key'],file_path+obj['Key'].rsplit('/', 1)[1])
     except:
         continue
+
+for obj in list(my_bucket.objects.filter(Prefix=prefix)):
+    print(obj.key)
+    image=my_bucket.Object(obj.key)
+    img_data=image.get()['Body'].read()
+    img=Image.open(io.BytesIO(img_data))
+    plt.imshow(img)
+    plt.show()
+
+import numpy as np
+import matplotlib.pyplot as plt
+from IPython import display
+import time
+
+pause_time=0.2  # seconds between frames
+a=np.random.rand(3, 3)
+
+for t in range(0, 10):
+    plt.imshow(a)
+    plt.title(t)
+    display.display(plt.gcf())
+    display.clear_output(wait=True)
+    time.sleep(pause_time)
+
+    a=np.random.rand(3, 3)
