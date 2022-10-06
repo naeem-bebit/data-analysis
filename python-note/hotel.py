@@ -1337,3 +1337,25 @@ for obj in list(my_bucket.objects.filter(Prefix=prefix)):  # iterate and show al
     img=Image.open(io.BytesIO(img_data))
     plt.imshow(img)
     plt.show()
+
+def write_image_to_s3(img_array, bucket, key, region_name='ap-southeast-1'):
+    """Write an image array into S3 bucket
+
+    Parameters
+    ----------
+    bucket: string
+        Bucket name
+    key : string
+        Path in s3
+
+    Returns
+    -------
+    None
+    """
+    s3=boto3.resource('s3', region_name)
+    bucket=s3.Bucket(bucket)
+    object=bucket.Object(key)
+    file_stream=BytesIO()
+    im=Image.fromarray(img_array)
+    im.save(file_stream, format='jpeg')
+    object.put(Body=file_stream.getvalue())
