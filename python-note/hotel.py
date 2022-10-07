@@ -808,7 +808,7 @@ column_1_value = 'example_%%'  # double percentage is necassary due to python sy
 Columns_2_value = 'example'
 sql = f"select * FROM d.database WHERE column_1 like '{column_1_value}' and column_2 = '{Columns_2_value}' limit 10"
 pd.read_sql(sql, engine)
-
+engine.dispose()
 
 try:
     function()
