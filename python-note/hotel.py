@@ -159,6 +159,7 @@ df.join(df.pop('column_name').str.split('-', n=1, expand=True)
 df['column_name'].str.split(",").str.get(0)
 # split the second element and leave the first
 df.index.str.rsplit("-",  n=2, expand=True)
+# Difference between split and rsplit are rsplit has n parameters and split from last element
 
 df.dtypes  # Get the type of the column data
 # Get the list of object category
