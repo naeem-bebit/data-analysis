@@ -1359,3 +1359,28 @@ def write_image_to_s3(img_array, bucket, key, region_name='ap-southeast-1'):
     im=Image.fromarray(img_array)
     im.save(file_stream, format='jpeg')
     object.put(Body=file_stream.getvalue())
+
+
+import cv2
+import numpy as np
+from PIL import Image
+
+pil_image=Image.open("demo2.jpg")  # open image using PIL
+
+# use numpy to convert the pil_image into a numpy array
+numpy_image=numpy.array(pil_img)
+
+# convert to a openCV2 image, notice the COLOR_RGB2BGR which means that
+# the color is converted from RGB to BGR format
+opencv_image=cv2.cvtColor(numpy_image, cv2.COLOR_RGB2BGR)
+
+import cv2
+import numpy as np
+from PIL import Image
+
+opencv_image=cv2.imread("demo2.jpg")  # open image using openCV2
+
+# convert from openCV2 to PIL. Notice the COLOR_BGR2RGB which means that
+# the color is converted from BGR to RGB
+color_coverted=cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
+pil_image=Image.fromarray(color_coverted)
