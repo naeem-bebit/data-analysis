@@ -1166,7 +1166,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
+format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1385,3 +1385,12 @@ opencv_image=cv2.imread("demo2.jpg")  # open image using openCV2
 # the color is converted from BGR to RGB
 color_coverted=cv2.cvtColor(opencv_image, cv2.COLOR_BGR2RGB)
 pil_image=Image.fromarray(color_coverted)
+
+from sklearn.metrics import classification_report
+import pandas as pd
+y_true=[0, 1, 2, 2, 2]
+y_pred=[0, 0, 2, 2, 1]
+target_names=['class 0', 'class 1', 'class 2']
+dft=classification_report(
+    y_true, y_pred, target_names=target_names, output_dict=True)
+pd.DataFrame(dft).transpose().round(2)
