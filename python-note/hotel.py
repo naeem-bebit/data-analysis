@@ -1166,7 +1166,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
+format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1394,3 +1394,24 @@ target_names=['class 0', 'class 1', 'class 2']
 dft=classification_report(
     y_true, y_pred, target_names=target_names, output_dict=True)
 pd.DataFrame(dft).transpose().round(2)
+
+
+from smb.SMBConnection import SMBConnection
+
+conn=SMBConnection(username="svcv@test.com",
+                     password="$password",
+                     my_name="my_name",
+                     remote_name="remote_name")
+
+conn.connect('ip or remote name')
+for img_path in favi_path_df['new_path'][:1]:
+    print(img_path)
+
+    buffer=io.BytesIO()
+    conn.retrieveFile(service_name="J$",
+                      path=img_path, file_obj=buffer)
+    buffer.seek(0)
+    img=buffer.read()
+    decoded=cv2.imdecode(np.frombuffer(img, np.uint8), -1)
+#     image = np.array(Image.open(io.BytesIO(img))) #or this one
+    buffer.close()
