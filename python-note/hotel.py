@@ -1413,5 +1413,11 @@ for img_path in favi_path_df['new_path'][:1]:
     buffer.seek(0)
     img=buffer.read()
     decoded=cv2.imdecode(np.frombuffer(img, np.uint8), -1)
-#     image = np.array(Image.open(io.BytesIO(img))) #or this one
+    print('OpenCV:\n', decoded)
+    plt.imshow(decoded)
+    plt.show()
+    # image = np.array(Image.open(io.BytesIO(img))) #or this one
+    # print('PIL:\n', image)
+    # plt.imshow(image)
+    # plt.show()
     buffer.close()
