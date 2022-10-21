@@ -894,6 +894,9 @@ df=pd.DataFrame({'num_legs': [2, 4, 8, 0],
                    'num_specimen_seen': [10, 2, 1, 8]},
                   index=['falcon', 'dog', 'spider', 'fish'])
 
+data=[['tom', 10], ['nick', 15], ['juli', 14]]
+df=pd.DataFrame(data, columns=['Name', 'Age'])
+
 # df to test the time for execution time
 df=pd.DataFrame(np.random.randn(40000, 3), columns=['col1', 'col2', 'col3'])
 
