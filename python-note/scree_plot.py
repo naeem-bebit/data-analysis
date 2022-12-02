@@ -1,3 +1,5 @@
+import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
@@ -12,3 +14,12 @@ scaled_df = pd.DataFrame(scaler.fit_transform(
 
 pca = PCA(n_components=4)
 pca_fit = pca.fit(scaled_df)
+
+
+PC_values = np.arange(pca.n_components_) + 1
+plt.plot(PC_values, pca.explained_variance_ratio_,
+         'o-', linewidth=2, color='blue')
+plt.title('Scree Plot')
+plt.xlabel('Principal Component')
+plt.ylabel('Variance Explained')
+plt.show()
