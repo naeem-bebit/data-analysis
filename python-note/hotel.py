@@ -308,6 +308,11 @@ pd.to_datetime(df['Column'])  # change column to datetime
 
 datetime.today().strftime('%Y-%m-%d-%H:%M:%S')  # Get the date for today
 
+# from datetime import datetime as dt
+# import pytz
+dt.now().astimezone(pytz.timezone('Asia/Kuala_Lumpur')
+       ).strftime("%a %d-%m-%Y  %H:%M:%S")
+
 df.T  # transpose
 df.describe().T  # transpose describe
 
@@ -1169,7 +1174,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
+format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1430,7 +1435,7 @@ for img_path in favi_path_df['new_path'][:1]:
 import base64, requests, json
 
 # Step 1: open the images on your local position (If you read the image from memory, it is another topic)
-with open( < IMG_LOCAL_PATH > , "rb") as f:
+with open(< IMG_LOCAL_PATH > , "rb") as f:
     img_bytes=f.read()
 
 # Step 2: Encode the bytes data to serializable data, then transfer the python type to string format
@@ -1444,7 +1449,7 @@ data_str=json.dumps({
 
 # Step 4: Call the dataIku API service and get response
 res=requests.post(
-    url= < DATAIKU_URL > ,
+    url= < DATAIKU_URL >,
     data=data_str
 )
 
