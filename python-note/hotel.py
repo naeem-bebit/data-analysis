@@ -1174,7 +1174,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
+format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1449,7 +1449,7 @@ data_str=json.dumps({
 
 # Step 4: Call the dataIku API service and get response
 res=requests.post(
-    url= < DATAIKU_URL >,
+    url= < DATAIKU_URL > ,
     data=data_str
 )
 
@@ -1488,3 +1488,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
+
+# from zipfile import ZipFile
+with ZipFile("PDF for Global\P001-003300-240G.zip", "r") as zip_ref:
+    zip_ref.extractall("PDF for Global/target_dir")
