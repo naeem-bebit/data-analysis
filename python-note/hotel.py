@@ -169,6 +169,8 @@ df['Target'] = np.where(df['column_name'].isin(
     df1['column_name']), 'Fail', 'Pass')  # create failed pass column
 
 df.drop(['columns2', 'column1'], axis=1)  # Drop columns
+list_aw = ["a","b"]
+df.drop(df[df['Filename'].isin(list_aw)].index) #drop row based on filename
 
 # iterrows access row value
 for index, row in df.iterrows():  # dataframe
