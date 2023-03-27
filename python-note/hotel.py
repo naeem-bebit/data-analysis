@@ -169,8 +169,8 @@ df['Target'] = np.where(df['column_name'].isin(
     df1['column_name']), 'Fail', 'Pass')  # create failed pass column
 
 df.drop(['columns2', 'column1'], axis=1)  # Drop columns
-list_aw = ["a","b"]
-df.drop(df[df['Filename'].isin(list_aw)].index) #drop row based on filename
+list_aw = ["a", "b"]
+df.drop(df[df['Filename'].isin(list_aw)].index)  # drop row based on filename
 
 # iterrows access row value
 for index, row in df.iterrows():  # dataframe
@@ -1176,7 +1176,7 @@ formatter=simpleFormatter
 args=(sys.stdout,)
 
 [formatter_simpleFormatter]
-format= % (asctime)s - %(name)s - %(levelname)s - %(message)s
+format=% (asctime)s - %(name)s - %(levelname)s - %(message)s
 
 # Lambda
 def myfunc(n):
@@ -1282,6 +1282,14 @@ print(file.read())
 print(file.getvalue())
 
 import boto3
+
+s3_resource=boto3.resource('s3',
+                             endpoint_url=config.endpoint_url,
+                             aws_access_key_id=config.aws_access_key_id,
+                             aws_secret_access_key=config.aws_secret_access_key)
+
+my_bucket=s3_resource.Bucket(config.bucket)
+my_bucket.Object(img)
 
 def s3_con(aaki, asak, endpoint_url):
     session=boto3.session.Session()
@@ -1437,7 +1445,7 @@ for img_path in favi_path_df['new_path'][:1]:
 import base64, requests, json
 
 # Step 1: open the images on your local position (If you read the image from memory, it is another topic)
-with open(< IMG_LOCAL_PATH > , "rb") as f:
+with open( < IMG_LOCAL_PATH > , "rb") as f:
     img_bytes=f.read()
 
 # Step 2: Encode the bytes data to serializable data, then transfer the python type to string format
@@ -1451,7 +1459,7 @@ data_str=json.dumps({
 
 # Step 4: Call the dataIku API service and get response
 res=requests.post(
-    url= < DATAIKU_URL > ,
+    url= < DATAIKU_URL >,
     data=data_str
 )
 
