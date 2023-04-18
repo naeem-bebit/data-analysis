@@ -1467,6 +1467,17 @@ res=requests.post(
 result=res.json()
 res.close()
 
+# request template
+# https://github.com/public-apis/public-apis
+import requests
+import json
+url="https://cat-fact.herokuapp.com/facts"
+# url = "https://api.quran.com/api/v4/chapters/2?language=en"
+r=requests.get(url)
+# data=r.json()
+data=json.loads(r.text)
+print(data)
+
 import sys
 import time
 import logging
