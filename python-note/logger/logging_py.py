@@ -6,6 +6,7 @@ import pandas as pd
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
+# name of the log file, the file will be created in the same dir with this file
 handler = logging.FileHandler('test.log')
 formatter = logging.Formatter(
     '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
