@@ -1445,7 +1445,7 @@ for img_path in favi_path_df['new_path'][:1]:
 import base64, requests, json
 
 # Step 1: open the images on your local position (If you read the image from memory, it is another topic)
-with open( < IMG_LOCAL_PATH > , "rb") as f:
+with open( 'image_sample.jpg' , "rb") as f:
     img_bytes=f.read()
 
 # Step 2: Encode the bytes data to serializable data, then transfer the python type to string format
@@ -1453,13 +1453,13 @@ img_str=base64.b64encode(img_bytes).decode("utf-8")
 
 # Step 3: Compile the data into python dict, and transfer to json format(**Notice, cannot use str, please make sure you use json.dumps)
 data_str=json.dumps({
-    'img_name': "image_1",
+    'img_name': "image_sample",
     "img_str": img_str
 })
 
 # Step 4: Call the dataIku API service and get response
 res=requests.post(
-    url= < DATAIKU_URL >,
+    url= 'http://internal-',
     data=data_str
 )
 
