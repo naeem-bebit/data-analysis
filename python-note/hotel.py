@@ -1467,6 +1467,13 @@ res=requests.post(
 result=res.json()
 res.close()
 
+#list all the file 
+import os
+path_input = 'report'
+for file in os.scandir(path_input):
+    if file.is_file() and file.name.endswith(".xlsx"):
+        print(file.name)
+
 # request template
 # https://github.com/public-apis/public-apis
 import requests
