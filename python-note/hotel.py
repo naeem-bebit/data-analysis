@@ -1467,6 +1467,44 @@ res=requests.post(
 result=res.json()
 res.close()
 
+#connecting to sql server
+server = "10.00.000.000"
+database = "K2_db_name"
+username = "user"
+password = "password"
+conn_str = f"DRIVER={{SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}"
+conn = pyodbc.connect(conn_str)
+cursor = conn.cursor()
+
+cursor.execute("SELECT TOP 10 Image2D FROM TB_Image2D")
+rows = cursor.fetchall()
+
+for row in rows:
+    print(row)
+    image_stream = io.BytesIO(row[0])
+    display(Image(data=image_stream.getvalue()))
+cursor.close()
+conn.close()
+
+
+import pymssql
+server = "10.00.000.000"
+port = 1433
+password = "password"
+user = "user"
+query = "SELECT TOP 10 Image2D FROM K2_db_name.dbo.table_name"
+
+conn = pymssql.connect(server, user, password, port=port)
+cursor = conn.cursor(as_dict=True)
+cursor.execute(query)
+rows = cursor.fetchall()
+for row in rows:
+    image_stream = io.BytesIO(row)
+    display(Image(data=image_stream.getvalue()))
+cursor.close()
+conn.close()
+
+
 #list all the file 
 import os
 path_input = 'report'
